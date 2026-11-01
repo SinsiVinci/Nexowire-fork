@@ -40,7 +40,8 @@ export async function scanHistoricalRuns(repo, pages = 1, get = getJson) {
   }
   const candidates = observed.filter(run => run.conclusion === 'action_required');
   const jobCounts = {};
-  for (const run of candidates) {
+  // Public unauthenticated API quota is small; bound additional job requests.
+  for (const run of candidates.slice(0, 10)) {
     const result = await get(`${base}/${run.id}/jobs?per_page=1`);
     jobCounts[run.id] = result.total_count ?? null;
   }
@@ -49,6 +50,7 @@ export async function scanHistoricalRuns(repo, pages = 1, get = getJson) {
     fetched_runs: observed.length,
     repository_reported_total: reportedTotal,
     history_incomplete: reportedTotal === null || observed.length < reportedTotal,
+    job_counts_incomplete: candidates.length > 10,
     action_required: classifyActionRequired(observed, jobCounts),
     note: 'Historical snapshot only. action_required is never PASS; no reruns or approvals performed.',
   };
