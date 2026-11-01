@@ -86,7 +86,18 @@ if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.m
   } else {
     try {
       const evidence = await getExactHeadEvidence(repo, exactHead);
-      console.log(JSON.stringify({ repo, head_sha: exactHead, runs: evidence, evidence: evidence.length ? 'SEE_RUNS' : 'NO_RUN' }, null, 2));
+      const matrix = summarizeForkMatrix(
+        evidence.map(item => ({
+          id: item.run_id, name: item.workflow, head_sha: item.head_sha,
+          status: item.status, conclusion: item.conclusion,
+        })),
+        Object.fromEntries(evidence.map(item => [item.run_id, item.jobs])),
+        exactHead,
+      );
+      console.log(JSON.stringify({
+        repo, head_sha: exactHead, runs: evidence, fork_matrix: matrix,
+        evidence: evidence.length ? 'SEE_RUNS' : 'NO_RUN',
+      }, null, 2));
     } catch (error) {
       console.error(`READ_ONLY_CI_CHECK_FAILED: ${error.message}`);
       process.exitCode = 1;
