@@ -11,6 +11,9 @@ test('fork-only read-only non-core workflow meets source security guard', () => 
   assert.match(original, /runs-on: windows-latest/);
   assert.match(original, /npm run typecheck/);
   assert.match(original, /npm run build/);
+  assert.equal((original.match(/fetch-depth: 2/g) ?? []).length, 2);
+  assert.equal((original.match(/verify-head-harness\.mjs/g) ?? []).length, 2);
+  assert.ok(original.indexOf('verify-head-harness.mjs') < original.indexOf('npm ci'), 'fail before dependencies');
 });
 
 test('unsafe event is rejected', () => {
