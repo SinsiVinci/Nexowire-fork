@@ -1,273 +1,332 @@
-# NEXOWIRE EKİP PANOSU — P001
-Tarih: 2026-11-01 (Europe/Istanbul). Kaynak: Naveax/Nexowire `main` `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`. Son kontrol: ilk kurulum.
+# NEXOWIRE EKİP PANOSU — P002
+Tarih: 2026-11-01 (Europe/Istanbul) | Son okunan `ekip` HEAD: `d85cc5b71296d0a7d18de8bbd80fc76c50970fe3` | Upstream ve fork `main`: `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`.
 
-## Hedef, kapsam, ilerleme
-- Hedef: güvenlik sınırlarına/CORE'a girmeden çalışır non-core kod, UI, test, ölçüm ve doküman iyileştirmelerini küçük PR'larla hedef projeye akıtmak.
-- Kilometre taşları: M0 ekip alanı ve 20 sahipli kuyruk (kuruldu); M1 fork CI kanıtı + ilk 5 doğrulanmış değişiklik; M2 ilk 10 anlamlı non-core PR; M3 düzenli merge akışı.
-- Kritik yol: yazma yetkisi yok; hedef CI fork `action_required` ve yeni main CI kırmızı olabilir. Güvenli fork CI, küçük PR, manuel upstream merge yolu öncelikli.
-- İlerleme: **0/120 yeni iş (%0)**; kurulum bu sayaçta sayılmaz. Bu sayı bütün Nexowire ürününün tamamlanma yüzdesi değildir.
-- Tahmini kalan: veri yok / dürüstçe hesaplanamıyor. İlk 10 PR'ın süre ve CI verisinden sonra tahmin oluşturulacak; 2 gün başarı garantisi yok.
-- Durum kodları: BEKLIYOR, AKTIF, BITTI, ENGEL, ONERI, DIS_ENGEL. Tamamlandı: ilgili kod/çıktı linki + gerçek test/CI sonucu + kalan sınır kayıtta olmalı.
+## Hedef / ilerleme / süre
+- Hedef: kritik CORE/auth/Broker/WAL/güvenlik/ödeme/release dışındaki gerçek kod/test/UI/dokümanı küçük, kanıtlı PR'larla Nexowire'a aktarmak.
+- **103/120 atanmış iş** için kod/yerel test teslimi raporlandı (**%85,8 yerel backlog ilerlemesi**); eski 17 iş kısmi/açık/engelli. **10/20** havuz işi de yerel teslim. Bu oran ürünün tamamlanma oranı veya upstream kabulü değildir.
+- **#1010–#1032 arasındaki 23 yeni upstream PR'ın tamamı açık Draft ve birleştirilmemiş.** Yeni ekibin upstream `main`e giren kodu: **0 PR**. 4 eski destek Draft #997–#1000 ayrıca açık.
+- **Fork CI ilerlemesi:** [PR #1](https://github.com/SinsiVinci/Nexowire-fork/pull/1) exact HEAD `50844fb0...` için [run 41327364795](https://github.com/SinsiVinci/Nexowire-fork/actions/runs/41327364795) 3 gerçek job success (Linux Node 22/24, Windows Node 24). Bu yalnız offline/source check; browser, gerçek Windows cihaz, CORE veya deploy kabulü değildir.
+- Kilometre taşları: M0 ekip/20 alan ✓; M1 gerçek fork CI adayı + 23 kod PR ✓ (upstream kabul değil); M2 ilk 3 güvenle birleşmiş non-core PR ☐; M3 sürekli exact-HEAD CI+merge ☐.
+- **Kritik yol:** upstream yazma yetkisi yok (`push:false`); upstream fork workflow'ları çoğunlukla `action_required / jobs=[]`. Fork CI'nın başka temiz upstream-tabanlı `kNN` dallarında eksiksiz çalışması ayrıca kanıtlanmalı (K13).
+- **ETA:** upstream merge/CI izinleri ve fiziksel tarayıcı kabulü zamanı ölçülmediği için güvenilir kalan süre henüz yok. 2 gün garanti değil.
+- **Sessiz sekme:** K16 Adım 0, tek güncellenmeyen kayıt. Onur K16'ya ortak mesajı tekrar gönderebilir.
 
-## Şeritler ve açık kapılar
-- K01–K04 web görsel katmanları; K05 ve K10 yalnız QA. Her dosyada tek yazarlık; farklı ekranın CSS'sini K02 yönetir.
-- K06–K09 doküman ve deneyim; K11–K12 ve K18 offline ölçüm; K13 CI; K14 Git entegrasyon; K15–K17 ve K19–K20 özel test/yardımcı araç.
-- `#1000`, `#999`, `#998`, `#997`: mevcut Draft destek PR'ları. Otomatik birleştirme yok, son HEAD CI `action_required`; yapılan sentetik test gerçek browser/Windows kabulü değil.
-- `#1009`, `#1007`, `#1005`, `#1004`, `#1003`, `#995`, `#989`: Ömer/CORE ekip alanları. Dosyalarına dokunma; güncel aktif PR'ları K14 kontrol eder.
-- Upstream issue [#1006](https://github.com/Naveax/Nexowire/issues/1006): P0/CORE/kontrol kapıları açık. [#1001](https://github.com/Naveax/Nexowire/issues/1001), [#974](https://github.com/Naveax/Nexowire/issues/974) fiziksel kabul bekler; burada yalnız takip.
+## Genel çalışma sözleşmesi
+- ARSIV'deki BITTI yalnız **yerel kapsam teslimi**; ilgili PR hâlâ Draft. Kod/uyum CI'sı ve fiziki kabul başka aşamadır, sahte PASS yok.
+- Her dosyanın tek yazarı, başkasının alanına girme; `ekip` dalına kod yok, sadece KNN kendi durum dosyasını günceller. ŞEF bu PANO/SEF/ARSIV'i yazar.
+- Öncelik aktif → kuyruk → sahipsiz havuz; kısmi tarayıcı/CI engelleri varsa diğer bağımsız işe geç. P002 ile doğrudan atanan T-126/127/130/132/133/135/136/137/138/139 artık HAVUZ değildir.
+- Görev bitiş kanıtı: exact commit/PR linki, gerçek test sonucu (ve NOT_RUN sınırı), sahibin kaynak kapsamı. CI izin engeline rağmen yeni bağımsız kod/test üretilir.
 
-## K01 — Bağlantı akışı UI
+## SAHİPLER / AKTİF / KUYRUK
+### K01 — Bağlantı akışı UI
 - ROL/ALAN: web/connect.html, web/connect.js; test/delegated/k01/**
-- AKTİF: **T-001** — Bağlanma ekranındaki kullanıcı durumlarını haritala ve tekrarlanabilir statik durum testi ekle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-002 — Bağlantı hatasında anlaşılır geri bildirim ve yeniden deneme UI durumlarını düzelt [BEKLIYOR]
-  - T-003 — Yükleme sırasında düğme devre dışı / çift tık regresyonunu ekle [BEKLIYOR]
-  - T-004 — Bağlanma ekranı odak sırası ve aria-live hatalarını iyileştir [BEKLIYOR]
-  - T-005 — Dar ekran bağlantı akışını DOM/CSS testleriyle güvenceye al [BEKLIYOR]
-  - T-006 — Bağlantı sayfasında başarısız/başarılı görüntü kanıtı ve e2e bekleyenleri kaydet [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-006** — Bağlantı sayfasında başarısız/başarılı görüntü kanıtı ve e2e bekleyenleri kaydet [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-138 — Kullanıcı tarafı hata durumlarında offline smoke fixtures [BEKLIYOR]
+  - T-141 — Bağlantı hatası sonrası tek odak/duyuru döngüsü için negatif fixture ekle [BEKLIYOR]
+  - T-142 — OAuth iptali ile yeniden denemede yanlış 'bağlandı' görünümünü test et [BEKLIYOR]
+  - T-143 — Uzun hata bağlantıları ve ekran daralmasında DOM semantiklerini doğrula [BEKLIYOR]
+  - T-144 — Sunucu timeout ile kullanıcı iptali mesajlarını ayıran statik regresyon yaz [BEKLIYOR]
+- SON TESLİM: [#1011](https://github.com/Naveax/Nexowire/pull/1011) · 8/8 VM, typecheck/build PASS; browser NOT_RUN
+- BAĞIMLILIK/ENGEL: T-006 için gerçek browser/screenshot yok; diğer offline işe geç
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K01 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K01.md). Bağımlıysa başka işe geç.
 
-## K02 — Genel responsive CSS
+### K02 — Genel responsive CSS
 - ROL/ALAN: web/styles.css; test/delegated/k02/**
-- AKTİF: **T-007** — CSS kırılma noktalarını ve taşma risklerini tarayıp regresyon testi ekle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-008 — Mobil menü/panel yatay taşma hatalarını düzelt [BEKLIYOR]
-  - T-009 — Form odak halkalarını yüksek kontrastta görünür kıl [BEKLIYOR]
-  - T-010 — Küçük ekranlarda uzun durum mesajı/kod kesilmesini gider [BEKLIYOR]
-  - T-011 — Ortak button disabled/loading stil sözleşmesini tekilleştir [BEKLIYOR]
-  - T-012 — CSS selector ölü kod ve tekrarları güvenli biçimde sadeleştir [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-145** — 320/375/768px görünüm kurallarının yatay taşma negatiflerini artır [BEKLIYOR]
+- KUYRUK (5):
+  - T-146 — Uzun Unicode cihaz adı ve URL için CSS wrap regresyonu yaz [BEKLIYOR]
+  - T-147 — Yüksek kontrast/klavye focus-visible CSS kontrolünü kuvvetlendir [BEKLIYOR]
+  - T-148 — Zoom %200/%400 altında layout sözleşmesini raporla [BEKLIYOR]
+  - T-149 — Hareket azaltma tercihine saygı ve spinner state CSS testi ekle [BEKLIYOR]
+  - T-150 — Global CSS tekrarlayan selector temizliği için davranış eşdeğerliği testi yaz [BEKLIYOR]
+- SON TESLİM: [#1010](https://github.com/Naveax/Nexowire/pull/1010), [#1012](https://github.com/Naveax/Nexowire/pull/1012) · 11/11 CSS statik PASS; browser NOT_RUN
+- BAĞIMLILIK/ENGEL: K03 mobil layout gözlemini takip et
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K02 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K02.md). Bağımlıysa başka işe geç.
 
-## K03 — Ana panel sunumu
+### K03 — Ana panel sunumu
 - ROL/ALAN: web/index.html, web/app.js (yalnız UI); test/delegated/k03/**
-- AKTİF: **T-013** — Ana panelin görünür durum ve boş liste öğelerini statik testle doğrula [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-014 — Cihaz yok/çevrimdışı/hata hâlleri için dürüst durum metinleri düzelt [BEKLIYOR]
-  - T-015 — Listeleme yüklenirken ekran okuyucu durumunu iyileştir [BEKLIYOR]
-  - T-016 — Panelde klavye odak ilerleme ve semantik etiketleri düzelt [BEKLIYOR]
-  - T-017 — Uzun cihaz adı ve hata mesajı için görünüm regresyonu ekle [BEKLIYOR]
-  - T-018 — Ana panel arayüz davranışını işlevsel statik smoke ile koru [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-016** — Panelde klavye odak ilerleme ve semantik etiketleri düzelt [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-017 — Uzun cihaz adı ve hata mesajı için görünüm regresyonu ekle [KISMEN/ENGEL]
+  - T-133 — Bağlantı işlemi kullanıcıya özel veri sızdırmadan gösterilir mi: statik QA [BEKLIYOR]
+  - T-151 — Gecikmiş API yanıtının yeni cihaz durumunu ezmediği VM testi ekle [BEKLIYOR]
+  - T-152 — Tekrarlı cihaz kartlarında erişilebilir adların benzersizliğini K15 sözleşmesiyle doğrula [BEKLIYOR]
+  - T-153 — 401→yeniden giriş→başarı durumunda eski kullanım sayısının gizli kaldığını test et [BEKLIYOR]
+- SON TESLİM: [#1016](https://github.com/Naveax/Nexowire/pull/1016) · 8/8 VM, typecheck/build PASS; tam npm test yarıda ve browser NOT_RUN
+- BAĞIMLILIK/ENGEL: T-016/T-017 gerçek viewport ve K02 CSS bağımlı
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K03 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K03.md). Bağımlıysa başka işe geç.
 
-## K04 — Yönetim ekranı sunumu
+### K04 — Yönetim ekranı sunumu
 - ROL/ALAN: web/admin.html, web/admin.js (yalnız görsel/erişilebilirlik); test/delegated/k04/**
-- AKTİF: **T-019** — Yönetim ekranının semantik etiket ve tablo başlıklarını denetle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-020 — Statik boş/hata durumuna yönelik DOM testleri ekle [BEKLIYOR]
-  - T-021 — Uzun kayıt ve dar viewport gösterimini iyileştir [BEKLIYOR]
-  - T-022 — Yönetim ekranında canlı durum bildirimi erişilebilirliğini artır [BEKLIYOR]
-  - T-023 — Görsel unsurların auth/izin değişmediğini negatif testle teyit et [BEKLIYOR]
-  - T-024 — Arayüz durumlarını belgeleyip gerçek yönetici hesabı gerektirenleri ayır [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-021** — Uzun kayıt ve dar viewport gösterimini iyileştir [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-022 — Yönetim ekranında canlı durum bildirimi erişilebilirliğini artır [KISMEN/ENGEL]
+  - T-154 — Görünmez admin hata paneli bulgusunu K05 negative testine göre düzelt [BEKLIYOR]
+  - T-155 — Yüklenme/hata/yenileme sırasında admin sayaçlarının yanlış başarı üretmemesini test et [BEKLIYOR]
+  - T-156 — Dar ekranda admin tablo başlığı ve durum hücresi semantiğini doğrula [BEKLIYOR]
+  - T-157 — Şüpheli boş admin verisini yetki başarı sonucu gibi sunmamayı statik test et [BEKLIYOR]
+- SON TESLİM: [#1015](https://github.com/Naveax/Nexowire/pull/1015) · 6/6 DOM PASS; 320/375px, NVDA NOT_RUN
+- BAĞIMLILIK/ENGEL: T-021/T-022 gerçek screen-reader/mobil yok; K05 hata paneli bulgusu
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K04 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K04.md). Bağımlıysa başka işe geç.
 
-## K05 — Erişilebilirlik bağımsız QA
+### K05 — Erişilebilirlik bağımsız QA
 - ROL/ALAN: test/delegated/k05/**; scripts/delegated/k05/**; docs/delegated/qa-accessibility-k05/**
-- AKTİF: **T-025** — Web ekranlarında otomatik label-for ve accessible name taraması yaz [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-026 — Klavye ile erişilemeyen etkileşimler için regresyon kontrolü ekle [BEKLIYOR]
-  - T-027 — aria-live ve durum mesajı semantik denetimi ekle [BEKLIYOR]
-  - T-028 — Hata metni/id eşleşmelerini statik doğrulama aracı yaz [BEKLIYOR]
-  - T-029 — Dokunmatik hedef ve viewport kontrollerini test listesine al [BEKLIYOR]
-  - T-030 — Erişilebilirlik test matrisi ve gerçek tarayıcı kanıtı boşluklarını yayımla [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-136** — Test hata mesajlarında fixture path normalizasyonu [BEKLIYOR]
+- KUYRUK (5):
+  - T-158 — Tekrarlı role=status/alert bölgeleri için yalancı PASS'i engelleyen negatif ekle [BEKLIYOR]
+  - T-159 — Long-label ile input ilişkisinde normalize Unicode testleri üret [BEKLIYOR]
+  - T-160 — Disabled kontrol üzerinde erişilebilir isim ve odak testi yaz [BEKLIYOR]
+  - T-161 — Dinamik panel yapısında DOM ID tekilliğini offline regresyonla koru [BEKLIYOR]
+  - T-162 — K02/K04 bulgularını sahiplik ihlali yapmadan okunabilir QA raporuna bağla [BEKLIYOR]
+- SON TESLİM: [#1019](https://github.com/Naveax/Nexowire/pull/1019), [#1027](https://github.com/Naveax/Nexowire/pull/1027) · 14/14+8/8 statik PASS; K04 admin-error bulgusu açık
+- BAĞIMLILIK/ENGEL: K04 admin-error ve K02 touch bulguları diğer sahiplerin alanı
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K05 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K05.md). Bağımlıysa başka işe geç.
 
-## K06 — Windows kurulum belgeleri
+### K06 — Windows kurulum belgeleri
 - ROL/ALAN: docs/INSTALL_WINDOWS.md, docs/CHATGPT_INSTALL_PROMPT.md; test/delegated/k06/**
-- AKTİF: **T-031** — Kurulum README bağlantılarını ve adımlarını güncel gerçekle karşılaştır [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-032 — ChatGPT MCP URL ile kontrol paneli URL karışıklığını açıklığa kavuştur [BEKLIYOR]
-  - T-033 — Bağla butonu başarısızlığında güvenli kurtarma adımı ekle [BEKLIYOR]
-  - T-034 — Windows indirme adı/uzantısı hata rehberini netleştir [BEKLIYOR]
-  - T-035 — Kullanıcıdan secret istemeyen kurulum kontrol listesi oluştur [BEKLIYOR]
-  - T-036 — Doküman iç linklerini ve ankrajları statik testle doğrula [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-137** — README link adları ve hedefleri doğruluk raporu [BEKLIYOR]
+- KUYRUK (5):
+  - T-163 — Kurulumda GitHub/ChatGPT hesap uyuşmazlığı için kısa hata kılavuzu ekle [BEKLIYOR]
+  - T-164 — Kurucu uzantısı ve Windows SmartScreen yardımını güvenlik politikasıyla hizala [BEKLIYOR]
+  - T-165 — MCP giriş adresi ile kontrol panelinin ayrımını bir örnekle sabitle [BEKLIYOR]
+  - T-166 — Yerel kurulum/Cloudflare canlı kabulün sınırlarını yeni kullanıcıya açıkla [BEKLIYOR]
+  - T-167 — Windows 10/11 kurulum belgesindeki bozuk anchor ve komutları test et [BEKLIYOR]
+- SON TESLİM: [#1018](https://github.com/Naveax/Nexowire/pull/1018) · 4/4 doküman PASS; Windows/OAuth NOT_RUN
+- BAĞIMLILIK/ENGEL: Windows/OAuth cihaz kabulü yok
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K06 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K06.md). Bağımlıysa başka işe geç.
 
-## K07 — Self-host belgeleri
+### K07 — Self-host belgeleri
 - ROL/ALAN: docs/SELF_HOST.md, docs/DEPLOYMENT_ONBOARDING.md; test/delegated/k07/**
-- AKTİF: **T-037** — Self-host ön koşullarını varsayımsız belgele ve bağlantıları denetle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-038 — Kurulum ve normal kullanıcı yolunu açıkça ayır [BEKLIYOR]
-  - T-039 — Hata ayıklama adımlarını salt-okunur komutlarla güçlendir [BEKLIYOR]
-  - T-040 — Örnek değişkenlerde sır sızıntısı riskine karşı doküman testi ekle [BEKLIYOR]
-  - T-041 — Platform farklarını (Windows/Linux) doğrulanabilir biçimde yaz [BEKLIYOR]
-  - T-042 — Self-host belgeleri için offline link ve komut smoke kontrolleri ekle [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-168** — Self-host örneklerinde localhost/hosted URL karışıklığını belge testine bağla [BEKLIYOR]
+- KUYRUK (5):
+  - T-169 — Windows/macOS/Linux destek düzeyini gereksiz vaat olmadan matrise dök [BEKLIYOR]
+  - T-170 — Bağlantı kesintisi sonrası manuel kurtarma salt-okunur komutlarını doğrula [BEKLIYOR]
+  - T-171 — İlk çalıştırma kimlik bilgisi saklama yönergelerinin gizlilik denetimini yap [BEKLIYOR]
+  - T-172 — Sistem izinlerini değiştiren komut örneklerini risk etiketiyle ayır [BEKLIYOR]
+  - T-173 — Geliştirici ve son kullanıcı yönergeleri arasında tekrarı azaltan link testi yaz [BEKLIYOR]
+- SON TESLİM: [#1013](https://github.com/Naveax/Nexowire/pull/1013) · 8/8 komut/docs PASS; gerçek self-host NOT_RUN
+- BAĞIMLILIK/ENGEL: Canlı self-host/OS kabulü yok
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K07 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K07.md). Bağımlıysa başka işe geç.
 
-## K08 — Mimari ve MCP dokümanları
+### K08 — Mimari ve MCP dokümanları
 - ROL/ALAN: docs/ARCHITECTURE.md, docs/MCP_SURFACE.md; test/delegated/k08/**
-- AKTİF: **T-043** — MCP yüzeyi adlarını gerçek read-only sözleşmeyle eşleştir [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-044 — Mimari şemadaki bileşen bağlantılarında kaynak tutarlılığı kontrol et [BEKLIYOR]
-  - T-045 — Agent/Hub/ChatGPT akışına yeni başlayan için kısa açıklama ekle [BEKLIYOR]
-  - T-046 — Belgede güvenlik yetkisi varmış izlenimi veren ifadeleri düzelt [BEKLIYOR]
-  - T-047 — Dökümana örnek hata/UNKNOWN terimleri sözlüğü ekle [BEKLIYOR]
-  - T-048 — Belge bağlantı/başlık doğrulama testi ekle [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-135** — Doküman code fence dil ve komut biçimi tutarlılık testi [BEKLIYOR]
+- KUYRUK (5):
+  - T-174 — MCP output status terimlerini sözleşme örneğiyle eşleştir [BEKLIYOR]
+  - T-175 — İşlem iptali/UNKNOWN ifadesini kullanıcı metninde yanlış başarıdan ayır [BEKLIYOR]
+  - T-176 — read-only tool vs mutation tool belgelerinde izin uyarısı doğrula [BEKLIYOR]
+  - T-177 — MCP contract JSON ile Markdown yüzey isimlerini statik karşılaştır [BEKLIYOR]
+  - T-178 — Mimari link ve code sample'larda eskimiş endpoint sınıflandırması yap [BEKLIYOR]
+- SON TESLİM: [#1014](https://github.com/Naveax/Nexowire/pull/1014), [#1021](https://github.com/Naveax/Nexowire/pull/1021) · 3/3+5/5 sözleşme PASS; MCP NOT_RUN
+- BAĞIMLILIK/ENGEL: Gerçek MCP yok, upstream CI 0-job
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K08 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K08.md). Bağımlıysa başka işe geç.
 
-## K09 — Ürün yol haritası
+### K09 — Ürün yol haritası
 - ROL/ALAN: ROADMAP.md, docs/SCALE_V2_ROADMAP.md; test/delegated/k09/**
-- AKTİF: **T-049** — Yol haritasında plan/uygulandı/kanıt yok ayrımını netleştir [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-050 — Aktif PR'ları ürün özellikleriyle çakışmasız eşleştir [BEKLIYOR]
-  - T-051 — Özelliklerin kullanıcıya dönük kabul tanımlarını somutlaştır [BEKLIYOR]
-  - T-052 — Hedef sürüm iddialarını yayımlanmış sürümden ayır [BEKLIYOR]
-  - T-053 — Metrik ve UX önceliği için güncel bağımlılık tablosu ekle [BEKLIYOR]
-  - T-054 — Yol haritasına kanıtsız tamamlandı ifadesi regresyon taraması koy [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-179** — Güncel upstream PR'larından non-core özellik durumunu kaynakla eşleyen offline rapor yaz [BEKLIYOR]
+- KUYRUK (5):
+  - T-180 — v1.0.8 yayın kanıtı ile main üzerindeki source-only yenilikleri ayır [BEKLIYOR]
+  - T-181 — ROADMAP içindeki 'tamamlandı' iddiaları için PR merge kanıtı denetimi ekle [BEKLIYOR]
+  - T-182 — Kullanıcı görünürlüğü/cihaz kurulumu önceliklerini testle izlenir hâle getir [BEKLIYOR]
+  - T-183 — Issue #539 non-core alt başlıklarını yinelenmeyen işlere ayır [BEKLIYOR]
+  - T-184 — SCALE v2 senaryolarında rakamsal maliyet/kapasite iddialarını evidence gate'e bağla [BEKLIYOR]
+- SON TESLİM: [#1017](https://github.com/Naveax/Nexowire/pull/1017), [#1028](https://github.com/Naveax/Nexowire/pull/1028) · 4/4+5/5 belge testi PASS; CI 0-job
+- BAĞIMLILIK/ENGEL: Kaynak sürüm iddiaları yalnız statik kanıt
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K09 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K09.md). Bağımlıysa başka işe geç.
 
-## K10 — Tarayıcı görünüm QA
+### K10 — Tarayıcı görünüm QA
 - ROL/ALAN: web/README.md; scripts/delegated/k10/**; test/delegated/k10/**
-- AKTİF: **T-055** — Statik web sayfaları için offline smoke çalıştırıcısı yaz [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-056 — 375px/768px/desktop görünüm senaryoları üret [BEKLIYOR]
-  - T-057 — Odak ve görsel taşma test kanıt formatını tasarla [BEKLIYOR]
-  - T-058 — Connect/main/admin farklı durum fixture'larını tanımla [BEKLIYOR]
-  - T-059 — Tarayıcı varsa ekran görüntüsünü doğrulayan kontrollü runner ekle [BEKLIYOR]
-  - T-060 — Tarayıcı yokken PASS ilan etmeyen CI rapor sözleşmesini oluştur [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-059** — Tarayıcı varsa ekran görüntüsünü doğrulayan kontrollü runner ekle [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-126 — Çevrimdışı örnek ekran durumları snapshot seti [BEKLIYOR]
+  - T-185 — Browser yokken screenshot raporu kesin NOT_RUN döndüren negatif test ekle [BEKLIYOR]
+  - T-186 — Fixture tab odak hedeflerinin gerçek browser gerektiren taraflarını JSON'da ayır [BEKLIYOR]
+  - T-187 — Farklı viewport sonuçları için bozulmamış PNG boyut kontrolü yaz [BEKLIYOR]
+  - T-188 — Statik runner'ın local asset path traversal engelini test et [BEKLIYOR]
+- SON TESLİM: [#1020](https://github.com/Naveax/Nexowire/pull/1020) · 10/10+34/34 statik PASS; Playwright NOT_RUN
+- BAĞIMLILIK/ENGEL: Playwright yok; screenshot NOT_RUN
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K10 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K10.md). Bağımlıysa başka işe geç.
 
-## K11 — S5 offline maliyet raporları
+### K11 — S5 offline maliyet raporları
 - ROL/ALAN: scripts/report-s5-cost-matrix.ts; src/ops/scale-s5-cost-envelope.ts (yalnız offline model); test/delegated/k11/**
-- AKTİF: **T-061** — Maliyet raporu boş/fiyat yok girişlerinde UNKNOWN üretsin: test ekle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-062 — NaN/Infinity/negatif maliyet için fail-closed rapor testi yaz [BEKLIYOR]
-  - T-063 — Karışık para birimi/birim girdi kontrolünü güçlendir [BEKLIYOR]
-  - T-064 — CSV kaçışları ve başlık kararlılığını regresyonla doğrula [BEKLIYOR]
-  - T-065 — Kullanıcı başına ve toplam maliyet raporu formülünü test et [BEKLIYOR]
-  - T-066 — Gerçek provider faturası olmayan sonuçları simülasyon diye etiketle [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-189** — Ücretsiz/sıfır fiyat ile eksik fiyatın ayrımını regresyonla sabitle [BEKLIYOR]
+- KUYRUK (5):
+  - T-190 — USD/TL para birimi karışıklığında yanlış toplam üretmeyen test ekle [BEKLIYOR]
+  - T-191 — Birim dönüşümünde KB/MiB ve zaman pencere ölçeklerini sınır test et [BEKLIYOR]
+  - T-192 — Eşik aşımında `UNKNOWN`/safeguard kararını offline raporda ayır [BEKLIYOR]
+  - T-193 — Negatif/Infinity girdi için CSV rapor başlıklarını koruyan test yaz [BEKLIYOR]
+  - T-194 — S5 cost envelope modelinde false confidence cümlelerini kaynak kanıtına bağla [BEKLIYOR]
+- SON TESLİM: [#1029](https://github.com/Naveax/Nexowire/pull/1029) · 8/8+3/3 offline, typecheck/build PASS; provider faturası UNKNOWN
+- BAĞIMLILIK/ENGEL: Gerçek provider fiyatı ve fatura yok
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K11 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K11.md). Bağımlıysa başka işe geç.
 
-## K12 — S5 loopback performans testleri
+### K12 — S5 loopback performans testleri
 - ROL/ALAN: scripts/bench-s5-loopback-ws-capacity.ts, scripts/bench-s5-loopback-reconnect-storm.ts; test/delegated/k12/**
-- AKTİF: **T-067** — Loopback WS kapasite benchmark'ının ölçüm/kayıt formatını doğrula [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-068 — Reconnect storm benchmark'ın sınırlı ve iptal edilebilir çalışmasını test et [BEKLIYOR]
-  - T-069 — Soğuk/tek örnek percentile hesaplamasını negatif testle doğrula [BEKLIYOR]
-  - T-070 — Sıfır/negatif süre ve bozuk örnekleri reddeden test ekle [BEKLIYOR]
-  - T-071 — Benchmark sonucu JSON/CSV deterministikliği için smoke ekle [BEKLIYOR]
-  - T-072 — Gerçek ağ/sağlayıcı kabulüyle sentetik kapasiteyi açıkça ayır [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-071** — Benchmark sonucu JSON/CSV deterministikliği için smoke ekle [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-195 — JSON latency schema boş/tek örnek deterministikliğini negatif testle artır [BEKLIYOR]
+  - T-196 — Benchmark abort sırasında açık websocket sayısının sıfırlanmasını test et [BEKLIYOR]
+  - T-197 — Çok küçük zaman aşımında resource cleanup leak regresyonu ekle [BEKLIYOR]
+  - T-198 — Aynı loopback workload iki tekrarında çıktının ölçüm türünü sabitle [BEKLIYOR]
+  - T-199 — Sentetik koşuldan gerçek provider kapasitesi çıkarımını engelleyen test yaz [BEKLIYOR]
+- SON TESLİM: [#1024](https://github.com/Naveax/Nexowire/pull/1024) · 20/20 sentetik PASS; CSV sözleşmesi yok
+- BAĞIMLILIK/ENGEL: T-071 CSV yok; JSON smoke tamam, gerçek soak yok
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K12 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K12.md). Bağımlıysa başka işe geç.
 
-## K13 — Fork CI ve test altyapısı
+### K13 — Fork CI ve test altyapısı
 - ROL/ALAN: .github/workflows/delegated-noncore.yml (yeni); scripts/delegated/k13/**; test/delegated/k13/**
-- AKTİF: **T-073** — Salt-okunur, secretsiz non-core PR CI workflow'u oluştur [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-074 — Node 22/24 typecheck/build/test ayrımını güvenli kur [BEKLIYOR]
-  - T-075 — HTML/DOM statik testlerini fork'ta workflow'a bağla [BEKLIYOR]
-  - T-076 — Windows-latest sentetik UI smoke matrisi oluştur [BEKLIYOR]
-  - T-077 — CI job/run/HEAD kanıtlarını otomatik özetleyen script ekle [BEKLIYOR]
-  - T-078 — Fork CI yetki ve action_required engeli için negatif doğrulama ekle [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-200** — Fork PR testleri head branch'de K13 scriptleri yoksa erken ve açık hata veren tasarım yap [BEKLIYOR]
+- KUYRUK (5):
+  - T-130 — Yanlışlıkla sır içeren test fixture'larını statik tarama [BEKLIYOR]
+  - T-201 — Fork ana dalını upstream'den ayrıştırmadan CI çalıştırma stratejisi/provası oluştur [BEKLIYOR]
+  - T-202 — Exact-head CI özetleyicinin 100+ job sayfalama eksiğini negatif test et [BEKLIYOR]
+  - T-203 — Fork workflow PR izin matrisi ve pull_request_target yasağını testle pekiştir [BEKLIYOR]
+  - T-204 — Runner Node 22/24/Windows sonuçları tek exact SHA'da değilse PASS'i reddet [BEKLIYOR]
+- SON TESLİM: [fork PR #1](https://github.com/SinsiVinci/Nexowire-fork/pull/1) · fork PR #1 exact HEAD 3/3 gerçek CI job PASS (Linux 22/24+Windows 24)
+- BAĞIMLILIK/ENGEL: Fork PR #1 diğer temiz upstream dallarında çalışır mı kanıtı yok; önce T-200
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K13 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K13.md). Bağımlıysa başka işe geç.
 
-## K14 — Fork eşitleme ve PR entegrasyonu
+### K14 — Fork eşitleme ve PR entegrasyonu
 - ROL/ALAN: scripts/delegated/k14/**; docs/delegated/integration-k14/** (başka kaynak dosya yok)
-- AKTİF: **T-079** — Güncel upstream/fork HEAD farkı için read-only rapor üret [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-080 — Açık non-core PR sahiplik ve dosya çakışmalarını tarayan script yaz [BEKLIYOR]
-  - T-081 — Destek PR #997-#1000 için merge öncesi dosya-kapsam tablosu hazırla [BEKLIYOR]
-  - T-082 — GitHub CI exact SHA ve jobs boşluklarını raporla [BEKLIYOR]
-  - T-083 — Güncel main'e göre non-core PR rebase risklerini salt-okunur ölç [BEKLIYOR]
-  - T-084 — Yeşil non-core PR'lar için kanıtlı merge/sıra önerisi çıkar [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-132** — Aynı sorunun farklı PR'larda tekrarı raporlayıcı [BEKLIYOR]
+- KUYRUK (5):
+  - T-205 — Açık yeni non-core PR'lar için aynı-path ve semantik çakışma raporu oluştur [BEKLIYOR]
+  - T-206 — #1010–#1032 PR'larının main sonrası merge riskini read-only karşılaştır [BEKLIYOR]
+  - T-207 — CI gerçekten 0-job ise merge-ready bayrağını kapatan entegrasyon testi yaz [BEKLIYOR]
+  - T-208 — Fork özel CI PR #1 ile upstream main senkron stratejisini karşılaştır [BEKLIYOR]
+  - T-209 — T-084 için gözlemlenebilir merge gate otomatik rapor tablosunu güncelle [BEKLIYOR]
+- **T-084** — yeşil CI/review kanıtı olmadan **DIŞ ENGEL**; beklemek yerine T-132 ve yeni işleri yap.
+- SON TESLİM: [#1022](https://github.com/Naveax/Nexowire/pull/1022) · 14/14 read-only entegrasyon testi PASS, upstream CI 0-job
+- BAĞIMLILIK/ENGEL: T-084 upstream exact CI/review olmadan ENGEL
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K14 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K14.md). Bağımlıysa başka işe geç.
 
-## K15 — Cihaz seçimi kullanıcı deneyimi
+### K15 — Cihaz seçimi kullanıcı deneyimi
 - ROL/ALAN: test/delegated/k15/**; docs/delegated/device-ux-k15/** (routing/auth koda dokunma)
-- AKTİF: **T-085** — Cihaz listeleme ve yok durumları için sözleşme envanteri çıkar [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-086 — Yanlış cihaz seçimini önleyen UI etiket testlerini yaz [BEKLIYOR]
-  - T-087 — Çevrimdışı cihazın çevrimiçi görünmesini reddeden test oluştur [BEKLIYOR]
-  - T-088 — Birden çok cihaz için açıklayıcı seçim metnini tasarla [BEKLIYOR]
-  - T-089 — Uzun/Unicode cihaz adlarının ekran gösterimini test et [BEKLIYOR]
-  - T-090 — Yetki değiştirmeyen cihaz seçim UX önerisi ve kanıt hazırla [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-086** — Yanlış cihaz seçimini önleyen UI etiket testlerini yaz [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-210 — K03 cihaz-adı accessible name düzeltmesini read-only testle yeniden tara [BEKLIYOR]
+  - T-211 — İki aynı adlı cihazın kimlik ayrımı için negatif fixture ekle [BEKLIYOR]
+  - T-212 — Offline cihaz ekran kartında yanlış 'online' etiketine regresyon yaz [BEKLIYOR]
+  - T-213 — Cihaz listesi boş/yükleniyor/hata erişilebilirlik durumlarını test et [BEKLIYOR]
+  - T-214 — Cihaz seçim durumunun auth yetkisi yerine geçmediğini raporla [BEKLIYOR]
+- SON TESLİM: [#1026](https://github.com/Naveax/Nexowire/pull/1026) · 8 test PASS+1 TODO; K03 UI bağımlı
+- BAĞIMLILIK/ENGEL: T-086 accessible name 1 TODO; K03 UI bağımlı
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K15 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K15.md). Bağımlıysa başka işe geç.
 
-## K16 — Ortam teşhis çıktıları
+### K16 — Ortam teşhis çıktıları
 - ROL/ALAN: src/diagnostics/environment-doctor.ts, scripts/run-environment-doctor.ts (salt-okunur); test/delegated/k16/**
-- AKTİF: **T-091** — Doctor mevcut rapor biçimlerini ve çıkış kodlarını sabitleyen test ekle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-092 — Hata durumunda gizli bilgi maskesini test et [BEKLIYOR]
-  - T-093 — Eksik isteğe bağlı araçta yanlış sağlıklı durumu engelle [BEKLIYOR]
-  - T-094 — Windows/Linux farklılıklarını gerçek dışı PASS üretmeden sınıflandır [BEKLIYOR]
-  - T-095 — JSON çıktı deterministikliği ve kaçış testini ekle [BEKLIYOR]
-  - T-096 — Teşhis komutlarının yan etkisiz olmasını doğrulayan negatif test yaz [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-091** — Doctor mevcut rapor biçimlerini ve çıkış kodlarını sabitleyen test ekle [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-092 — Hata durumunda gizli bilgi maskesini test et [KISMEN/ENGEL]
+  - T-093 — Eksik isteğe bağlı araçta yanlış sağlıklı durumu engelle [KISMEN/ENGEL]
+  - T-094 — Windows/Linux farklılıklarını gerçek dışı PASS üretmeden sınıflandır [KISMEN/ENGEL]
+  - T-095 — JSON çıktı deterministikliği ve kaçış testini ekle [KISMEN/ENGEL]
+  - T-096 — Teşhis komutlarının yan etkisiz olmasını doğrulayan negatif test yaz [KISMEN/ENGEL]
+- SON TESLİM: yok · Adım 0; hiçbir değişiklik, NOT_RUN
+- BAĞIMLILIK/ENGEL: K16 sessiz, sekme kontrolü gerekli
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K16 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K16.md). Bağımlıysa başka işe geç.
 
-## K17 — Beceri kayıt/meta kalite
+### K17 — Beceri kayıt/meta kalite
 - ROL/ALAN: src/skills/manifest.ts, src/skills/registry.ts (yetki genişletme yasak); test/delegated/k17/**
-- AKTİF: **T-097** — Beceri manifesti yol/başlık tutarlılığını test et [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-098 — Bozuk veya yinelenen beceri adı için test ekle [BEKLIYOR]
-  - T-099 — Registry açıklamaları/örnek alanları için şema kalite raporu oluştur [BEKLIYOR]
-  - T-100 — Yetkisiz yürütme önerisi içeren belge kalıplarını negatif testle işaretle [BEKLIYOR]
-  - T-101 — Mevcut skill kataloğu için statik link doğrulama aracı yap [BEKLIYOR]
-  - T-102 — Registry değişikliği gerekiyorsa güvenlik sınırını koruyarak yalnız meta düzelt [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-215** — SKILL manifest frontmatter boş değer ve çift anahtar negatiflerini artır [BEKLIYOR]
+- KUYRUK (5):
+  - T-216 — Dizin dışı/bozuk referans ve symlink yolu için test üret [BEKLIYOR]
+  - T-217 — Katalog isim çakışmasında kayıt sırası deterministikliğini doğrula [BEKLIYOR]
+  - T-218 — Skill açıklamalarında platform desteği yoksa bilinmiyor dilini koru [BEKLIYOR]
+  - T-219 — Registry meta değişiminin capability yetkisini artırmadığını test et [BEKLIYOR]
+  - T-220 — Katalog README üretimine ihtiyaç varsa yalnız statik çıktıyı tasarla [BEKLIYOR]
+- SON TESLİM: [#1030](https://github.com/Naveax/Nexowire/pull/1030) · 18 yerel test PASS, typecheck/build PASS
+- BAĞIMLILIK/ENGEL: Yetki genişletme yasak, gerçek güvenlik kabulü yok
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K17 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K17.md). Bağımlıysa başka işe geç.
 
-## K18 — Taşıma ve kapasite metrikleri
+### K18 — Taşıma ve kapasite metrikleri
 - ROL/ALAN: src/ops/scale-transport-metrics.ts, scripts/report-s5-measured-scenarios.ts (offline); test/delegated/k18/**
-- AKTİF: **T-103** — Taşıma metriği boş ve tek örnek rapor testleri ekle [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-104 — Düşen/eksik sayaçlar için UNKNOWN sınıflandırması yap [BEKLIYOR]
-  - T-105 — Çakışan birim ve sayaç adlarını doğrulayan parser testi ekle [BEKLIYOR]
-  - T-106 — Rapor çıkışının stabil sırası/formatını regresyonla sabitle [BEKLIYOR]
-  - T-107 — Percentile örnek sınırlarının testini ekle [BEKLIYOR]
-  - T-108 — Ölçüm yokken kapasite tahmini kesinleştirmeyen rapor sözleşmesi yaz [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-107** — Percentile örnek sınırlarının testini ekle [KISMEN/ENGEL]
+- KUYRUK (5):
+  - T-108 — Ölçüm yokken kapasite tahmini kesinleştirmeyen rapor sözleşmesi yaz [KISMEN/ENGEL]
+  - T-139 — Yalnız test için tutarlı örnek telemetri veri seti [BEKLIYOR]
+  - T-221 — Metrik örnek setinde monoton olmayan sayaç geçişini işaretle [BEKLIYOR]
+  - T-222 — Tür/birim karışıklığı raporunda UNKNOWN kalmasını sınır testiyle doğrula [BEKLIYOR]
+  - T-223 — S5 CSV/JSON çıkışında NaN/Infinity'nin yanlış sıfıra dönmesini engelle [BEKLIYOR]
+- SON TESLİM: [#1023](https://github.com/Naveax/Nexowire/pull/1023) · 11 offline test PASS, typecheck/build PASS; percentile açık
+- BAĞIMLILIK/ENGEL: T-107/T-108 ölçüm/percentile açık
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K18 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K18.md). Bağımlıysa başka işe geç.
 
-## K19 — Dosya aktarımı UX/QA
+### K19 — Dosya aktarımı UX/QA
 - ROL/ALAN: test/delegated/k19/**; docs/delegated/file-ux-k19/** (artifact/WAL/authorization koda dokunma)
-- AKTİF: **T-109** — Dosya transferi kullanıcı durumlarının sözleşme envanterini çıkar [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-110 — Büyük dosya ilerleme metninin sahte tamamlandı vermediğini test et [BEKLIYOR]
-  - T-111 — Kesilen transferin kullanıcıya UNKNOWN görünmesi için test tasarla [BEKLIYOR]
-  - T-112 — Aynı isimli dosyada çakışma arayüzünü incele [BEKLIYOR]
-  - T-113 — Tekrar denemede veri kaybını gizlemeyen kabul matrisi oluştur [BEKLIYOR]
-  - T-114 — Offline testlerin gerçek iki cihaz kabulü olmadığını kanıt sayfasında ayır [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-224** — Dosya aktarımı yarıda kalınca kullanıcı durumunu UNKNOWN tutan test örneği ekle [BEKLIYOR]
+- KUYRUK (5):
+  - T-225 — Çakışan hedef dosyada overwrite olmadan hata metni sözleşmesini güçlendir [BEKLIYOR]
+  - T-226 — Kısmi transfer sonrası retry UI ifadesini tahmin olarak işaretle [BEKLIYOR]
+  - T-227 — Uzun/Unicode dosya adı görünümü için offline test tasarla [BEKLIYOR]
+  - T-228 — İki-PC gerçek test matrisinde ayrı hesap/izin gerekliliklerini belgele [BEKLIYOR]
+  - T-229 — Artifact saklama ve temizleme metinlerini güvenli kabul kriterleriyle eşleştir [BEKLIYOR]
+- SON TESLİM: [#1025](https://github.com/Naveax/Nexowire/pull/1025) · 16/16 sentetik PASS; fiziksel iki-PC NOT_RUN
+- BAĞIMLILIK/ENGEL: Gerçek MCP/2-PC/Windows NOT_RUN
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K19 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K19.md). Bağımlıysa başka işe geç.
 
-## K20 — Test/issue bakım ve kalite
+### K20 — Test/issue bakım ve kalite
 - ROL/ALAN: scripts/delegated/k20/**; test/delegated/k20/**; docs/delegated/maintenance-k20/**
-- AKTİF: **T-115** — Açık issue'lardan non-core iş adaylarını tekrarsız sınıflandır [BEKLIYOR]
-- KUYRUK (sırayla; en az 5):
-  - T-116 — Repo içi kırık doküman bağlantıları için offline test aracı ekle [BEKLIYOR]
-  - T-117 — Birim test dosyası adlarıyla sahiplik/çakışma envanteri üret [BEKLIYOR]
-  - T-118 — Typecheck/build/test komutlarının başarısızlık ayrımını kontrol et [BEKLIYOR]
-  - T-119 — PR incelemesi için küçük kanıt özeti şablonunu otomatik üret [BEKLIYOR]
-  - T-120 — Tamamlanan non-core işlerin kullanım senaryosu regresyon listesini tut [BEKLIYOR]
-- BİTTİ TANIMI (bu 6 işin her biri): yalnız sahip olunan dosyada gerçek değişiklik veya gerekçeli 'değişiklik gerekmiyor'; bağlantılı commit/PR, tekrarlanabilir test çıktısı, yanıltıcı PASS olmaması. Bağımlılık: önceki görevde eklenen fixture/araç varsa onu kullan; başka şerit/CORE bağımlıysa yeni işe geç.
+- AKTİF: **T-127** — Sayfa içi yardım bağlantılarını takip eden statik test [BEKLIYOR]
+- KUYRUK (5):
+  - T-230 — PR kanıt raporu başlıklarında exact SHA ve CI iş sayısını zorunlu kıl [BEKLIYOR]
+  - T-231 — Doküman link audit'inin symlink/anchor negatiflerini genişlet [BEKLIYOR]
+  - T-232 — Repo test dosyası keşfinin sessiz glob eksiklerini bildiren araç yaz [BEKLIYOR]
+  - T-233 — Kaynak kod yerine yalnız ekip raporu değiştiren boş PR'ları işaretle [BEKLIYOR]
+  - T-234 — Offline regresyon kataloğuna hata riski ve kullanıcı senaryosu eşlemesi ekle [BEKLIYOR]
+- SON TESLİM: [#1031](https://github.com/Naveax/Nexowire/pull/1031), [#1032](https://github.com/Naveax/Nexowire/pull/1032) · 6 test dosyası PASS; tam npm NOT_RUN
+- BAĞIMLILIK/ENGEL: Upstream CI, tam npm ve gerçek cihaz kabulü eksik
+- BİTTİ TANIMI: ilgili izinli dosyada tekrar üretilebilir test/gerçek düzeltme, exact SHA ve açık kanıt sınırı; [K20 kayıt](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/durum/K20.md). Bağımlıysa başka işe geç.
 
-## HAVUZ — henüz sahipsiz
-Yalnız yukarıdaki görevler tamamlanmışsa ve açık bağımlılık yoksa sahiplen. `kxx` son eki üstlenen KNN ile değişir; önce kendi durumuna `ÜSTLENDİM: T-xxx` yaz, sonra kodla. Başka KNN ile dosya çakışırsa dur; yeni klasör kullan.
-- T-121 — Yeni başlayanlar için adım adım cihaz-bağlantı hata kılavuzu · yalnız yeni docs/delegated/newcomer-kxx/** · [SAHİPSİZ]
-- T-122 — Windows ve Linux geliştirici komutu doğrulama matrisi · yalnız yeni test/delegated/platform-kxx/** · [SAHİPSİZ]
-- T-123 — MCP hata mesajları için statik kullanıcı dili QA · yalnız yeni test/delegated/mcp-ux-kxx/** · [SAHİPSİZ]
-- T-124 — Dokümanlarda eskimiş sürüm referansları raporu · yalnız yeni scripts/delegated/versions-kxx/** · [SAHİPSİZ]
-- T-125 — HTML lang, viewport, title ve erişilebilir meta kontrolü · yalnız yeni test/delegated/html-meta-kxx/** · [SAHİPSİZ]
-- T-126 — Çevrimdışı örnek ekran durumları snapshot seti · yalnız yeni test/delegated/ui-snapshots-kxx/** · [SAHİPSİZ]
-- T-127 — Sayfa içi yardım bağlantılarını takip eden statik test · yalnız yeni scripts/delegated/help-links-kxx/** · [SAHİPSİZ]
-- T-128 — Eski CI action_required run'ları salt okunur takip aracı · yalnız yeni scripts/delegated/ci-watch-kxx/** · [SAHİPSİZ]
-- T-129 — PR etiketleri ve açıklamalarında güvenlik kapsamı tespiti raporu · yalnız yeni docs/delegated/pr-triage-kxx/** · [SAHİPSİZ]
-- T-130 — Yanlışlıkla sır içeren test fixture'larını statik tarama · yalnız yeni test/delegated/fixture-audit-kxx/** · [SAHİPSİZ]
-- T-131 — Örnek CSV çıktısı için locale/birim hata testi · yalnız yeni test/delegated/csv-units-kxx/** · [SAHİPSİZ]
-- T-132 — Aynı sorunun farklı PR'larda tekrarı raporlayıcı · yalnız yeni scripts/delegated/pr-overlap-kxx/** · [SAHİPSİZ]
-- T-133 — Bağlantı işlemi kullanıcıya özel veri sızdırmadan gösterilir mi: statik QA · yalnız yeni test/delegated/status-privacy-kxx/** · [SAHİPSİZ]
-- T-134 — Tarayıcı screenshot kanıtı ile sentetik PASS ayrımı şablonu · yalnız yeni docs/delegated/browser-evidence-kxx/** · [SAHİPSİZ]
-- T-135 — Doküman code fence dil ve komut biçimi tutarlılık testi · yalnız yeni test/delegated/docs-fences-kxx/** · [SAHİPSİZ]
-- T-136 — Test hata mesajlarında fixture path normalizasyonu · yalnız yeni test/delegated/qa-path-kxx/** · [SAHİPSİZ]
-- T-137 — README link adları ve hedefleri doğruluk raporu · yalnız yeni scripts/delegated/readme-links-kxx/** · [SAHİPSİZ]
-- T-138 — Kullanıcı tarafı hata durumlarında offline smoke fixtures · yalnız yeni test/delegated/error-fixtures-kxx/** · [SAHİPSİZ]
-- T-139 — Yalnız test için tutarlı örnek telemetri veri seti · yalnız yeni test/delegated/telemetry-fixtures-kxx/** · [SAHİPSİZ]
-- T-140 — Kendi çalışma dalının diff/CI kabul özetini çıkaran araç · yalnız yeni scripts/delegated/pr-summary-kxx/** · [SAHİPSİZ]
+## HAVUZ — P002 (sahipsiz 20 iş)
+KNN kendi kuyruğu bitince diğer 19 rapordaki ÜSTLENDİM'leri okuyup kendi raporuna yazar; çakışmada küçük KNN sahibi olur. Yalnız yeni `test/delegated/pool-kNN/**` veya `scripts/delegated/pool-kNN/**` alanı kullanılır. Kritik code/secret değişikliği yok.
+- T-235 — Şüpheli URL örnekleri için güvenli kullanıcı dili kontrolü [SAHİPSİZ]
+- T-236 — CSS yüksek kontrast/zoom negatif fixture [SAHİPSİZ]
+- T-237 — Kurulum yardım sayfaları arasında dil tutarlılığı [SAHİPSİZ]
+- T-238 — Delegated test runner'da atlanan uzantı negatif testi [SAHİPSİZ]
+- T-239 — Gerçek browser kanıtı olmayan ekranların envanteri [SAHİPSİZ]
+- T-240 — Ürün özelliği ile PR/merge kanıtı eşlemesi [SAHİPSİZ]
+- T-241 — Read-only GitHub pagination/truncated sonuç testi [SAHİPSİZ]
+- T-242 — JSON/CSV birim dönüşümü kanonik fixture [SAHİPSİZ]
+- T-243 — Windows dokümanlarında riskli yükseltme komutu uyarısı [SAHİPSİZ]
+- T-244 — Markdown duplicate heading/anchor regresyonu [SAHİPSİZ]
+- T-245 — Sahte gerçek cihaz PASS etiketi taraması [SAHİPSİZ]
+- T-246 — Device list error aria-live fixture [SAHİPSİZ]
+- T-247 — Connect UI hata dili sözlüğü [SAHİPSİZ]
+- T-248 — CI eski SHA/job sonucu regresyonu [SAHİPSİZ]
+- T-249 — MCP örnek yanıtında maskeleme testi [SAHİPSİZ]
+- T-250 — Tekrarlı iş ve dosya sahipliği otomatik raporu [SAHİPSİZ]
+- T-251 — README ve INSTALL_WINDOWS link stale testi [SAHİPSİZ]
+- T-252 — Metrik raporlarında sıfır ile UNKNOWN ayrımı [SAHİPSİZ]
+- T-253 — Offline UI touch hedefi kayıt formatı [SAHİPSİZ]
+- T-254 — Açıklama-only PR ile kod/test PR ayrımı [SAHİPSİZ]
 
 ## PROJEYE GİDECEKLER
-- Eski destek PR'ları: [#1000](https://github.com/Naveax/Nexowire/pull/1000), [#998](https://github.com/Naveax/Nexowire/pull/998), [#997](https://github.com/Naveax/Nexowire/pull/997), [#999](https://github.com/Naveax/Nexowire/pull/999) — Draft ve kabul edilmemiş, K14 inceleyecek; CI job kanıtı olmadan merge yok.
-- Yeni T-001...T-140 işleri: ilk doğrulanmış ve çakışmasız kodla KNN kendi fork dalından Naveax/main'e profesyonel PR açar; PR numarası henüz YOK. Kritik alan değişirse PR açmadan ŞEF'e bildirilir.
+- **Yeni 23 Draft upstream PR (tamamı unmerged):**
+  - K01: [#1011](https://github.com/Naveax/Nexowire/pull/1011)
+  - K02: [#1010](https://github.com/Naveax/Nexowire/pull/1010), [#1012](https://github.com/Naveax/Nexowire/pull/1012)
+  - K03: [#1016](https://github.com/Naveax/Nexowire/pull/1016)
+  - K04: [#1015](https://github.com/Naveax/Nexowire/pull/1015)
+  - K05: [#1019](https://github.com/Naveax/Nexowire/pull/1019), [#1027](https://github.com/Naveax/Nexowire/pull/1027)
+  - K06: [#1018](https://github.com/Naveax/Nexowire/pull/1018)
+  - K07: [#1013](https://github.com/Naveax/Nexowire/pull/1013)
+  - K08: [#1014](https://github.com/Naveax/Nexowire/pull/1014), [#1021](https://github.com/Naveax/Nexowire/pull/1021)
+  - K09: [#1017](https://github.com/Naveax/Nexowire/pull/1017), [#1028](https://github.com/Naveax/Nexowire/pull/1028)
+  - K10: [#1020](https://github.com/Naveax/Nexowire/pull/1020)
+  - K11: [#1029](https://github.com/Naveax/Nexowire/pull/1029)
+  - K12: [#1024](https://github.com/Naveax/Nexowire/pull/1024)
+  - K14: [#1022](https://github.com/Naveax/Nexowire/pull/1022)
+  - K15: [#1026](https://github.com/Naveax/Nexowire/pull/1026)
+  - K17: [#1030](https://github.com/Naveax/Nexowire/pull/1030)
+  - K18: [#1023](https://github.com/Naveax/Nexowire/pull/1023)
+  - K19: [#1025](https://github.com/Naveax/Nexowire/pull/1025)
+  - K20: [#1031](https://github.com/Naveax/Nexowire/pull/1031), [#1032](https://github.com/Naveax/Nexowire/pull/1032)
+- Önceki destek Draft'lar [#997](https://github.com/Naveax/Nexowire/pull/997), [#998](https://github.com/Naveax/Nexowire/pull/998), [#999](https://github.com/Naveax/Nexowire/pull/999), [#1000](https://github.com/Naveax/Nexowire/pull/1000): CI `action_required`, ilgili kaynakların kabul sınırları açık.
+- Fork-only CI [PR #1](https://github.com/SinsiVinci/Nexowire-fork/pull/1): 3 job yeşil ama Draft; temiz kod dallarında test runner eksikliği ve fork `main`in upstream fast-forward senkronuna etkisi çözülmeden birleştirme.
+- Ömer'in kritik aktif PR'ları #1003/#1009/#1007/#1005/#995/#989; korumalı kaynak ve canlı cihazlara dokunma.
 
 ## ONUR'UN LİSTESİ
-1. Ömer'den `Naveax/Nexowire` için **collaborator / Write** iste; henüz `push:false`. Discord metni: `Ömer, Nexowire'da kritik alanlara girmeden testleri geçen UI, doküman ve non-core düzeltmeleri kendim birleştirebilmem için SinsiVinci hesabına Write collaborator yetkisi verebilir misin? CORE, ödeme, auth ve release alanlarına dokunmayacağım. Yetki olmazsa fork üzerinden PR açarak devam edeceğim.`
-2. Her K01–K20 sekmesinin en başına numarasını ekleyip ortak KÖLE MESAJI'nı yapıştır; cevap taşımana gerek yok. Asıl raporlar `ekip/durum/KNN.md`.
-3. GitHub Actions'ta fork PR'larının bekleyen workflow onayını yalnız diff ve izinleri kontrol ettikten sonra projede yetkili kişinin yapabileceğini bil. Onur'da upstream yetkisi yok; CI sonucunu yeşil varsayma.
-
-## Süreç notları
-- ŞEF yalnız PROTOKOL/PANO/SEF/ARSIV yazar, kuruluş dışında KNN raporlarını değiştirmez.
-- Pano sürümü bir ŞEF DEVAM'da artar; köleler raporlarında okudukları sürümü kaydeder. Pano görev devri tek sahiplik ilkesine bağlıdır.
+1. K16 sekmesine ortak KÖLE MESAJI'nı gönder; diğer 19 sekme P002'yi okuyarak otomatik devam eder.
+2. Ömer'e bir kez Discord'dan: `Ömer, SinsiVinci hesabına Naveax/Nexowire için Write collaborator yetkisi verebilir misin? Kritik CORE/auth/ödeme/release alanlarına girmeden, testleri geçen non-core PR'ları CI yeşilken birleştirmek istiyorum. Yetki yoksa fork PR'larından çalışmaya devam edeceğim.`
+3. Upstream fork PR Actions onayını yalnız repo yetkilisi diff/izinleri inceledikten sonra yapabilir; onay CI PASS değildir. Onur'un yetkisi henüz yok; işin diğer kısmı fork CI'da devam.

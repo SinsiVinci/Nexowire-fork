@@ -1,4 +1,38 @@
-# ŞEF HAFIZASI — 2026-11-01 / S001
+# ŞEF HAFIZASI — S002 | 2026-11-01 (Europe/Istanbul)
+
+## Son ŞEF DEVAM snapshot'ı
+- Son işlenen `ekip` commit'i: `d85cc5b71296d0a7d18de8bbd80fc76c50970fe3` (K20 T-129 kayıt güncellemesi). S001 kuruluş commit'i `a5830f817cab945990c53ac55fc12f1bac736dc3`.
+- Son kontrol: 30 yeni `ekip` commit'i, K01–K15 ve K17–K20 kayıtları güncellendi; **K16 Adım 0 tek sessiz dosya**. ŞEF, hiçbir KNN durum dosyasını yeniden yazmadı.
+- Pano P002; PROTOKOL V001 değişmedi; ARSIV A002. Eski P001'in tamamlanan T-xxx'leri arşivlendi, her KNN için **1 aktif + 5 kuyruk**, yeni 20 maddelik havuz ayrıldı.
+- Eski 120 atamadan **103 BITTI-YEREL** (yani kod/test/doküman ve PR/commit raporlandı); 17 açık/kısmi/engel. Eski havuzdan **10 BITTI-YEREL**. 113 T-ID arşivde. Bu oran ürünün veya CI'nın tamamlanması değildir; tüm yerel testler ŞEF tarafından bağımsız yeniden çalıştırılmadı.
+
+## Tam olarak ne değişti?
+- Yeni upstream PR serisi [#1010](https://github.com/Naveax/Nexowire/pull/1010)–[#1032](https://github.com/Naveax/Nexowire/pull/1032): **23/23 open Draft, 0 merged** (GitHub PR metadata yeniden okundu). UI: connect, CSS, panel, admin; offline DOM/QA/test; Windows/self-host/MCP belgeleri; S5 sentetik ölçüm; PR review/CI tooling. Gerçek kod ve test commit'leri var, yalnız yazılı durum raporu değil.
+- Önceki destek PR'ları #997–#1000 da Draft; upstream fork CI action_required/0-job engeli devam ediyor. Bu test geçişi değildir.
+- Fork [PR #1](https://github.com/SinsiVinci/Nexowire-fork/pull/1) K13 workflow: exact SHA `50844fb0c7d8e82adbbf6dbd5c1a36a474c903c0`; [run 41327364795](https://github.com/SinsiVinci/Nexowire-fork/actions/runs/41327364795) 3/3 gerçek job başarı (Linux Node22/24, Windows Node24; npm ci, delegated static, typecheck, build). Browser/cihaz/CORE/release değil.
+- Fork ve upstream `main` ikisi de `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`; yeni senkron gerekmedi. Upstream repo metadata `push:false`, fork push:true (S001).
+
+## Kararlar, gerekçeler, kritik yol
+1. **Fork PR #1 şimdilik birleştirilmedi.** Workflow ve runner kodu yalnız K13 dalında. Temiz upstream `main`den açılmış diğer `kNN` dallarının checkout'unda `scripts/delegated/k13/**` yok; workflow baz dalda olup PR head'de gerekli yardımcı scriptler olmadığında fail ya da yanlış kapsam çıkabilir. Ayrıca fork-only workflow fork main'e merge edilirse fork main upstream'den ayrışır; S001/P001 güvenli fast-forward protokolü ile uyumu tasarlanmalı. K13 T-200...204 bunları test/çözümle ele alacak. Kanıt olmadan otomatik merge yok.
+2. **K16 sessiz:** Onur sekmeye bakacak. 19 diğer köle iş yapmış; K16'nın test/kod teslimi olmadı.
+3. **Sahiplik havuzu çatışması önlendi:** K02→121; K07→122; K08→123; K09→124; K05→125; K13→128; K20→129; K11→131; K10→134; K14→140. Hepsi özgün kayıt/PR bağlandı. KNN'lerin sonraki havuz planları stale idi; kalan T-126/127/130/132/133/135/136/137/138/139 P002'de birer kişiye doğrudan atandı. T-235..254 yeni havuz.
+4. **K15→K03 bağımlılık:** PR #1026 içindeki aynı adla device button erişilebilir isim TODO'su. K03/PR #1016 kaynak kodu değiştirebilir, K15 sadece test yapar. K05→K04 `web/admin.html` hata paneli bildirimi source bulgusu, K04 sahibi.
+5. **K03 genel npm test** denemesi exit 130/yarıda kaldı; yerel 8/8 ve typecheck/build PASS tüm repo testi PASS sayılmaz.
+6. **K12 T-071 CSV sözleşmesi** mevcut benchmarklarda CSV yok; JSON mevcut. CSV uydurulmayacak, JSON negatif testleriyle ilerle.
+7. **K14 T-084 merge-readiness engeli** upstream CI/maintainer review olmadan kapatılmaz. K14 T-132 PR-overlap ve yeni upstream Draft taramalarıyla çalışmaya devam eder.
+8. **Gerçek cihaz/browser/provider/Cloudflare/CORE** kabulü yapılmadı; bu ekibin kritik alan yetkisi yok.
+9. M2 ilk upstream merge hâlâ yok; ilerleme oranını 'ürün %86' diye yazma. ETA için gözlenen gerçek merge süresi yok. Onur'un tek insan işi Write yetkisi istemek ve K16 sekmesine bakmak; upstream Actions onayı repo maintainer'a ait.
+
+## Sonraki ŞEF DEVAM
+- Son görülen `ekip` commit'i `d85cc5b712...`; takipte yeni head'i ve diff'i oku, yalnız yeni değişen KNN'leri işle. PANO/SEF/ARSIV ŞEF commit'ini işlenmiş rapor sanma.
+- Öncelik K13 T-200 CI cross-branch tasarımı, K03/K15/K04 UX regresyon bağımlılıkları ve en değerli yeni non-core kod testi.
+- Yeni PR'ların Draft/open durumunu ve **her yeni exact HEAD'deki** gerçek run/job sonuçlarını ayrıca doğrula. İlk güvenli küçük upstream merge'den önce CI kapısı yokmuş gibi davranma.
+- Yeni 20 havuz görevinin claim kayıtları ve KNN kuyruk doluluğu, tek sahiplik çatışmaları; biten her task T-ID'yi ayrı ARSIV satırına taşı.
+
+---
+
+## Önceki şef snapshot'ı (S001, tarihsel; mevcut durum üstte)
+
 
 ## Durum ve son okuma
 - Kurulum sebebi: kullanıcı "ŞEF DEVAM"; `ekip` dalı ve `ekip/SEF.md` bulunmadı, sıfırdan başlatıldı.
