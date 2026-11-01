@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { summarizeRuns, getExactHeadEvidence } from '../../../scripts/delegated/k13/summarize-ci.mjs';
+import { summarizeRuns, summarizeForkMatrix, getExactHeadEvidence } from '../../../scripts/delegated/k13/summarize-ci.mjs';
 
 const head = 'a'.repeat(40);
 const other = 'b'.repeat(40);
@@ -36,4 +36,32 @@ test('truncated job pages fail closed', async () => {
   });
   assert.equal(response[0].evidence, 'NOT_PASS');
   assert.equal(response[0].jobs.at(-1).name, 'TRUNCATED_JOB_LIST');
+});
+
+test('100 successes on page one cannot conceal a 101st missing job', async () => {
+  const evidence = await getExactHeadEvidence('example/repo', head, async url => {
+    if (url.includes('/runs?')) return { workflow_runs: [run(1)] };
+    return { total_count: 101, jobs: Array.from({ length: 100 }, (_, index) => ({
+      ...job(), name: `job-${index}`,
+    })) };
+  });
+  assert.equal(evidence[0].jobs.length, 101);
+  assert.equal(evidence[0].jobs.at(-1).name, 'TRUNCATED_JOB_LIST');
+  assert.equal(evidence[0].evidence, 'NOT_PASS');
+});
+
+test('three fork jobs must succeed in one latest exact-head run', () => {
+  const workflowRun = (id, sha = head, status = 'completed', conclusion = 'success') => ({
+    ...run(id, conclusion, sha), path: '.github/workflows/delegated-noncore.yml', status,
+  });
+  const allJobs = ['linux-static (22)', 'linux-static (24)', 'windows-static'].map(name => ({ ...job(), name }));
+  assert.equal(summarizeForkMatrix([workflowRun(1)], { 1: allJobs }, head).evidence, 'PASS');
+  assert.equal(summarizeForkMatrix([workflowRun(1)], { 1: allJobs.slice(0, 2) }, head).evidence, 'NOT_PASS');
+  assert.equal(summarizeForkMatrix([workflowRun(1), workflowRun(2)], {
+    1: allJobs.slice(0, 2), 2: allJobs.slice(2),
+  }, head).evidence, 'NOT_PASS');
+  assert.equal(summarizeForkMatrix([workflowRun(1, other)], { 1: allJobs }, head).reason, 'NO_EXACT_HEAD_RUN');
+  assert.equal(summarizeForkMatrix([workflowRun(1), workflowRun(2, head, 'in_progress', null)], {
+    1: allJobs, 2: allJobs,
+  }, head).reason, 'LATEST_RUN_NOT_SUCCESS');
 });

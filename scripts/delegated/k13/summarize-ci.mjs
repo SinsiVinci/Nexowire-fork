@@ -28,6 +28,31 @@ export function summarizeRuns(runs, jobsByRun, exactHead) {
   });
 }
 
+const requiredForkJobs = ['linux-static (22)', 'linux-static (24)', 'windows-static'];
+
+export function summarizeForkMatrix(runs, jobsByRun, exactHead) {
+  const matching = runs
+    .filter(run => run.head_sha === exactHead &&
+      (run.path === '.github/workflows/delegated-noncore.yml' ||
+        run.name === 'Fork non-core checks (offline)'))
+    .sort((a, b) => b.id - a.id);
+  if (!matching.length) return { evidence: 'NOT_PASS', reason: 'NO_EXACT_HEAD_RUN' };
+
+  // Never union jobs from separate runs, earlier SHAs, or a stale green run.
+  const run = matching[0];
+  const jobs = jobsByRun[run.id] ?? [];
+  if (run.status !== 'completed' || run.conclusion !== 'success') {
+    return { evidence: 'NOT_PASS', reason: 'LATEST_RUN_NOT_SUCCESS', run_id: run.id };
+  }
+  const names = jobs.map(job => job.name);
+  if (jobs.length !== requiredForkJobs.length ||
+      !requiredForkJobs.every(name => names.filter(actual => actual === name).length === 1) ||
+      jobs.some(job => job.status !== 'completed' || job.conclusion !== 'success')) {
+    return { evidence: 'NOT_PASS', reason: 'INCOMPLETE_OR_FAILED_MATRIX', run_id: run.id };
+  }
+  return { evidence: 'PASS', run_id: run.id, head_sha: exactHead, jobs: [...requiredForkJobs] };
+}
+
 async function getJson(url) {
   const response = await fetch(url, {
     headers: { 'Accept': 'application/vnd.github+json', 'User-Agent': 'nexowire-noncore-ci-summary' },

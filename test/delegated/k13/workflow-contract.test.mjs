@@ -32,4 +32,16 @@ test('missing fork guard and checkout hardening are rejected', () => {
     'if: true',
   )).length > 0);
   assert.ok(validateWorkflow(original.replaceAll('persist-credentials: false', 'persist-credentials: true')).length > 0);
+  assert.ok(validateWorkflow(original.replace(
+    "  windows-static:\n    if: github.repository == 'SinsiVinci/Nexowire-fork'",
+    '  windows-static:\n    if: true',
+  )).some(problem => problem.includes('windows-static')));
+});
+
+test('PR security permission matrix rejects dangerous scopes', () => {
+  for (const scope of ['id-token', 'pull-requests', 'actions', 'checks', 'contents']) {
+    const unsafe = original.replace('  contents: read', `  contents: read\n  ${scope}: write`);
+    assert.ok(validateWorkflow(unsafe).includes('write permission'), scope);
+  }
+  assert.ok(validateWorkflow(original.replace('  pull_request:', '  pull_request_target:')).length > 0);
 });

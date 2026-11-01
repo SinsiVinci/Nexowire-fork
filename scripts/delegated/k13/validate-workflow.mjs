@@ -31,6 +31,19 @@ export function validateWorkflow(source) {
   forbidPattern(/\bsecrets\s*\./i, 'secret reference');
   forbidPattern(/\bNEXOWIRE_LIVE_[A-Z0-9_]+\b/, 'live acceptance flag');
   forbidPattern(/^\s*permissions:\s*write\s*$/m, 'broad write permission');
+
+  const jobsSection = source.split(/^jobs:\s*$/m)[1] ?? '';
+  const starts = [...jobsSection.matchAll(/^  [A-Za-z][A-Za-z0-9_-]*:\s*$/gm)];
+  if (!starts.length) problems.push('no CI jobs');
+  for (let i = 0; i < starts.length; i++) {
+    const block = jobsSection.slice(starts[i].index, starts[i + 1]?.index);
+    if (!/^    if: github\.repository == 'SinsiVinci\/Nexowire-fork'\s*$/m.test(block)) {
+      problems.push(`job missing fork-only gate: ${starts[i][0].trim()}`);
+    }
+  }
+  const checkouts = (source.match(/^\s*- uses: actions\/checkout@/gm) ?? []).length;
+  const disabledCredentials = (source.match(/persist-credentials:\s*false/g) ?? []).length;
+  if (!checkouts || checkouts !== disabledCredentials) problems.push('all checkouts must disable persisted credentials');
   return problems;
 }
 
