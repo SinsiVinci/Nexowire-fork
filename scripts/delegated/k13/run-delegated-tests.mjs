@@ -2,7 +2,10 @@ import { readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-const root = resolve('test/delegated');
+const roots = [
+  resolve('test/delegated'),
+  resolve('scripts/delegated/ci-watch-k13'),
+];
 const tests = [];
 
 function collect(directory) {
@@ -13,7 +16,7 @@ function collect(directory) {
   }
 }
 
-collect(root);
+for (const root of roots) collect(root);
 if (!tests.length) {
   console.error('No delegated static tests found; refusing empty PASS.');
   process.exitCode = 1;
