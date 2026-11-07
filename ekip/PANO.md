@@ -1,305 +1,337 @@
-# NEXOWIRE EKİP PANOSU — P004
-Tarih: 2026-11-07 (Europe/Istanbul) | ŞEF: SinsiVinci/Nexowire-fork `ekip`
-Kaynak: [22 açık sorun](https://github.com/Naveax/Nexowire/issues) · [hedef main](https://github.com/Naveax/Nexowire/tree/main) · [ekip protokolü](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PROTOKOL.md)
+# NEXOWIRE EKİP PANOSU — P005
+Tarih: 2026-11-07 (Europe/Istanbul) | ŞEF: SinsiVinci/Nexowire-fork `ekip` | Protokol: V004
 
-## ÖMER–ŞEF ÇALIŞMA MUTABAKATI — 2026-11-07
-- **P004'teki görev kimlikleri ve sahipler K01–K20 için aynen devam eder:** T-255…T-374 (**120 ayrı yeni görev**), HAVUZ T-375…T-394 (**20 yedek**). P004'te görev tamamlanması eklenmedi; ilerleme **0/120 yeni görev**. Daha önce birleştirilmiş #1066/#1070/#1071 kaynak işleri bu paydaya ve paya GİRMEZ.
-- **Ömer'in çalışma dalı:** [#1096](https://github.com/Naveax/Nexowire/pull/1096) açık Draft, exact HEAD `02bf1004646620198719a7f441e7d8ce870f4d38`, 310 değişen dosya. CORE, Broker, Windows Agent, SQLite Hub ve Connection v2 koordinasyonu Ömer'in. Özellikle `src/agent/process-manager.ts` (**#540 kaynak çözümü**) ve `.github/workflows/ci.yml` bu PR'da değiştiğinden kölelerin bu dosyaları düzenlemesi YASAK; bağımsız KNN test/doküman çalışması devam eder.
-- KNN P004'teki kendi dosya alanlarıyla **#1096 doğrudan path çakışması göstermiyor** (310 dosyanın listesi karşılaştırıldı); ancak `#1068` hâlâ açık Draft olduğu için K01–K04 web/CSS source çakışması uyarısı korunur. Çakışma tespit edilirse hiçbir dalı zorla merge etme; KNN raporunda iki PR, iki SHA ve dosya yoluyla ŞEF'e ilet, ŞEF Onur üzerinden Ömer'e kısa bilgi verir.
-- **Owner kabul bildirimi:** Ömer'in iletisinde #1096 için **60/60 yerel PASS**, Windows Node 22/24 kabulü PASS, canlı Work-PC CORE + Hub + Agent çalışıyor bilgisi var. **Bu iletinin yerel 60/60 ve cihaz iddiaları ŞEF tarafından fiziksel olarak tekrar çalıştırılmadı.** GitHub exact-HEAD #1096 check-runs ilk sayfada **17 success, 6 skipped, 1 in_progress** (browser-live) gözlendi. Taslak/NO-GO ve tamamlanmamış test varken üretim kabulü veya genel PASS ilan etme.
-- **CI tekrarını önle:** Önce PR exact commit SHA'sı, ilgili workflow run/check'in devam edip etmediği ve gerçek job sonuçlarını oku. Aynı SHA için koşu zaten başladıysa yeniden dispatch etme; eski SHA'nın PASS'i yeni SHA için kanıt değildir. `skipped` = `PASS` değil; canlı cihaz gerekli ise `NOT_RUN/WAITING_PHYSICAL` kullan.
-- **#1006 ortak kanıt yolu:** Yeni bir T-ID ancak ilgili gerçek issue #540/#588/#539/#485/#487 alt problemi, kaynak commit/PR, test komutu, exact SHA ve CI/cihaz kabul sınırlarıyla tamamlandığında #1006 takip kayıtlarına **aynı kanıtı bağlanabilir biçimde** aktarılacak. Şu anda yeni P004 işi bitmediği için #1006'ya sahte bitiş yorumu yazılmadı. #1006 mevcut P0 release NO-GO şartları sürer.
-- **Öncelik:** Gerçek hatayı kanıtla, güvenli koda düzeltme yap, tekrar test et. Çekirdek dışı özellik geliştirmeyi gereksiz durdurma; yeni genel yasak yok. Ömer'in native/CORE/auth/SQLite alanları ise mevcut sahiplik sınırında kalır.
+## Hedef ve kilometre taşları
+- Tek hedef: [Naveax/Nexowire açık issue'ları](https://github.com/Naveax/Nexowire/issues) üzerinden **gerçek hataları tekrarla → düzelt → yeniden test et → güvenli PR ile ana projeye geçir**. Öncelik: #540 Windows alt süreç sonlandırma ·  #588 >220KB dosya aktarımı ·  #539 güvenilirlik/gerçek durum ·  #485 kurulum ve bağlantı ·  #487 offline kapasite ve maliyet ·  #1006 kabul/CI kayıtları.
+- Ömer'in **[#1096](https://github.com/Naveax/Nexowire/pull/1096) Windows CORE/Broker/SQLite Hub/Connection v2** ve **[#1068](https://github.com/Naveax/Nexowire/pull/1068) web entegrasyonu** aktif. Bu kaynaklarda ŞEF ekibi değişiklik yapmaz. `src/agent/process-manager.ts` ve `.github/workflows/ci.yml` de korunur. #271 ON HOLD.
+- 20/20 durum dosyası P004/V003 üzerinden iki kullanıcı turunda güncellendi; ŞEF, son S004'ten beri **67 yeni ekip commit'i** okudu. P004 T-255…T-374 **104/120 (%86,7) yerel/kaynak teslim, 16 açık veya kısmi**. Bu oran **ürünün tamamlanma oranı DEĞİL** ve canlı Windows/provider kabulü anlamına gelmez.
+- P004 HAVUZ 20 görevinden **16 benzersiz sahiplenilmiş** (yerel/QA teslim), 4 sahipsiz kaldı: T-376, T-386, T-391, T-392. Dört çoklu sahiplenme çözüldü; asıl sahiplik kanıtı A004 arşivinde.
+- **Ana projeye geçen:** [#1102](https://github.com/Naveax/Nexowire/pull/1102) `b5a3f8840517d65ecbd6a018699c4c8bdde09987` squash merge (S5 kapasite UNKNOWN etiketi); PR exact HEAD **7/7 CI PASS**. Fork `main` upstream ile aynı SHA'ya fast-forward edildi. **Main push CI: 6/7 PASS, browser-live hâlen in_progress** (son kontrol); bu issue #487/#539'un tamamen çözüldüğü iddiası değildir.
+- P004 çevriminde 32 yeni kaynak PR doğdu: #1099…#1130; #1102 merge, **31 açık Draft**. 14 diğer PR'da exact SHA üzerinde 7/7 CI yeşil görüldü; bazı eklenen iç içe testler ana CI tarafından keşfedilmediğinden **toplu merge yok**. [#1118](https://github.com/Naveax/Nexowire/pull/1118) Node22 CI FAIL (browser cancelled); K20 bu hatanın sahibi.
+- **Açık somut RED/engel:** K01 [#1114](https://github.com/Naveax/Nexowire/pull/1114) boş pairingId/token; K04 [#1104](https://github.com/Naveax/Nexowire/pull/1104) admin 401/403 (owner adayına göre 4/6 test başarısız); K13 [#1112](https://github.com/Naveax/Nexowire/pull/1112) ana CI test keşfi (52 delegated testten 43 doğrudan/kalıp kapsama, kalanların keşfi doğrulanmadı); K20 [#1118](https://github.com/Naveax/Nexowire/pull/1118) Node22 CI FAIL; gerçek cihaz/Windows R15/S5 acceptance NOT_RUN. Bunların hiçbiri çözüldü diye işaretlenmedi.
+- Yeni dönem: **P005 T-395…T-514 = 120 yeni ayrık görev** (her kölede 1 aktif + 5 kuyruk), **HAVUZ T-515…T-534 = 20 sahipsiz yedek**. Başlangıç P005 tamamlanma 0/120. P004'ün geçmiş 104 işi P005 sayacına ekleme. Toplam Nexowire ilerleme yüzdesi ve bitiş zamanı güvenilir biçimde ölçülemiyor; 22 açık issue ve owner/cihaz bağımlılıkları var.
 
-## Hedef, ilerleme, kritik yol, süre
-- **Yeni odak: Ömer'in açık sorunları.** 2026-11-07 anlık envanterinde **22 açık issue** var. Bunların bir bölümü şemsiye işler ve büyük bölümü doğrudan güvenlik/CORE/Windows yetki alanı. Bütün 22'yi 20 bağımsız kod görevi gibi saymak YANLIŞTIR.
-- **İlerleme göstergesi:** issue odaklı yeni P004 alt işleri **0/120 doğrulanmış tamam** (yeni atama). Açık 22 issue'nun **0'ı bu incelemede yeni kapatıldı**; ürün genel yüzde ilerlemesi bilinmiyor. Önceki P001/P002 yerel işler ve upstream koordinatör birleşmeleri arşivde: gerçek ürün kaynak ilerlemesi vardır; tek başına issue kapanışı değildir.
-- **20/20** köle kayıt dosyası P002'den sonra yazıldı (K16 Adım 3 dahil). 34 kayıt commit'i işlendi; köle raporları 1 Kasım kaynaklı, 7 Kasım'da yeni çalışma henüz kanıtlanmadı.
-- **Yetki:** `SinsiVinci` hedefte **write**. Fork `main`, 7 Kasım'da upstream `main@4e7db16f4233048a956664bef6b607781eb63fb7` noktasına **27 commit, yalnız fast-forward** ile eşitlendi. Kaynak değişince önce yeni HEAD'i yeniden doğrula.
-- **Eski PR gerçeği:** 36 köle kaynak PR'ından **6 açık Draft** (#1010, #1011, #1015, #1016, #1030, #1035); **30 kapalı, doğrudan merge edilmedi**. Fakat ilgili kaynakların bir kısmı Ömer'in #1054/#1055/#1057/#1058/#1059/#1061/#1063/#1066/#1070/#1071 birleşmeleriyle gerçek `main`e taşındı. Özellikle UI kaynakları için owner [#1068](https://github.com/Naveax/Nexowire/pull/1068) hâlâ **açık Draft**. Kapalı kaynak PR'ı otomatik kayıp ya da tamamlandı sayma; içerik/sha karşılaştır.
-- **Kilometre taşları:** M0 22 issue ve mevcut PR/owner ayrımı ✓; M1 20 güvenli iş alanı ve P004 ✓; M2 ilk üç gerçek sorun için tekrar üretilebilir hata kanıtı ☐; M3 ilk küçük non-core düzeltme PR'ı exact-HEAD CI yeşil ☐; M4 ana dala güvenli birleşme + ilgili issue kabulü ☐.
-- **Kritik yol:** #540 Windows süreç ağacı, #588 büyük dosya aktarımı, #539 yanlış başarı/teşhis gösterimi; owner'ın kritik koduna çarpmadan izole test/UX iyileştirme. #1006 etrafındaki gerçek CI ve #1068 UI entegrasyonu bekleyen bağımlılıklar.
-- **ETA:** Yeni ekibin ilk bağımsız test/düzeltme paketine **1–3 iş günü tahmini** (20 sohbet yeniden çalışırsa, izinli kod alanları ve CI yeşilse). Açık 22 issue'nun tamamının kapanış süresi **ölçülemez**: fiziksel Windows, CORE/authorization ve deploy kabulü Ömer'in ayrı alanıdır. Bu bir söz değil.
+## Yönetim / kabul ilkeleri
+1. **Test sonucu üç ayrı seviye:** yerel kaynak/VM; exact commit hosted CI; gerçek cihaz/provider fiziksel kabul. Özellikle CI yeşil olsa bile yeni test keşfi doğrulanmamışsa ilgili kapsam `NOT_RUN` kalır.
+2. Kod tek sahibi olan yollarda hazırlanır. KNN aktif görev → bu bölümdeki 5 kuyruk → sahipsiz HAVUZ; bağımlı görevde beklemek yok. Başka kişinin dosyasına dokunma.
+3. PR ve issue kapanışı ŞEF gözetiminde, yalnız gerçek kanıtla; yeni kullanıcı kısıtları/owner CORE değişiklikleri uydurma. Başka PR'ların tarihsel PASS'ini yeni HEAD PASS'ine taşıma.
+4. Bir havuz görevini talep edenler diğer 19 KNN raporunu okur, önce kendi kaydına `ÜSTLENDİM` yazar, tekrar kontrol eder. Çakışmada **küçük KNN** kazanır. Aynı T-ID iki kere bitmiş sayılmaz.
+5. Dosya alanı sahipliği ve görev sırası PROTOKOL V004'tedir. Ömer'in #1096/#1068 çalışmalarında aynı kaynak varsa bağımsız test üret; iki tarafı çatıştıracak birleştirme yapma.
 
-## Öncelikli hata analizi ve karar
-| Sıra | Issue | Somut problem | Bizim güvenli teslimimiz | Kritik kod sahibi / gerçek kapanış |
-|---|---|---|---|---|
-| P1 | [#540](https://github.com/Naveax/Nexowire/issues/540) | Windows'ta `taskkill` başarılı görünürken alt süreç canlı kalabiliyor; 11 test PASS olsa bile süreç kapanmıyor. | K16 izole negatif test, K20 tekrar/kanıt, UI için yanlış başarı kaydı. | ProcessManager/native yaşam döngüsü Ömer; gerçek Windows süreç çıkışı kanıtı gerekli. |
-| P1 | [#588](https://github.com/Naveax/Nexowire/issues/588) | Yaklaşık 220 KB üzeri dosyada aktarım tıkanması; devam/tekrar ve veri bütünlüğü. | K19 aktarım kullanıcı sonuç testi, K18 güvenilir sayımlar; kırılma matrisi. | Hash, artifact, yetki, güvenli resumable aktarım çekirdeği Ömer. |
-| P1 | [#539](https://github.com/Naveax/Nexowire/issues/539) | 22 güvenilirlik alt sorunu; özellikle R01 hata kaynağı, R11 doğru ekran, R17 ortam teşhisi, R18 süreç durumu, R22 doğrulama. | UI hataları, doküman, bağımsız negatif test ve CI kanıtı. | R02/03/04/05/09/10/14/15/19/20 gibi çekirdek/izin alt işleri Ömer. |
-| P2 | [#485](https://github.com/Naveax/Nexowire/issues/485) | Tek tık kurulum ve eşleştirme sırasında kullanıcıya doğru yardım/hata metni. | K01/K02/K06/K07/K10 görünüm, kurulum anlatımı ve test. | Gerçek imzalı kurucu/cihaz enrollment Ömer; #269 da korumalı. |
-| P2 | [#487](https://github.com/Naveax/Nexowire/issues/487) | Ölçek, adil kullanım, maliyet ve uzun dönem kabulü. | K11/K12/K18 offline ölçüm/kaynak doğrulama; #1070'daki teslimleri tekrar üretmeme. | Gerçek servis/ödeme/kapasite kabulü Ömer. |
-| GATE | [#1006](https://github.com/Naveax/Nexowire/issues/1006) | Açık PR ve CI kanıtı, canlı cihaz ve release NO-GO durumları. | K13/K14/K20 SHA, test işi ve merge risk denetimi. | Canlı CORE/release/onay ayrı; 'action_required' PASS değildir. |
+## KÖLELER — TEK SAHİPLİK / AKTİF / 5'Lİ KUYRUK
 
-## Çalışılmayacak kritik sorunlar
-- **Doğrudan müdahale yasak:** #1001 (native journal/PID), #974 (WAL başlangıç), #587 (geri alma/veri bütünlüğü), #617/#323/#322 (ayrıcalıklı Windows/CORE), #402 (ekran izolasyonu), #486/#484 (ödeme/kota/kimlik), #265 (canlı yönlendirici), #269 (kurucu imza), #812'nin gerçek izin hesabı, #780'in Git sandbox/CORE güvenlik kısmı, #482'nin kritik S1–S4 kısımları.
-- **#271 özel ON HOLD:** #481 owner handoff içindeki açık durdurma kararı geçerli; ACL değişimi yapma.
-- Kritik issue'ları **salt-okunur izlemek serbest**, ama kapanmış saymak, issue kapatmak veya Ömer'in aktif PR dosyasını değiştirmek yasak. Ömer'in yeni açık Draft'ları #1068, #1080, #1085, #1086–#1096 ve diğerleriyle çakışma kontrolü zorunlu.
+### K01 — Bağlantı ekranı — gerçek hata
+- **ROL/ALAN:** web/connect.html, web/connect.js (yalnız #1068 tamamlanınca); test/delegated/k01/**.
+- **ODAK / ISSUE:** #485 #539. **Önceki açık:** T-256/257 kısmi; T-260 gerçek browser ENGEL. Boş pairingId/token RED #1114, owner #1068.
+- **ÇAKIŞMA SINIRI:** Ömer #1068 web source'a dokunurken yalnız K01 test/fixture; issue #485 source eksikliği owner'a iletilecek.
+- **ÖNCEKİ PR KANITI:** [#1114](https://github.com/Naveax/Nexowire/pull/1114); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-395:** #485: #1114 boş/whitespace pairingId+token RED senaryolarını #1068 current HEAD'e göre tek hatalı ve tek doğru örnek olarak sabitle, owner'a en küçük değişiklik notu çıkar. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-396:** #539: aynı bağlantı denemesinde stale 401 ile yeni pairing cevabının yarışını gerçek `connect.js` işleviyle tekrar üret ve kendi testinde düzeltme öner.
+  2. **T-397:** #485: başarılı pairing iddiasından önce callback/provenance olumsuz durumlarını kullanıcıya gösteren sunumun negatif testlerini ekle.
+  3. **T-398:** #539: 403/429/retry-after ve terminal hesap reddi mesajlarını aynı metin gibi göstermeyen K01 test paketi.
+  4. **T-399:** #485: #1068 main'e girdikten sonra K01 kaynak ekranında kanıtlanan hatayı sadece kendi web yollarında düzelt, VM testleriyle tekrar doğrula.
+  5. **T-400:** #485: hosted tarayıcıda 375/768px odak/yeniden dene görüntüsü kanıtı üret, ortam yoksa NOT_RUN.
 
-## Uygulama sırası ve tek sahiplik
-1. Her köle PROTOKOL V002 + PANO P004 + kendi KNN kaydını okur, current upstream HEAD ve ilgili issue/PR'ı tekrar kontrol eder. Eski görevleri korur ama **P004 yeni AKTİF ve KUYRUK** önceliklidir. Birleştirilmiş eski içerik tekrar yazılmaz.
-2. Bir dosyanın tek yazarı vardır. K01–K04 web kaynakları **#1068 ile örtüştüğünden** mevcut durumda önce sadece inceleme/test; owner tamamlayınca eksik davranış kalmışsa düzeltme. K13 `ci.yml`ye dokunmaz. K11 CSV ile K18 JSON sahipliği ayrıdır.
-3. Her işte: hata örneği → en küçük güvenli değişiklik/test → aynı commit için test ve CI → PR → hedefte SHA/dosya karşılaştırması → gerçek kabul. `BITTI-YEREL` issue kapandı demek değildir.
-4. 1 aktif + **5 derin kuyruk**; bekleyen bağımlılığa takılınca sonraki bağımsız işi yap. Kod dalı fork'ta `kNN/konu`, doğrudan **güncel upstream main**den; `ekip` dalına asla kod taşıma. Görevin tek sahibi PANO'daki KNN.
-5. Yazma izni var diye korumayı/CI'yı atlama. **Sadece non-core, çakışmasız, gerçek job'ları başarılı ve incelemesi bitmiş PR** ana dala gidebilir. Ömer'in aktif bütünleştirme PR'larını otomatik merge etme. Karar ŞEF tarafından tek tek kayıtlanır.
+### K02 — Küçük ekran/kullanılabilirlik
+- **ROL/ALAN:** web/styles.css (owner #1068 sonrası); test/delegated/k02/**.
+- **ODAK / ISSUE:** #485 #539. **Önceki açık:** T-266 canlı Chromium/screenshot NOT_RUN; T-385 havuz sahibi K02.
+- **ÇAKIŞMA SINIRI:** #1068 CSS yolu owner tarafından açıkken salt-okunur test; #1126 CI kontrolü.
+- **ÖNCEKİ PR KANITI:** [#1101](https://github.com/Naveax/Nexowire/pull/1101), [#1126](https://github.com/Naveax/Nexowire/pull/1126); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-401:** #539: #1126 exact CI ve test keşfini kontrol et; platform bazında `NOT_RUN` ile başarısızlığı ayıran K02 regresyonunda gerçek negatif kanıt. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-402:** #485: #1068 CSS adayında 320/375/768/zoom 200%/400% görünüm taşmalarını DOM ölçümüne uygun test paketi olarak sabitle.
+  2. **T-403:** #539: K01'in hata metinlerinde uzun Unicode adres/cihaz ismi ve CSS wrap kırılmasını bağımsız K02 testinde tekrar üret.
+  3. **T-404:** #485: focus-visible/high-contrast/reduced-motion kurallarında gerçekten yanlış sunum bulursan #1068 sonrası yalnız styles.css'de düzelt.
+  4. **T-405:** #539: ekranda büyütme ile başarı/UNKNOWN mesajının saklanmasını önleyen responsive regresyon.
+  5. **T-406:** #485: hosted gerçek browser ekran ölçümü ve ekran görüntüsü kanıtı, yoksa kaynak/NOT_RUN olarak açık bırak.
 
-## KÖLELER — her görev için kimlik / sahip / bitiş
-Genel **bitti tanımı:** İlgili issue'ya bağlı somut test/kod/belge farkı, kaynak PR/commit, exact-HEAD test sonucu, gerekirse CI ve gerçek cihaz `NOT_RUN`; yetki sınırı içinde kalması. T-255…T-374 yeni, P001/P002 T-ID'leri yeniden kullanılmaz.
+### K03 — Panelde doğru işlem sonucu
+- **ROL/ALAN:** web/index.html, web/app.js (owner #1068 sonrasında); test/delegated/k03/**.
+- **ODAK / ISSUE:** #539 #812. **Önceki açık:** T-270/271 #1068 kaynak kabulü, T-272 gerçek görsel/NVDA beklemede.
+- **ÇAKIŞMA SINIRI:** K08 Türkçe status-copy çelişki kanıtı T-375/#1128; owner #1068 web source'u henüz açık.
+- **ÖNCEKİ PR KANITI:** [#1103](https://github.com/Naveax/Nexowire/pull/1103); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-407:** #539/R18: K08 #1128'in gösterdiği Türkçe başarı/UNKNOWN durum dili çelişkisini gerçek `render()` fonksiyonunda negatif regresyonla sabitle. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-408:** #539: out-of-order `succeeded`/`queued`/`UNKNOWN` durumlarının eski ekrana geri düşmesini K03 panel QA ile yakala.
+  2. **T-409:** #812: localGrant false iken effective input kanıtını yanlış yetki onayı saymayan kullanıcı durumu sözleşmesi ekle.
+  3. **T-410:** #539: K15 aynı adlı cihaz seçim etiketlerinden gelen erişilebilirlik bulgusunu K03 panel testine bağla.
+  4. **T-411:** #539: #1068 birleşirse eksik sunum hatasını yalnız K03 kaynak yolunda minimal fix + testle kapat.
+  5. **T-412:** #539: sahici tarayıcı/klavye/ekran okuyucu kabulünü K10 kanıtıyla eşleştir, yoksa NOT_RUN.
 
-### K01 — Bağlanma ekranı ve hata açıklığı
-- ROL/ALAN: `web/connect.html, web/connect.js; test/delegated/k01/** (yalnız sunum)`
-- İLGİLİ ISSUE: #485, #539/R01. SAHİPLİK/BAĞIMLILIK: #1068 owner entegrasyonu sonuçlanana dek aynı web dosyalarını değiştirme.
-- **AKTİF: T-255** — #485/#539: güncel main ile #1011 ve #1068 bağlanma ekranının farkını salt-okunur incele; yalnız eksik kullanıcı hatasını kanıtla [YENİ]
-- **KUYRUK (5):**
-  - T-256 — #485: kopan bağlantıda 'bağlı' etiketinin kalmaması için bağımsız UI negatif test paketi [YENİ]
-  - T-257 — #539/R01: iptal, zaman aşımı, geçersiz adres ve erişilemeyen servis mesajlarını ayrı sunum testiyle doğrula [YENİ]
-  - T-258 — #485: tekrar denemede çift tıklama ve eski cevap yarışı için tarayıcı-olmayan regresyon [YENİ]
-  - T-259 — #539/R11: bağlantı sonucu UNKNOWN ise 'başarılı' yazmayan ekran durum matrisi [YENİ]
-  - T-260 — #485: gerçek tarayıcı olursa dar ekran/odak/görüntü kabulünü kanıtla; yoksa NOT_RUN [YENİ]
+### K04 — Admin hata ve yetki sunumu
+- **ROL/ALAN:** web/admin.html, web/admin.js (owner #1068 sonrası); test/delegated/k04/**.
+- **ODAK / ISSUE:** #539 #485. **Önceki açık:** T-275 401/403 RED owner #1068'de 4/6, T-277/278 fiziksel erişilebilirlik açık; T-382 havuz sahibi K04.
+- **ÇAKIŞMA SINIRI:** Admin web source #1068 sahibinde; K05 #1122 aynı ID T-382 duplicate (K04 wins).
+- **ÖNCEKİ PR KANITI:** [#1104](https://github.com/Naveax/Nexowire/pull/1104), [#1120](https://github.com/Naveax/Nexowire/pull/1120); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-413:** #539/R11: owner #1068 admin 401/403 olayındaki 4/6 FAIL bulgusunu tek kararlı negatif test ve kaynak/ekran etkisiyle raporla. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-414:** #539: stale yönetim sayaçlarının 401 sonrası yanlış başarı göstermesine karşı UI fixture güçlendir.
+  2. **T-415:** #539: role=alert/status ve dinamik admin kayıtlarının erişilebilir metin döngüsünü K05 bulgularıyla çapraz test et.
+  3. **T-416:** #539: #1120 tek checkout 56/56 doğrulayıcıyı owner #1068 adayında gerçek çalıştırabilirlik için test et, yoksa NOT_RUN.
+  4. **T-417:** #539: #1068 birleşirse admin yanlış durum metnini yalnız kendi web yolunda düzelt, bağımsız K05 regresyonunu koş.
+  5. **T-418:** #485: dar ekran/klavye ile yönetim hata görünürlüğünün hosted browser kanıtını topla.
 
-### K02 — Dar ekran ve ortak görünüm
-- ROL/ALAN: `web/styles.css; test/delegated/k02/**`
-- İLGİLİ ISSUE: #485, #539/R11. SAHİPLİK/BAĞIMLILIK: #1068 web/CSS PR'ı aktif: aynı CSS yolu üzerinde yeni kodu beklet.
-- **AKTİF: T-261** — #485: #1010 CSS kapsamının #1068 ile ana dala taşınıp taşınmadığını SHA bazında karşılaştır [YENİ]
-- **KUYRUK (5):**
-  - T-262 — #539/R11: 320/375/768 pikselde taşma/uzun hata metni için yalnız K02 testlerine regresyon ekle [YENİ]
-  - T-263 — #485: dar ekranda ekran okuyucu odağı ve görünür odak sınırlarının CSS testini ekle [YENİ]
-  - T-264 — #539: %200/%400 yakınlaştırmada uzun cihaz adı/URL için offline görünüm testi [YENİ]
-  - T-265 — #485: renk kontrastı ve azaltılmış hareket tercihi için CSS negatif senaryo [YENİ]
-  - T-266 — #539: #1068 sonrası gerçek tarayıcıyla dört görünüm ekran kanıtı; yoksa NOT_RUN [YENİ]
+### K05 — Bağımsız arayüz kalite
+- **ROL/ALAN:** test/delegated/k05/**; scripts/delegated/k05/**; docs/delegated/qa-accessibility-k05/**.
+- **ODAK / ISSUE:** #539 #485. **Önceki açık:** T-382 çakışma K04 sahibi; K05 #1122 ayrı QA kanıtı, T-279..284 local bitti.
+- **ÇAKIŞMA SINIRI:** K01–K04 web source'a yazma, aynı pool T-ID için küçük numara kuralı.
+- **ÖNCEKİ PR KANITI:** [#1115](https://github.com/Naveax/Nexowire/pull/1115), [#1122](https://github.com/Naveax/Nexowire/pull/1122); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-419:** #539: K05 #1115/#1122 testlerinin CI'da gerçekten çağrılıp çağrılmadığını K13 keşif raporuyla çapraz kanıtla. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-420:** #539: #1068 admin 401/403 sorunu için ekran okuyucuya giden alert metninde yanlış başarı negatifi üret.
+  2. **T-421:** #485: bağlantı ekranında boş alan/hatalı adres/iptal sonrası odak kaybı için bağımsız erişilebilirlik fixture'ları.
+  3. **T-422:** #539: iki aynı adlı cihazın erişilebilir etiketinin benzersizliğini K03/K15 adaylarında test et.
+  4. **T-423:** #539: source-only taramanın gerçek NVDA/Chromium kabulü gibi sunulmasını reddeden kanıt şeması.
+  5. **T-424:** #539: K01–K04 sahiplerine tek tek dosya/PR/SHA ile en yüksek etkili üç somut bulgu önerisi yaz.
 
-### K03 — Ana panelde doğru durum
-- ROL/ALAN: `web/index.html, web/app.js (yalnız UI); test/delegated/k03/**`
-- İLGİLİ ISSUE: #539/R11/R18, #812. SAHİPLİK/BAĞIMLILIK: #1068 K03 paneline dokunuyor: sonucu gözlemeden aynı yolları değiştirme; #812 yetki hesabına dokunma.
-- **AKTİF: T-267** — #539: #1016/#1068 durum ekranı değişikliklerinin current main'e girip girmediğini kanıtla [YENİ]
-- **KUYRUK (5):**
-  - T-268 — #539/R18: devam ediyor/başarılı/başarısız/bilinmiyor durumlarını aynı ekranda ayıran negatif test [YENİ]
-  - T-269 — #812: yerel izin ile fiilî kontrol uyumsuzluğunda yanlış kesinlik vermeyen yalnız görünüm fixture'ı [YENİ]
-  - T-270 — #539: gecikmiş cevap yeni cihazın durumunu ezmesin diye yarış testini güncelle [YENİ]
-  - T-271 — #539: 401 sonrası önceki müşterinin sayısının ekranda kalmaması regresyonu [YENİ]
-  - T-272 — #539: tarayıcı/klavye ile cihaz kartları ve erişilebilir ad kabulü, mümkün değilse NOT_RUN [YENİ]
+### K06 — Windows kurulum hataları
+- **ROL/ALAN:** docs/INSTALL_WINDOWS.md, docs/CHATGPT_INSTALL_PROMPT.md; test/delegated/k06/**.
+- **ODAK / ISSUE:** #485 #269. **Önceki açık:** T-383 küçük numara K06; K07 #1125 ayrı belge QA, T-378 K06.
+- **ÇAKIŞMA SINIRI:** İmzalı installer/release dosyaları protected; K07 docs yolları ayrı.
+- **ÖNCEKİ PR KANITI:** [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-425:** #485: #1129'da yakalanan gerçek connect-page hata mesajı ile kurulum rehberi arasındaki farkı K06 izinli belgelerde düzelt ve test et. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-426:** #485: #1108/#1129 içeriklerinin aynı başlık/anchor ve doğru kurtarma yolunu koruduğunu tek source checkout'ta kanıtla.
+  2. **T-427:** #485: `Oluştur`/`BAĞLA` hata örneklerinde sır/token/özel URL yankılanmasını negatif fixture ile engelle.
+  3. **T-428:** #269: v1.0.8 `.cmd` checksum ile gerçek imzalı native helper kabulünü dürüstçe ayıran metin denetimi.
+  4. **T-429:** #485: Windows 10/11 ve SmartScreen adımlarında hiçbir izinsiz admin/UAC çağrısı önermeyen salt-okunur kurulum kontrolü.
+  5. **T-430:** #485: yayın dosyası linklerini güncel GitHub release meta ile doğrula, canlı kurulum gerektireni NOT_RUN bırak.
 
-### K04 — Yönetim ekranında güvenilir göstergeler
-- ROL/ALAN: `web/admin.html, web/admin.js (sunum); test/delegated/k04/**`
-- İLGİLİ ISSUE: #539/R11/R18. SAHİPLİK/BAĞIMLILIK: #1068 K04 admin dosyalarına dokunuyor; entegrasyon sonucu netleşene kadar test ve denetim.
-- **AKTİF: T-273** — #539: #1015/#1068 yönetim ekranındaki durum geri bildirimlerinin ana dalda eşini kontrol et [YENİ]
-- **KUYRUK (5):**
-  - T-274 — #539/R11: bozuk/eksik/negatif sayacı asla sağlıklı sistem saymayan negatif test [YENİ]
-  - T-275 — #539/R18: tamamlandı/çalışıyor/bilinmiyor etiketlerinde yanıltıcı başarı tespiti [YENİ]
-  - T-276 — #539: bağlantı hatası ve yenileme sırasında eski ölçüm değerlerini temiz gösteren test [YENİ]
-  - T-277 — #539: idari ekran uzun tablo/etiket ve küçük ekran semantik kontrolü [YENİ]
-  - T-278 — #539: klavye/ekran okuyucu gerçek kabulü; Windows/NVDA yoksa NOT_RUN [YENİ]
+### K07 — Self-host bağlantı rehberi
+- **ROL/ALAN:** docs/SELF_HOST.md, docs/DEPLOYMENT_ONBOARDING.md; test/delegated/k07/**.
+- **ODAK / ISSUE:** #485 #539. **Önceki açık:** T-383 K06 sahibi; K07 #1125 bağımsız doküman QA, T-389 K07.
+- **ÇAKIŞMA SINIRI:** K06 Windows dokümanına dokunma; Cloudflare/secret üretme veya deploy yapma.
+- **ÖNCEKİ PR KANITI:** [#1100](https://github.com/Naveax/Nexowire/pull/1100), [#1125](https://github.com/Naveax/Nexowire/pull/1125); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-431:** #485: #1125 bağlantı/sürüm rehberi QA'sının #1100 ile tek PR'da çakışmadan nasıl taşınacağını incele ve kendi iki dokümanında eksikleri düzelt. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-432:** #539/R17: USB/WSL/Python/CUDA/Ollama/Hyper-V isteğe bağlı önkoşul matrisi için negatif test ve platform farkı.
+  2. **T-433:** #485: doğrulanmış self-host URL ile sakıncalı uzak URL yazımının kullanıcıya gösterilen farkını belge örnekleriyle sabitle.
+  3. **T-434:** #485: başarısız pairing sonrası güvenli geri dönüş adımlarını canlı secret taşımadan doğrulayan test.
+  4. **T-435:** #539: salt-okunur Environment Doctor komutlarının gerçek kaynak yönlendirmeleriyle link/syntax eşitliği.
+  5. **T-436:** #485: #1068 entegrasyonu sonrası rehberde değişmiş UI adlarını kaynak/test farkıyla düzelt.
 
-### K05 — Bağımsız erişilebilirlik kontrolü
-- ROL/ALAN: `test/delegated/k05/**; scripts/delegated/k05/**; docs/delegated/qa-accessibility-k05/**`
-- İLGİLİ ISSUE: #539/R11, #485. SAHİPLİK/BAĞIMLILIK: K01–K04 kaynak dosyalarını düzeltme; yalnız negatif test ve bulgu kaydı.
-- **AKTİF: T-279** — #539: #1068 web arayüzündeki hata/duyuru alanlarını bağımsız K05 taramasıyla ölç [YENİ]
-- **KUYRUK (5):**
-  - T-280 — #485: bağlanma/onboarding klavye akışını HTML örnekleriyle negatif test et [YENİ]
-  - T-281 — #539: yinelenen cihaz ve düğme isimleri için erişilebilir ad tekilliği kontrolü [YENİ]
-  - T-282 — #539: dinamik panel rol/status/alert alanlarının gerçek hata metniyle eşleşme testi [YENİ]
-  - T-283 — #485: dar ekran ve uzun dil metinleri için okunabilirlik kontrol matrisi [YENİ]
-  - T-284 — #539: raporlanan bulguları tekil sahibi K01–K04'e bağlantılı olarak ilet; kaynak kodlarına dokunma [YENİ]
+### K08 — MCP hata ve durum sözlüğü
+- **ROL/ALAN:** docs/ARCHITECTURE.md, docs/MCP_SURFACE.md; test/delegated/k08/**.
+- **ODAK / ISSUE:** #539 #812. **Önceki açık:** K08 T-375/T-380 havuz sahibi; #1128 gerçek Türkçe status-copy bulgusu K03'e devredilecek.
+- **ÇAKIŞMA SINIRI:** web/app.js owner K03/#1068; K08 salt-okunur QA ve MCP belgeleri.
+- **ÖNCEKİ PR KANITI:** [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-437:** #539/R18: #1128 kaynak `render()` Türkçe statü çelişkisini K03'e dosya/satır/SHA ve önerilen metinle teslim et. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-438:** #539/R01: upstream provider reddi, Agent offline ve yerel politika izin reddini tek karar tablosunda gerçek MCP şemasıyla karşılaştır.
+  2. **T-439:** #539: `UNKNOWN` terminal işlem sonucunun `succeeded` metniyle karışmadığını belge/test negatifleriyle kanıtla.
+  3. **T-440:** #812: console local grant gösterimi ile gerçek yetki kanıtı ayrımını MCP yüzey örneklerinde koru.
+  4. **T-441:** #539/R13: reddedilmiş provider cevabında otomatik bypass/yeniden deneme önermeyen belge testleri.
+  5. **T-442:** #539: main'e giren yeni MCP tool şemalarıyla iki K08 dokümanının doğruluk kontrolünü yenile.
 
-### K06 — Windows kurulumunun anlaşılır olması
-- ROL/ALAN: `docs/INSTALL_WINDOWS.md, docs/CHATGPT_INSTALL_PROMPT.md; test/delegated/k06/**`
-- İLGİLİ ISSUE: #485, #269. SAHİPLİK/BAĞIMLILIK: #269 imza/installer/deploy kodu yasak; #1066 ile taşınan eski belgeyi tekrar üretme.
-- **AKTİF: T-285** — #485: #1066 sonrasında mevcut Windows kurulum belge durumunu gerçek main ile eşleştir [YENİ]
-- **KUYRUK (5):**
-  - T-286 — #485: kurulumda 'oluştur/bağla' başarısızlığını güvenli ve doğrulanabilir adımlarla belge testine bağla [YENİ]
-  - T-287 — #485: Windows/ChatGPT hesap karışıklığında teşhis karar ağacını salt-okunur yaz [YENİ]
-  - T-288 — #269: imzalı kurucu iddiasını gerçek yayın kanıtından ayıran belge negatif testi [YENİ]
-  - T-289 — #485: kurucu güncelleme/yedekleme belgelerinde olmayan otomatik onarım vaadini temizle [YENİ]
-  - T-290 — #485: okunamayan sayfa içi bağlantı ve desteklenen sürüm bilgisi için kılavuz testi [YENİ]
+### K09 — Sorun ve yol haritası gerçekliği
+- **ROL/ALAN:** ROADMAP.md, docs/SCALE_V2_ROADMAP.md; test/delegated/k09/**.
+- **ODAK / ISSUE:** #539 #481 #780 #482. **Önceki açık:** T-304 tarihsel handoff kısmi, diğer T303/305-308 source teslim; #1099/#1127 Draft.
+- **ÇAKIŞMA SINIRI:** CORE/sandbox uygulamasına girme, tarihsel belgeleri yanlış final sayma.
+- **ÖNCEKİ PR KANITI:** [#1099](https://github.com/Naveax/Nexowire/pull/1099), [#1127](https://github.com/Naveax/Nexowire/pull/1127); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-443:** #539: #1099/#1127 yeni ve eski 22 güvenilirlik alt işini bugünkü main'de gerçek issue/PR sonuçlarına bağlayan kaynak testi. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-444:** #481: 14 Ekim handoff'undaki daha önce kapanmış #260 ve ON HOLD #271 durumlarını yanlış görev yapılmadan güncel yol haritasında ayır.
+  2. **T-445:** #780: coding-agent'ın kullanıcıya görünen iş akışından yalnız koruma dışı eksikleri delilli aday listesine dönüştür.
+  3. **T-446:** #482: S1–S5 için source merged/CI hosted/physical/release kabulünü ayrı sütunda izleyen markdown doğrulama.
+  4. **T-447:** #539: diğer KNN'den gelen geçerli somut hataları yol haritasına aynı işi tekrar etmeden kaynak bağlantısıyla ekle.
+  5. **T-448:** #539: yol haritasında 'bitti' yazan ama açık issue kalan satırları güçlü negatif testle işaretle.
 
-### K07 — Kendi sunucusunu kullananların rehberi
-- ROL/ALAN: `docs/SELF_HOST.md, docs/DEPLOYMENT_ONBOARDING.md; test/delegated/k07/**`
-- İLGİLİ ISSUE: #485, #539/R17. SAHİPLİK/BAĞIMLILIK: Cloudflare, canlı tünel ve yetki yönetimi yasağı; #1066 içeriklerini tekrarlama.
-- **AKTİF: T-291** — #485: #1066 entegre edilmiş self-host belge parçasını SHA ile doğrula [YENİ]
-- **KUYRUK (5):**
-  - T-292 — #539/R17: desteklenen işletim sistemi/opsiyonel araç ayrımını belgeye doğru yansıt [YENİ]
-  - T-293 — #485: localhost ve dış bağlantı adresini karıştırmayan kurulum negatif testi [YENİ]
-  - T-294 — #539: kurulum sonrası salt-okunur sağlık kontrol komutları için belge doğrulaması [YENİ]
-  - T-295 — #485: güvenlik etkisi olan komutları kullanıcı onayı gerektirir diye doğru işaretle [YENİ]
-  - T-296 — #539: ortam yoksa denenen örnekler için NOT_RUN/UNKNOWN sınırlarını netleştir [YENİ]
+### K10 — Browser ve görsel kabul
+- **ROL/ALAN:** web/README.md; scripts/delegated/k10/**; test/delegated/k10/**; docs/delegated/browser-evidence-k10/**.
+- **ODAK / ISSUE:** #539 #485 #812. **Önceki açık:** T-309/310/311/314 gerçek tarayıcı ve Windows kabul bekliyor; Chromium socket EPERM.
+- **ÇAKIŞMA SINIRI:** Owner .github/workflows/ci.yml'ye dokunma; K13 ile hosted güvenli test mekanizması öner.
+- **ÖNCEKİ PR KANITI:** [#1116](https://github.com/Naveax/Nexowire/pull/1116); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-449:** #485: local Chromium EPERM engeline karşı mevcut hosted `browser-live` koşusunun gerçekten K10 üç durum ekranını test edip etmediğini kanıtla. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-450:** #539: fork safe runner üzerinde yalnız K10 test yollarını kullanan üç state screenshot/PNG-SHA-256 doğrulaması tasarla.
+  2. **T-451:** #812: local grant ve observed input uyuşmazlığını gerçek kullanıcı ekranında yanlış etiket yapmadan gösteren test senaryosu.
+  3. **T-452:** #539: tarayıcı çıktısı farklı eski PR SHAsından gelirse aynı exact-head kabulünü reddeden negatif QA.
+  4. **T-453:** #485: Chrome 375/768/desktop metin taşma ve odak navigasyon matrisi için hosted gerçek artefakt üretme yolu.
+  5. **T-454:** #539: Chromium çalışmadıysa çalıştı saymadan bağımsız DOM testinden hangi sorunun geçerli kaldığını raporla.
 
-### K08 — Bilgisayarla bağlantı hata sözlüğü
-- ROL/ALAN: `docs/ARCHITECTURE.md, docs/MCP_SURFACE.md; test/delegated/k08/**`
-- İLGİLİ ISSUE: #539/R01/R13/R18, #812. SAHİPLİK/BAĞIMLILIK: Kimlik, MCP tool yetkisi, secret ve güvenlik cevabı değiştirme; salt-okunur örnek.
-- **AKTİF: T-297** — #539: #1066 MCP belge birleşmesini main üzerinde tekrar doğrula [YENİ]
-- **KUYRUK (5):**
-  - T-298 — #539/R01: hata kaynağı, kullanıcı mesajı ve destek kanıtı arasındaki farkı test örneğiyle eşleştir [YENİ]
-  - T-299 — #539/R13: sağlayıcı ret cevabını yetki onayı gibi göstermeyen örnek sözleşme yaz [YENİ]
-  - T-300 — #539/R18: 'çalışıyor/sonuç bilinmiyor/tamamlandı' durum sözlüğünü tutarlı yap [YENİ]
-  - T-301 — #812: yerel-gözlemlenen durum ile gerçek yetki kaynağı ayrımını dokümanda belirt [YENİ]
-  - T-302 — #539: MCP örneklerinin güncel şema ve isimlerle eşleşmesini kendi testiyle doğrula [YENİ]
+### K11 — S5 maliyet kodu ve ölçümsüz kapasite
+- **ROL/ALAN:** scripts/report-s5-cost-matrix.ts, src/ops/scale-s5-cost-envelope.ts (offline); test/delegated/k11/**.
+- **ODAK / ISSUE:** #487 #539. **Önceki açık:** #1102 ana dalda MERGED b5a3f884; main push CI devam, provider/canlı cihaz açık. T-379 K11 tek sahibi.
+- **ÇAKIŞMA SINIRI:** Billing/gerçek tahsilat değil, yalnız offline model; K12 T-379 bağımsız ek test ama kredi K11.
+- **ÖNCEKİ PR KANITI:** [#1102](https://github.com/Naveax/Nexowire/pull/1102) (merge edilmiş, tekrar yapma); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-455:** #487: merged #1102 yeni `main` commit ve otomatik main-push CI tamamlanmasını exact SHA ile doğrula, provider kabulü açık tut. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-456:** #539/R12: kapasiteEvidence `UNKNOWN` alanını JSON/CSV tüketicileri bozmadı mı diye K11 testinde tekrar üret.
+  2. **T-457:** #487: eksik sağlayıcı teklifinde hiçbir müşteri fatura toplamının sıfır kabul edilmediğini örnek raporda test et.
+  3. **T-458:** #487: ölçülen completion metriği olmadan hosted WSS kapasitesine sayı veren yeni kaynak alanlarını negatif regresyonla yakala.
+  4. **T-459:** #487: yanlış birim/para/küsurat/NaN maliyet durumlarında gerçek kodda hata bulursan dar düzeltme ve geri dönüş testi.
+  5. **T-460:** #487: yeni maliyet modeli PR'ı olacaksa K18/K12 dosyalarına girmeden exact-head CI ve source/prod ayrımını belgele.
 
-### K09 — Sorunların ürün yol haritası
-- ROL/ALAN: `ROADMAP.md, docs/SCALE_V2_ROADMAP.md; test/delegated/k09/**`
-- İLGİLİ ISSUE: #539, #481, #780, #482. SAHİPLİK/BAĞIMLILIK: #780 Git sandbox ve güvenlik çekirdeğine girme; yalnız yol haritası/kanıt.
-- **AKTİF: T-303** — #539: 22 açık issue içindeki 22 güvenilirlik alt başlığını mükerrer olmadan yol haritasına bağla [YENİ]
-- **KUYRUK (5):**
-  - T-304 — #481: eski master handoff ile güncel kapatılmış issue ve PR'ların uyumsuz noktalarını bul [YENİ]
-  - T-305 — #780: coding-agent kullanıcıya görünen fakat güvenlik dışı eksikleri kanıta göre ayır [YENİ]
-  - T-306 — #482: S1–S5 tamamlandı iddialarını source-only/CI/physical kabul aşamalarına ayır [YENİ]
-  - T-307 — #539: K09 eski P002 yerel WIP'i baştan yayımlama; main'de mevcut kaynakla farkı kontrol et [YENİ]
-  - T-308 — #539: yol haritasındaki bitmiş iddiasını gerçek birleşmiş commit/CI verisine bağla [YENİ]
+### K12 — Bağlantı yük/iptal dayanıklılığı
+- **ROL/ALAN:** scripts/bench-s5-loopback-ws-capacity.ts, scripts/bench-s5-loopback-reconnect-storm.ts; test/delegated/k12/**.
+- **ODAK / ISSUE:** #487 #539. **Önceki açık:** T-071 K11 CSV emitter bağımlılığı; T-379 K11 havuz kredisi, K12 ek testi kalır; #1109 CI 6/7+pending.
+- **ÇAKIŞMA SINIRI:** Yalnız bounded localhost; gerçek provider veya global CI değiştirme.
+- **ÖNCEKİ PR KANITI:** [#1109](https://github.com/Naveax/Nexowire/pull/1109); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-461:** #487: #1109 current exact-head CI bitince test gerçekten keşfedilmiş mi K13 ile doğrula; kendi son değişikliklerini bozmadan düzelt. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-462:** #539/R06: reconnect ikinci turunda abort sırasında socket/queue sızıntısını gerçek localhost testinde tekrarla ve minimize et.
+  2. **T-463:** #487: tek örnek p95/p99'u gerçek kapasite kabulü sanmayan ölçüm şemasını her benchmark çıktısında doğrula.
+  3. **T-464:** #487: cancel/timeout ile aldatıcı sukses counters farkını negatif test ve gerekiyorsa K12 kaynak düzeltmesiyle sabitle.
+  4. **T-465:** #487: CSV-only T-071 bağımlılığını K11'e ayrı kaynak talebi olarak yaz, JSON sözleşmesini koru.
+  5. **T-466:** #539/R12: uzun yaşayan bağlantının ölçümü olmayan süre/ölçek tahminini UNKNOWN yapan ek gerçek davranış regresyonu.
 
-### K10 — Gerçek tarayıcıdan bağımsız ekran denetimi
-- ROL/ALAN: `web/README.md; scripts/delegated/k10/**; test/delegated/k10/**; docs/delegated/browser-evidence-k10/**`
-- İLGİLİ ISSUE: #539/R11, #485, #812. SAHİPLİK/BAĞIMLILIK: Sistem izinlerini veya tarayıcı güvenliğini aşma; gerçek sonuç olmadan PASS deme.
-- **AKTİF: T-309** — #539: #1068 kaynaklarına karşı bağımsız gerçek tarayıcı koşusu mümkün mü kontrol et [YENİ]
-- **KUYRUK (5):**
-  - T-310 — #485: bağlantı akışı için üç kullanıcı durumu ekran görüntüsü kanıt seti [YENİ]
-  - T-311 — #812: konsol izin göstergelerinin çelişkili durumunu salt-okunur tarayıcı senaryosuna dök [YENİ]
-  - T-312 — #539: ekran görüntüsü yokken PASS raporlamayı reddeden test [YENİ]
-  - T-313 — #539: tarayıcı fixture'ında dosya yolu/kaynak sızdırma negatifleri [YENİ]
-  - T-314 — #485: Windows ve dar ekran gerçek uygulama gözlemi; ortam yoksa NOT_RUN [YENİ]
+### K13 — CI gerçek test keşfi ve kanıt
+- **ROL/ALAN:** .github/workflows/delegated-noncore.yml; scripts/delegated/k13/**; test/delegated/k13/**.
+- **ODAK / ISSUE:** #1006 #539. **Önceki açık:** T-327 nested tests main CI keşif açığı açık; #1112 exact 7/7 ama hedef test keşfi kanıtlanmadı.
+- **ÇAKIŞMA SINIRI:** Owner #1096 `.github/workflows/ci.yml` path; ŞEF/K14 bunu owner'a kanıtla taşır.
+- **ÖNCEKİ PR KANITI:** [#1112](https://github.com/Naveax/Nexowire/pull/1112); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-467:** #1006: main CI'da gerçekten çağrılmayan K09 `.test.mjs` ve nested TS dosyaları için tam liste ve yanlış-yeşil örneği çıkar. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-468:** #1006: owner CI dosyasını değiştirmeden güvenli delegated-noncore.yml runner'ında açık PR exact SHA test-discovery paketi çalıştır.
+  2. **T-469:** #539/R22: #1112'de düzeltilen stale PR HEAD, yanlış run_id ve boş requiredJobs pozitif negatiflerini hosted run ile doğrula.
+  3. **T-470:** #1006: 31 Draft source PR içinde yeşil ama ek testleri keşfedilmemiş ilk üç aday için açık kanıt filtresi oluştur.
+  4. **T-471:** #539: main push ve PR workflow job'larının aynı exact SHA olmayabileceğini ayıran rapor kontratını işleyen test.
+  5. **T-472:** #1006: PR başına otomatik yeniden dispatch olmadan açık P005 entegre test listesini K14'e ver.
 
-### K11 — Kapasite ve maliyetin doğru hesaplanması
-- ROL/ALAN: `scripts/report-s5-cost-matrix.ts; src/ops/scale-s5-cost-envelope.ts (offline); test/delegated/k11/**`
-- İLGİLİ ISSUE: #487, #539/R12. SAHİPLİK/BAĞIMLILIK: Faturalama, gerçek plan fiyatı veya ödeme hesabına müdahale yok.
-- **AKTİF: T-315** — #487: #1070'deki K11 test ve rapor içeriklerinin main üzerindeki exact eşini doğrula [YENİ]
-- **KUYRUK (5):**
-  - T-316 — #487: fiyat teklifi eksikken maliyeti sıfır saymayan offline regresyon [YENİ]
-  - T-317 — #487: farklı para birimlerini kıyaslamada yanıltıcı toplam üretmeme testi [YENİ]
-  - T-318 — #539/R12: ölçümsüz kapasite için 'UNKNOWN' ve gerekçe alanı testleri [YENİ]
-  - T-319 — #487: günlük kullanım, sınır aşımı ve bozuk veride rapor güvenilirliği paketi [YENİ]
-  - T-320 — #487: gerçek sağlayıcı maliyeti ölçülmediğinde PASS iddiası yapmayan örnek rapor [YENİ]
+### K14 — Güvenli PR entegrasyonu
+- **ROL/ALAN:** scripts/delegated/k14/**; docs/delegated/integration-k14/**.
+- **ODAK / ISSUE:** #1006 #539. **Önceki açık:** #1102 merged; 31 Draft P004 PR açık; #1068 ve #1096 owner PR'ları aktif; T-390 havuz sahibi.
+- **ÇAKIŞMA SINIRI:** Upstream merge/CI dispatch için ŞEF kararını bekle, K14 salt-okunur karşılaştırma; protected source'a dokunma.
+- **ÖNCEKİ PR KANITI:** [#1117](https://github.com/Naveax/Nexowire/pull/1117), [#1123](https://github.com/Naveax/Nexowire/pull/1123); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-473:** #1006: #1102 merge sonrası b5a3f884 yeni main üzerinde 31 Draft PR'ı tekrar/çatışma/baz SHA bakımından yeniden sınıflandır. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-474:** #1006: exact-head 7/7 yeşil 14 PR'dan gerçekten yeni testlerini çalıştıran ilk üç güvenli noncore adayı belirle.
+  2. **T-475:** #1006: #1118 failing CI ve diğer pending adayları merge-ready dışına atan kesin durum raporu.
+  3. **T-476:** #1006: #1068 web ve #1096 CORE dosya yol haritalarını yeni main sonrası compare et, owner haberleşme listesi üret.
+  4. **T-477:** #539: K13 test keşfi açığını çözmeden '7/7 tüm yeni testler geçti' denmesini engelleyen PR özeti.
+  5. **T-478:** #1006: gereksiz ayrı PR yığılmasını azaltmak için yalnız çakışmasız test/doküman paketlerinin mantıklı birleştirme planı.
 
-### K12 — Yük ve bağlantı dayanıklılık denemeleri
-- ROL/ALAN: `scripts/bench-s5-loopback-ws-capacity.ts; scripts/bench-s5-loopback-reconnect-storm.ts; test/delegated/k12/**`
-- İLGİLİ ISSUE: #487, #539/R12/R06. SAHİPLİK/BAĞIMLILIK: Yalnız sınırlı localhost deneyi; üretim servisleri/CORE yok; K18 CSV koduna girme.
-- **AKTİF: T-321** — #487: #1070 içinde taşınmış K12 testlerini current main'de yeniden çalıştır [YENİ]
-- **KUYRUK (5):**
-  - T-322 — #539/R06: tekrar bağlanma fırtınasında sonlandırma ve kaynak bırakma negatifleri [YENİ]
-  - T-323 — #487: az örnekli ölçümde yüzde dilim raporlarının yanlış kesinlik üretmemesi [YENİ]
-  - T-324 — #487: benchmark iptal/timeout olunca açık soket kalmaması kontrolü [YENİ]
-  - T-325 — #487: CSV üretimi başka sahibin dosyasındaysa yalnız JSON kanıtını üret ve bağımlılığı raporla [YENİ]
-  - T-326 — #539/R12: yerel yük testinin gerçek müşteri kapasitesi olmadığını gösteren kabul verisi [YENİ]
+### K15 — Cihaz seçimi güvenilirliği
+- **ROL/ALAN:** test/delegated/k15/**; docs/delegated/device-ux-k15/**.
+- **ODAK / ISSUE:** #539 #812 #485. **Önceki açık:** T-339 #1068 main merge bağımlı, diğer T-340..344 source, T-394 K15 havuz sahibi.
+- **ÇAKIŞMA SINIRI:** K03 web/app.js owner #1068; K15 yalnız QA.
+- **ÖNCEKİ PR KANITI:** [#1110](https://github.com/Naveax/Nexowire/pull/1110); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-479:** #539: #1110 CI/current main ile #1068 adayındaki aynı adlı cihaz erişilebilir etiket farkını tekrar doğrula. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-480:** #812: yerel grant false/true ile etkin input kanıtını birbiri yerine koymayan yeni veri matrisi ve UI negatif.
+  2. **T-481:** #539: çevrimdışı/online/UNKNOWN cihaz kartına sahte 'ready' vermeyen kaynak regresyon.
+  3. **T-482:** #485: ilk eşleştirmede cihaz seçilmemişken otomatik yanlış hedef işlem başlatmama testleri.
+  4. **T-483:** #539: K03 owner panelinde aynı ad/uzun Unicode/cihaz sıralama değişikliği bug'ını kanıt linkiyle bildir.
+  5. **T-484:** #539: K10 hosted browser kabulünden test edilebilir cihaz kartı noktalarını kendi QA raporunda ayır.
 
-### K13 — Otomatik kontrollerin güvenilirliği
-- ROL/ALAN: `.github/workflows/delegated-noncore.yml; scripts/delegated/k13/**; test/delegated/k13/**`
-- İLGİLİ ISSUE: #1006, #539/R22. SAHİPLİK/BAĞIMLILIK: Ömer'in .github/workflows/ci.yml dosyasında aktif #1068 değişikliği var; çakışma/secret/yetki genişletme yasak.
-- **AKTİF: T-327** — #1006: güncel main CI'da ilk 20 ekip testinin gerçekten keşfedildiğini read-only denetle [YENİ]
-- **KUYRUK (5):**
-  - T-328 — #539/R22: bitmiş ama 0-job olan koşuları yanlış başarı saymayan K13 aracı [YENİ]
-  - T-329 — #1006: 22/24 Node ve Windows sonuçlarının aynı commit üstünde olma şartını test et [YENİ]
-  - T-330 — #539: offline/gerçek cihaz/yayın kanıtını ayrı tutan CI rapor biçimi [YENİ]
-  - T-331 — #1006: fork CI betiklerini upstream ile çakışmadan çalıştırma tasarımını sınayıp belgele [YENİ]
-  - T-332 — #1006: kritik olmayan PR için yeşil CI ile reddedilmiş/kapanmış CI'yı kesin ayır [YENİ]
+### K16 — Windows process sonlandırma kanıtı
+- **ROL/ALAN:** src/diagnostics/environment-doctor.ts (read-only); scripts/run-environment-doctor.ts (read-only); test/delegated/k16/**.
+- **ODAK / ISSUE:** #540 #539. **Önceki açık:** T-345..350/T-387 source test bitti; #1105 owner Windows fiziksel, T-385 K02 daha küçük owner.
+- **ÇAKIŞMA SINIRI:** Ömer #1096 `src/agent/process-manager.ts` değiştiriyor; K16 bu kaynakta patch yok.
+- **ÖNCEKİ PR KANITI:** [#1105](https://github.com/Naveax/Nexowire/pull/1105), [#1121](https://github.com/Naveax/Nexowire/pull/1121); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-485:** #540: #1105 HEAD'de root exited/grandchild alive sahte başarı negatiflerinin hosted Windows Node22/24 gerçek job'da yürütülebilirliğini kanıtla. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-486:** #540: `taskkill` exit!=0, PID reuse, child alive ve 128 exit alanlarında false PASS'i reddeden bağımsız fixture'ları büyüt.
+  2. **T-487:** #540: gerçek Work-PC kabulü için process tree, owner PID identity ve Job readback kanıtını owner'a anlaşılır matrise bağla.
+  3. **T-488:** #539/R17: Environment Doctor CLI secret maskesi ve Windows/Linux NOT_RUN ayrımının main ile uyumunu tekrar test et.
+  4. **T-489:** #540: K16 #1121 T-385 duplicate kaydını K02'ye bırak; kendi QA kodunu koruyarak yeni benzersiz issue görevi seç.
+  5. **T-490:** #540: owner #1096 süreci düzeltirse güncel main'de ilgili K16 testlerini koş, fiziksel şartlar sağlanmadan issue kapatma.
 
-### K14 — Fork eşitlemesi ve çakışmasız birleştirme
-- ROL/ALAN: `scripts/delegated/k14/**; docs/delegated/integration-k14/**`
-- İLGİLİ ISSUE: #1006, #539/R22. SAHİPLİK/BAĞIMLILIK: Source PR #1068 ve Ömer'in aktif kod dalları üzerinde değişiklik/merge yok; salt-okunur inceleme.
-- **AKTİF: T-333** — #1006: açık kalan altı SinsiVinci PR'ının #1068 ve main ile tekrarlarını raporla [YENİ]
-- **KUYRUK (5):**
-  - T-334 — #1006: 30 kapanmış Draft'ın hangi birleşmiş üst PR'a geçtiğini SHA/PR ile haritala [YENİ]
-  - T-335 — #539: 201 dosyalı yeni upstream farkı sonrası korumalı dosya çakışmalarını denetle [YENİ]
-  - T-336 — #1006: fork main senkronu için yalnız fast-forward ve expected SHA doğrula [YENİ]
-  - T-337 — #539: gerçek CI 7/7 sonucu olan, fakat hâlâ taslak kalan PR listesini ayrı işaretle [YENİ]
-  - T-338 — #1006: ŞEF'e küçük güvenli PR önerisi sun; merge ve issue kapatma yetkisini otomatik kullanma [YENİ]
+### K17 — Beceri kayıt hataları
+- **ROL/ALAN:** src/skills/manifest.ts, src/skills/registry.ts (yalnız metadata); test/delegated/k17/**.
+- **ODAK / ISSUE:** #780 #539. **Önceki açık:** T-351–356, T-393 source QA bitti; #1030 eski source Draft, #1080 sandbox owner.
+- **ÇAKIŞMA SINIRI:** Sandbox/izin genişletme yasak; kaynak parser değişecekse #1030 ile duplicate kontrol.
+- **ÖNCEKİ PR KANITI:** [#1113](https://github.com/Naveax/Nexowire/pull/1113); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-491:** #780: #1113 hosted exact-head CI ve #1030 eski PR arasındaki tekrarlı metadata testlerini ayıkla. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-492:** #780: platform vaadi olmadan Windows/macOS/Linux destekli gösterme hatasını kaynak manifest örneğiyle tekrar üret.
+  2. **T-493:** #780: symlink/dizin dışına kaçış meta taramasında gerçek güvenlik koduna geçmeden negatif QA raporu.
+  3. **T-494:** #539: bozuk frontmatter anahtarlarının kullanıcıya yanlış yetenek sunumunu önleyen test ve varsa dar parser düzeltmesi.
+  4. **T-495:** #780: #1080 Git sandbox security sahibinin path'ine dokunmadan skill katalog kaynak doğruluğunu denetle.
+  5. **T-496:** #780: eski #1030 ile yeni #1113 bağımsız testlerinin birlikte çalıştığı bir konsolide kaynak kanıtı.
 
-### K15 — Doğru cihazın seçildiğini kanıtlama
-- ROL/ALAN: `test/delegated/k15/**; docs/delegated/device-ux-k15/**`
-- İLGİLİ ISSUE: #539/R11, #812, #485. SAHİPLİK/BAĞIMLILIK: Auth veya cihaz seçimi gerçek yetkisini değiştirme; K03'ün panel koduna dokunma.
-- **AKTİF: T-339** — #539: #1068 ana dal entegrasyonu sonrası iki aynı adlı cihaz negatif testini tekrar çalıştır [YENİ]
-- **KUYRUK (5):**
-  - T-340 — #812: gösterilen erişim etiketinin gerçek izin kanıtı olmadığını ayıran test [YENİ]
-  - T-341 — #539: çevrimdışı/çevrimiçi/bilinmiyor cihaz kartı durum testi [YENİ]
-  - T-342 — #485: ilk kurulumda cihaz seçilmemişse yanlış başarıyı önleyen görünüm testi [YENİ]
-  - T-343 — #539: erişilebilir cihaz adı, kimlik ayrımı ve listede sıralama negatifleri [YENİ]
-  - T-344 — #539: K03 kaynak bulgularını kendi dosyasında kanıtla, sahibine yönlendir [YENİ]
+### K18 — Transfer ölçüm güvenilirliği
+- **ROL/ALAN:** src/ops/scale-transport-metrics.ts, scripts/report-s5-measured-scenarios.ts; test/delegated/k18/**.
+- **ODAK / ISSUE:** #487 #588 #539. **Önceki açık:** T-357–362, T-384 local bitti; #1107 ve #1119 Draft, CSV K11.
+- **ÇAKIŞMA SINIRI:** Hash/transfer/WAL authorization çekirdeği Ömer; K19 UX QA ayrı.
+- **ÖNCEKİ PR KANITI:** [#1107](https://github.com/Naveax/Nexowire/pull/1107), [#1119](https://github.com/Naveax/Nexowire/pull/1119); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-497:** #487: #1119/1107 exact CI ve yeni main #1102 kapasite alanı ile metrik rapor type uyumunu test et. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-498:** #588: sent/received/verified byte eşitliğinde ACK kaybı sonrası yanlış 100% üretmeyen negatif QA.
+  2. **T-499:** #487: KB/KiB/MiB ve süre türleri karışınca parse false-zero yerine UNKNOWN üreten gerçek metrik kodu testi.
+  3. **T-500:** #539/R12: boş/sentetik p95 kapasite çıktısına sahte gerçek sağlayıcı güven aralığı atamama kontrolü.
+  4. **T-501:** #588: >220KiB kesinti/tekrar local fixture setini K19'suç testlerinden bağımsız ölçüm katında tekrarla.
+  5. **T-502:** #487: K11 CSV raporuna girmeden kendi JSON metrics source'unda gerçek hata bulursan kod+regresyon düzeltmesi.
 
-### K16 — Ortam sağlığı ve Windows durdurma kanıtı
-- ROL/ALAN: `src/diagnostics/environment-doctor.ts (salt-okunur); scripts/run-environment-doctor.ts (salt-okunur); test/delegated/k16/**`
-- İLGİLİ ISSUE: #539/R17, #540. SAHİPLİK/BAĞIMLILIK: #540 ProcessManager/native process kill kodu yasak; canlı makineye veya gerçek sürece test çalıştırma.
-- **AKTİF: T-345** — #539/R17: kapatılan #1041 testinin #105x birleşmesiyle main'e aktarılıp aktarılmadığını kontrol et [YENİ]
-- **KUYRUK (5):**
-  - T-346 — #540: Windows taskkill 0 olmayan çıkış kodu için izole test fixture'ı ve beklenen sözleşme çıkar [YENİ]
-  - T-347 — #540: alt süreç canlı kalırken 'başarı' denmemesini offline testle göster; PROD/gerçek PID yok [YENİ]
-  - T-348 — #539: environment doctor çıktısında fiziksel test gerekliliğini koruyan negatif test [YENİ]
-  - T-349 — #539: secret içeren hata çıktısının maskelenmesini sentetik testle doğrula [YENİ]
-  - T-350 — #540: tam Windows kabulünde hangi kanıtların gerektiğini dosya sahibi için raporla [YENİ]
+### K19 — Büyük dosya UX/doğrulama
+- **ROL/ALAN:** test/delegated/k19/**; docs/delegated/file-ux-k19/**.
+- **ODAK / ISSUE:** #588 #539. **Önceki açık:** T-363–368 ve T-377 source bitti; gerçek iki-PC/#588 OPEN; PR #1111/#1124.
+- **ÇAKIŞMA SINIRI:** Transfer hash/parça birleştirme/yetki source protected; K18 metrics farklı.
+- **ÖNCEKİ PR KANITI:** [#1111](https://github.com/Naveax/Nexowire/pull/1111), [#1124](https://github.com/Naveax/Nexowire/pull/1124); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-503:** #588: #1111/#1124 kaynak testlerinin 221KiB/1MiB > boyut karşı örneklerini güncel main ve exact CI'da yeniden çalıştır. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-504:** #588: yerel file-copy QA ile gerçek iki-PC/Hub transfer çözümünü açıkça ayıran kabul matrisi.
+  2. **T-505:** #588: cut/retry/duplicate destination ve overwrite yok durumlarında 'UNKNOWN' metnini kanıtlayan UX negatifleri.
+  3. **T-506:** #539/R15: ACTUAL written bytes ve independent digest readback olmadan tamamlandı demeyen referans model test.
+  4. **T-507:** #588: uzun Unicode/special karakter dosya adında kopyalama ekranının yanlış kaynak yolunu göstermemesi testi.
+  5. **T-508:** #588: fiziksel iki-PC owner değerlendirmesi için en küçük 220KB başarısızlık tarifini PR/issue bağıyla hazırla.
 
-### K17 — Beceri kataloğunun tutarlılığı
-- ROL/ALAN: `src/skills/manifest.ts, src/skills/registry.ts (yalnız meta); test/delegated/k17/**`
-- İLGİLİ ISSUE: #780, #539/R17. SAHİPLİK/BAĞIMLILIK: #780 sandbox/izin/sahiplik çekirdeğine dokunma; #1030 OPEN Draft önce main farkını kontrol et.
-- **AKTİF: T-351** — #780: #1030 open PR'ın current main ile tekrarlı testlerini ayır ve inceleme notu çıkar [YENİ]
-- **KUYRUK (5):**
-  - T-352 — #539: skill açıklamasında platform destek durumu bilinmiyorsa yanlış destek vaadini engelle [YENİ]
-  - T-353 — #780: bozuk manifest alanları ve çift anahtarlı kayıt için meta negatifleri [YENİ]
-  - T-354 — #780: katalog içindeki symlink/dizin dışı referansların salt-okunur taraması [YENİ]
-  - T-355 — #539: metadata değişikliğinin yetki kapsamını büyütmediğini gösteren test [YENİ]
-  - T-356 — #780: açık PR #1080 sandbox sahibinin dosyalarına değmeden yalnız statik katalog eksiklerini raporla [YENİ]
+### K20 — CI hatası/issue ilerleme yönetimi
+- **ROL/ALAN:** scripts/delegated/k20/**; test/delegated/k20/**; docs/delegated/maintenance-k20/**.
+- **ODAK / ISSUE:** #1006 #539 #540. **Önceki açık:** #1118 exact HEAD CI `test (22)` FAIL; T-381/388 K20, T-385 K02 sahibi. #1130 pending.
+- **ÇAKIŞMA SINIRI:** K13 CI workflow source'una ve owner #1096 yetki koduna dokunma.
+- **ÖNCEKİ PR KANITI:** [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130); kaynak/test seviyesi, cihaz ayrı.
+- **AKTİF T-509:** #1006: #1118 Node22 CI failure logunu exact-head read-only incele, K20 kendi test/scripts kaynak hatasını yeniden üretip dar fix + re-test yap. **Bitti:** yeniden üretim + dar çözüm veya owner-açık test kanıtı + exact SHA/test/PR kaydı; fiziksel kabul gerekirse NOT_RUN.
+- **KUYRUK (5):** Her birinin bitiş ölçütü: commit/PR + yeniden üretim/negatif test + doğru yerel/hosted/fiziksel sonuç ayrımı.
+  1. **T-510:** #1006: 32 yeni PR'da source-only, 7/7 run, test discovery ve fiziksel kabul ayrımını yeniden raporlayan araç.
+  2. **T-511:** #539: T-385 duplicate claim'ini K02'ye bırakıp K20 #1130'un benzersiz CI evidence araçlarını doğrula.
+  3. **T-512:** #1006: owner #1096 ve #1068 güncel HEAD değiştikçe GitHub PR lineage ve SHA kaymasını yanlış PASS'e çevirmeyen negatif.
+  4. **T-513:** #540: K16 Windows sonlandırma kanıtının yalnız source/test olduğunu issue kayıtlarında otomatik sınıflandır.
+  5. **T-514:** #1006: P005 120 yeni görev ve 20 bağımsız dosya alanı için küçük sahiplik/çakışma audit yaz.
 
-### K18 — Aktarım ölçümlerini dürüst raporlama
-- ROL/ALAN: `src/ops/scale-transport-metrics.ts (offline); scripts/report-s5-measured-scenarios.ts; test/delegated/k18/**`
-- İLGİLİ ISSUE: #487, #588, #539/R12. SAHİPLİK/BAĞIMLILIK: #588 veri bütünlüğü/aktarım çekirdeği değiştirme; K11 CSV üretimine dokunma.
-- **AKTİF: T-357** — #487: #1070'e giren K18 metrik testlerinin main üzerinde exact karşılığını denetle [YENİ]
-- **KUYRUK (5):**
-  - T-358 — #588: büyük dosya senaryosunda yanlış 100% aktarım göstergesini sentetik ölçümle yakala [YENİ]
-  - T-359 — #487: JSON metriklerde NaN/Infinity/negatif değeri UNKNOWN yapma sınır testi [YENİ]
-  - T-360 — #539/R12: olmayan gerçek kapasite ölçümü için güven aralığı uydurmama testi [YENİ]
-  - T-361 — #487: CSV bağımlılığı K11 ise yalnız kendi JSON alanında kanıt üret ve devret [YENİ]
-  - T-362 — #588: kesinti sırasında gönderilen/alınan/teyit edilen baytları ayrı sayan offline fixture [YENİ]
+## HAVUZ — SAHİPSİZ / BAĞIMSIZ YEDEKLER
+Eski P004 HAVUZ'dan henüz alınmamış: **T-376, T-386, T-391, T-392**. Eski tanımlar P004 git geçmişinde; küçük KNN ilk geçerli sahip. Yeni yedekler aşağıdadır; tümü **şu an sahipsiz**, tek sahip yalnız kayıtla alınır. Görev tanımı kendi alanında salt-okunur analiz, test/fixture veya izinli kaynak düzeltmesi olarak sınırlandırılır; başkasının dosyasına el sürülmez.
 
-### K19 — Dosya aktarımı kullanıcı deneyimi
-- ROL/ALAN: `test/delegated/k19/**; docs/delegated/file-ux-k19/**`
-- İLGİLİ ISSUE: #588, #539/R15. SAHİPLİK/BAĞIMLILIK: Transfer, yetki, hash, artifact, WAL kodu yasak; gerçek iki-PC denemesi owner-gated.
-- **AKTİF: T-363** — #588: 220 KB üstünde başlayan büyük dosya başarısızlığını güvenli ve tekrarlanabilir salt-okunur matrise dök [YENİ]
-- **KUYRUK (5):**
-  - T-364 — #588: kesinti sonrası yeniden dene/UNKNOWN/bekle durumları için örnek kullanıcı metni testi [YENİ]
-  - T-365 — #588: overwrite talebinde yanlış izin varsaymayan hata senaryosu testi [YENİ]
-  - T-366 — #539/R15: kullanıcıya 'tamamlandı' göstermek için gereken bağımsız doğrulama kanıtını tanımla [YENİ]
-  - T-367 — #588: Unicode/çok uzun dosya adı ve boyut bilgisi için test fixture'ı [YENİ]
-  - T-368 — #588: gerçek iki cihaz/Windows kabulü olmadan çözülmüş demeyen kontrol listesi [YENİ]
+- **T-515:** #485: yeni kurulum sayfasındaki gerçek başarısız bağlantı örneklerinden biri için, ilgili tek sahipli test alanında yeniden üretim ve negatif doğrulama. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-516:** #539: bağlantı durumunun bir kez başarılı ardından reddedilen yanıtında eski yeşil durum kalıp kalmadığını doğrula (yalnız kendi test yolu). **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-517:** #539: 401 ile 403'ün kullanıcıya aynı hata gibi görünmesini owner'ın en güncel arayüzünde delillendir, kaynak owner'a bırak. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-518:** #539: büyük ekran/telefon odak sırası ve yeniden deneme düğmesinin gerçek tarayıcı kanıtı. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-519:** #485: Windows yönergesindeki link/kurulum önkoşulu uyumsuzluğunu gerçek ana dal üzerinden yeniden test et. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-520:** #485: self-host yönergesindeki sağlıklı/bozuk bağlantı adımlarını iki bağımsız offline örnekte test et. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-521:** #539: MCP'de UNKNOWN, FAILED ve APPLIED durum metinlerinin aynı anlamı vermediğini örnekle. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-522:** #539: tarihsel yol haritasındaki kapanmış iş ile bugünkü açık issue arasındaki kaynak doğruluğunu denetle. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-523:** #539: Playwright yerine hosted tarayıcı ekran çıktısı edinilemiyorsa NOT_RUN ispat formatı ve fail-closed denetimi. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-524:** #487: kapasite bilinmiyor çıktısının CSV/JSON kaydında belirsiz kalmasını tekrardan doğrulayan regresyon. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-525:** #487: loopback yük verisinin canlı sağlayıcı sonucu sanılmasını önleyen tek negatif test. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-526:** #1006: main CI test keşfi devre dışıyken kaynak PR'ı yeşil sayılmaması için bir negatif kontrol. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-527:** #1006: aynı exact HEAD için 7/7 CI, eksik test keşfi ve gerçek cihaz NOT_RUN farklarının PR raporuna işlenmesi. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-528:** #1006: sayfalanan çok sayıdaki PR'da aynı PR iki defa puanlanmadığını taze kaynak üstünde sınama. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-529:** #539: cihaz seçimi aynı isimde iki aday döndürdüğünde doğru yanlış başarı durumu kontrolü. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-530:** #540: Windows olmayan ortamda taskkill başlatılamamasının kill başarısı diye sayılmaması regresyonu. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-531:** #780: beceri manifestinin bilinmeyen platformda çalıştı iddiası üretmediği negatif örnek. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-532:** #588: 220KB üstü yerel transferde gönderildi fakat teslim alındı kanıtı gelmedi durumunu ayrıştıran test. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-533:** #588: büyük dosya gösteriminde KB/KiB ve eksik checksum kanıtı kullanıcı mesajı QA. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
+- **T-534:** #1006: fail olan job yanında altı yeşil job varsa bütün PR'ın başarısız sınıflandırılması regresyonu. **Bitti:** kaynak sürümü ve issue bağlantısı, öncesi/sonrası test, PR ya da owner'a somut RED raporu.
 
-### K20 — Sorun takibi ve kanıt denetimi
-- ROL/ALAN: `scripts/delegated/k20/**; test/delegated/k20/**; docs/delegated/maintenance-k20/**`
-- İLGİLİ ISSUE: #539, #540, #1006, #481. SAHİPLİK/BAĞIMLILIK: Ömer'in issue'larını ve kapanışlarını izinsiz değiştirme; kod üretimi denetim araçlarıyla sınırlı.
-- **AKTİF: T-369** — #539: 22 açık issue'yu alt iş/tekil P0/şemsiye olarak güncel kaynakla sınıflandır [YENİ]
-- **KUYRUK (5):**
-  - T-370 — #540: Windows süreç kalıntısı hatasının kabul ölçütlerini kayıttaki kanıta göre ayrı raporla [YENİ]
-  - T-371 — #1006: upstream PR birleşme/kapalı/superseded ayrımını GitHub API'da doğru işleyen test [YENİ]
-  - T-372 — #539: 20 işçinin iş-issue eşleşmesi ile tekrarlı atanmış dosyayı raporla [YENİ]
-  - T-373 — #481: eski handoff talimatlarında açıkça ON HOLD olan #271'in yanlışlıkla tekrar görevlendirilmesini engelle [YENİ]
-  - T-374 — #1006: kabul edilmeyen fiziksel cihaz/CI sonucunun DONE sayılmasına karşı negatif kontrol [YENİ]
+## PROJEYE GİDECEKLER — PR VE TEST KANITI
+| KNN | Bu çevrimin PR'ları | Şimdiki karar |
+|---|---|---|
+| K01 | [#1114](https://github.com/Naveax/Nexowire/pull/1114) | #1068 web owner ile kaynak çakışmasın; yeni bağımsız QA |
+| K02 | [#1101](https://github.com/Naveax/Nexowire/pull/1101), [#1126](https://github.com/Naveax/Nexowire/pull/1126) | #1068 web owner ile kaynak çakışmasın; yeni bağımsız QA |
+| K03 | [#1103](https://github.com/Naveax/Nexowire/pull/1103) | #1068 web owner ile kaynak çakışmasın; yeni bağımsız QA |
+| K04 | [#1104](https://github.com/Naveax/Nexowire/pull/1104), [#1120](https://github.com/Naveax/Nexowire/pull/1120) | #1068 web owner ile kaynak çakışmasın; yeni bağımsız QA |
+| K05 | [#1115](https://github.com/Naveax/Nexowire/pull/1115), [#1122](https://github.com/Naveax/Nexowire/pull/1122) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K06 | [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K07 | [#1100](https://github.com/Naveax/Nexowire/pull/1100), [#1125](https://github.com/Naveax/Nexowire/pull/1125) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K08 | [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K09 | [#1099](https://github.com/Naveax/Nexowire/pull/1099), [#1127](https://github.com/Naveax/Nexowire/pull/1127) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K10 | [#1116](https://github.com/Naveax/Nexowire/pull/1116) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K11 | [#1102](https://github.com/Naveax/Nexowire/pull/1102) | #1102 main'e MERGED; yeni P005 işleri ayrı PR'da |
+| K12 | [#1109](https://github.com/Naveax/Nexowire/pull/1109) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K13 | [#1112](https://github.com/Naveax/Nexowire/pull/1112) | Keşif açığını gerçek koşan testle gider; genel 7/7 tek başına yeterli değil |
+| K14 | [#1117](https://github.com/Naveax/Nexowire/pull/1117), [#1123](https://github.com/Naveax/Nexowire/pull/1123) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K15 | [#1110](https://github.com/Naveax/Nexowire/pull/1110) | #1068 web owner ile kaynak çakışmasın; yeni bağımsız QA |
+| K16 | [#1105](https://github.com/Naveax/Nexowire/pull/1105), [#1121](https://github.com/Naveax/Nexowire/pull/1121) | #1096 process-manager korumalı; yalnız test/QA |
+| K17 | [#1113](https://github.com/Naveax/Nexowire/pull/1113) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K18 | [#1107](https://github.com/Naveax/Nexowire/pull/1107), [#1119](https://github.com/Naveax/Nexowire/pull/1119) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K19 | [#1111](https://github.com/Naveax/Nexowire/pull/1111), [#1124](https://github.com/Naveax/Nexowire/pull/1124) | Açık Draft; exact HEAD/test keşfi ve dosya çakışması doğrulanmadan birleştirme yok |
+| K20 | [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130) | #1118 CI FAIL, önce düzelt; #1130 incele |
 
-## HAVUZ — 20 sahipsiz, güvenli fikir (T-375…T-394)
-Aynı işte iki kişi olursa PROTOKOL claim kuralı; önce diğer 19 durum dosyasını kontrol et. Havuz işi ancak kendi izinli dosya/alanında yapılabilir; aksi hâlde öneri kaydı bırak.
-- **T-375** · #539 · İşlem durumlarının Türkçe kullanıcı sözlüğünde açık kalan tutarsızlıklarını yalnız docs/delegated altında fixture ile öner. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-376** · #540 · Gerçek Windows süreç ağacı kabulünde exit code / torun PID / sahiplik kanıtı bulunabilirliği için salt-okunur şablon. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-377** · #588 · Büyük dosya aktarımındaki gerçek sürüm sınırlarını kaynak kodu değiştirmeden kararlı biçimde listele. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-378** · #485 · Yeni kullanıcı hata mesajlarının sahte URL/sır yankılamadığını özgün negatif fixture ile doğrula. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-379** · #487 · Gerçek sağlayıcı fiyatı yokken sentetik özetin yanlış ticari sayı üretmediği sınır kontrolü. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-380** · #539 · Eski hata ekranlarında 'başarılı' sözcüğünün kaynak/kanıt eşleşmesi için bağımsız arama raporu. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-381** · #1006 · Açık PR'larda exact HEAD ile CI sonuçlarının aynı bağlamdan geldiğini kontrol eden salt-okunur veri seti. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-382** · #539 · Tekrarlanan UI testlerinin tek ana-dal sürümünde çalıştığını kontrol eden bağımsız test. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-383** · #485 · Onboarding rehberlerinde ölü/değişmiş sürüm bağlantılarının kaynağa dayalı raporu. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-384** · #487 · Ölçüm sütunlarındaki KB/MiB ayrımını belgeleyen doğrulama fikstürü. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-385** · #539 · Farklı işletim sisteminde NOT_RUN ile FAIL ayrımını kalite testine bağla. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-386** · #588 · Aktarımda dosya adına özel karakter içeren test örneği ve açık kabul matrisi. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-387** · #540 · Alt süreç canlı kalıyorsa ana süreç çıkışıyla false PASS karşı örneğini sahiplik ihlalsiz belgele. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-388** · #539 · Açık issue ve ilgili kapalı PR eşleşmesinde source-only / live kanıt ayrımı testi. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-389** · #485 · Daha önce işe yaramayan kullanıcı eşleştirme hatasında belgelenmiş kurtarma adımları testi. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-390** · #1006 · GitHub 100+ PR sayfalamasında sessiz eksik sonuç veren rapor aracına bağımsız negatif. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-391** · #539 · Yarıda kalan işlemde 'succeeded' etiketi göstermeyen örnek kullanıcı metinleri. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-392** · #487 · İnternet erişimi gerektirmeyen sınırlı benchmark örnek raporunun iddia sınırı. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-393** · #780 · Skill katalog kullanıcı açıklamalarının gerçek mevcut yeteneği aşmadığı kaynak raporu. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
-- **T-394** · #539 · Yanlış cihaz seçimi ve yetki durumu karışıklığının ayrı negatif senaryo matrisi. Sahip: BOŞ. Bitti: ilgili izole negatif test/doküman + PR + sonuç.
+## ONUR'UN LİSTESİ — YALNIZ İNSANIN YAPACAĞI
+1. Aynı **KÖLE MESAJI V002**'yi 20 sekmeye, numaralarını koruyarak gönder (tur sayısı eşit olmak zorunda değil). Köle raporunu ŞEF'e taşıma; KNN dosyalarına kaydeder.
+2. Sekmeleri dolaştıktan sonra ŞEF'e kısa **ŞEF DEVAM** promptunu gönder. Ek onay veya Ömer'den collaborator istemek gerekmiyor.
+3. Fiziksel cihaz/Windows testleri kişisel makine/izin gerektirirse, ŞEF yalnız gerçekten kaçınılmaz insan adımını burada ayrıca tarif eder; sırf NOT_RUN diye sekmeleri bekletme.
 
-## ÖNCEKİ İŞLERİN DEVİR DURUMU
-- P002'de tamamlandığı yalnız köle tarafından raporlanan işler [ARSIV A003](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/ARSIV.md)'te; downstream alınanlar source-tree karşılaştırmasıyla belirtildi.
-- **Eski kısmi/engel:** T-006 (tarayıcı), T-016/017 (panel gerçek görünüm), T-021/022 (admin gerçek görünüm), T-059 (browser), T-071 (K18 CSV bağımlılığı), T-084 (CI/PR), T-086 (cihaz QA), T-133/142/143 (kısmi sunum), T-201 (CI dal yapısı), T-223 (K18 JSON bitmiş, K11 CSV), T-231 (eski kaynak artık main'e gelmiş olabilir), T-179–184 (K09 yerel WIP). Bunlar **silinmedi**, ilgili KNN kaydında izlenecek; yeni issue görevlerinin önüne geçmez.
-- T-235 K02 ve K07 tarafından çakışmalı sahiplenilmiş: **K02 küçük numara sahibi**, K07'nin #1034 test çıktısı tarihsel kalır ve T-235 olarak bir daha işlenmez.
-
-## PROJEYE GİDECEKLER — kontrol listesi
-- **Açık özgün ekibin Draft'ları:** [#1010](https://github.com/Naveax/Nexowire/pull/1010), [#1011](https://github.com/Naveax/Nexowire/pull/1011), [#1015](https://github.com/Naveax/Nexowire/pull/1015), [#1016](https://github.com/Naveax/Nexowire/pull/1016): bunların hedef dosyaları [owner #1068](https://github.com/Naveax/Nexowire/pull/1068) içinde; K01–K04/K14 **bekleyen değişiklik karşılaştırması** yapar, eski dalları zorla birleştirmez.
-- **Açık özgün QA Draft'ları:** [#1030](https://github.com/Naveax/Nexowire/pull/1030) (K17), [#1035](https://github.com/Naveax/Nexowire/pull/1035) (K08): main'e zaten giren testleri ayıkla, bağımsız kalan kanıtı tekrar çalıştır, exact-head yeşil olmadan merge yok.
-- **Main'e owner koordinasyonuyla giren tanımlı parçalar:** [#1066](https://github.com/Naveax/Nexowire/pull/1066) (K06/07/08 belgeleri), [#1070](https://github.com/Naveax/Nexowire/pull/1070) (K11/12/18 S5), [#1071](https://github.com/Naveax/Nexowire/pull/1071) (K09), ayrıca #1054/#1055/#1057/#1058/#1059/#1061/#1063 çeşitli QA. Bu işler için ikinci PR üretme.
-- **P004 yeni PR'lar:** Her yeni görev, hangi açık issue'nun hangi alt sorununun yanıtı olduğunu PR metninde profesyonel şekilde belirtecek; yalnız kaynak PR = hata çözümü değil, gerekiyorsa issue açık kalacak.
-
-## ONUR'UN LİSTESİ
-1. **20 köle sekmesini aynı ortak KÖLE MESAJI ile dolaştır.** Her biri P004 ve PROTOKOL V002'yi okuyarak yeni issue odağında ilerleyecek; ayrı mesaj hazırlamana gerek yok.
-2. **Ek yetki istemen gerekmiyor.** `SinsiVinci` hedef repo için `write`. Ömer'e soru/Discord mesajı veya fiziksel Windows testi bugün ekibin ilerlemesinin önkoşulu değil. Gerçek makine kabulü gerektiğinde ayrıca raporlanacak.
+## Arşiv / şef hafızası
+- Eski biten ve sahiplenilen T-255…T-394 kayıtları [ARSIV A004](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/ARSIV.md)'te, karar gerekçeleri [SEF S005](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/SEF.md)'tedir. Eski görev tanımlarını görmek için `P004` commit geçmişi.

@@ -1,3 +1,70 @@
+# ARŞİV — A004 | 2026-11-07
+
+## P004 iki köle çalıştırması: teslim ve açıklar
+- **104/120** P004 görev kimliği ilgili KNN tarafından **yerel kaynak/test/doküman seviyesinde** teslim olarak kaydedildi. **Bunlar ana proje/cihaz kabulü değildir**; dosya ve PR kanıtı KNN'nin kendi raporunda. Geriye kalan 16 kimlik P005 görev bölümlerinde açık/bağımlı olarak taşındı.
+- [PR #1102](https://github.com/Naveax/Nexowire/pull/1102) (K11) 7/7 exact-head PR CI başarısından sonra ŞEF tarafından **upstream main'e squash MERGED**; `b5a3f8840517d65ecbd6a018699c4c8bdde09987`, kaynak kapasite iddiasını UNKNOWN olarak ayırır. Canlı S5 ölçüm kabulü değildir.
+- Son kontrol S004'ten beri **67 commit** ve 20/20 KNN raporu okundu; P004 120 yeni görev sayacı önceki 0/120'den yerel 104/120'ye ulaştı. P004 HAVUZ 16/20 benzersiz sahiplenildi. Ana projede bu döngüde 1 non-core PR merge edildi; issue kapatma yok.
+
+### KNN başına P004 yerel teslim kimlikleri (kayıt/PR kanıtıyla)
+- **K01:** T-255, T-258, T-259 (3); [#1114](https://github.com/Naveax/Nexowire/pull/1114). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K02:** T-261, T-262, T-263, T-264, T-265 (5); [#1101](https://github.com/Naveax/Nexowire/pull/1101), [#1126](https://github.com/Naveax/Nexowire/pull/1126). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K03:** T-267, T-268, T-269 (3); [#1103](https://github.com/Naveax/Nexowire/pull/1103). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K04:** T-273, T-274, T-276 (3); [#1104](https://github.com/Naveax/Nexowire/pull/1104), [#1120](https://github.com/Naveax/Nexowire/pull/1120). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K05:** T-279, T-280, T-281, T-282, T-283, T-284 (6); [#1115](https://github.com/Naveax/Nexowire/pull/1115), [#1122](https://github.com/Naveax/Nexowire/pull/1122). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K06:** T-285, T-286, T-287, T-288, T-289, T-290 (6); [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K07:** T-291, T-292, T-293, T-294, T-295, T-296 (6); [#1100](https://github.com/Naveax/Nexowire/pull/1100), [#1125](https://github.com/Naveax/Nexowire/pull/1125). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K08:** T-297, T-298, T-299, T-300, T-301, T-302 (6); [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K09:** T-303, T-305, T-306, T-307, T-308 (5); [#1099](https://github.com/Naveax/Nexowire/pull/1099), [#1127](https://github.com/Naveax/Nexowire/pull/1127). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K10:** T-312, T-313 (2); [#1116](https://github.com/Naveax/Nexowire/pull/1116). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K11:** T-315, T-316, T-317, T-318, T-319, T-320 (6); [#1102](https://github.com/Naveax/Nexowire/pull/1102). #1102 upstream main'e girdi, diğerleri kaynak QA seviyesinde.
+- **K12:** T-321, T-322, T-323, T-324, T-325, T-326 (6); [#1109](https://github.com/Naveax/Nexowire/pull/1109). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K13:** T-327, T-328, T-329, T-330, T-331, T-332 (6); [#1112](https://github.com/Naveax/Nexowire/pull/1112). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K14:** T-333, T-334, T-335, T-336, T-337, T-338 (6); [#1117](https://github.com/Naveax/Nexowire/pull/1117), [#1123](https://github.com/Naveax/Nexowire/pull/1123). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K15:** T-340, T-341, T-342, T-343, T-344 (5); [#1110](https://github.com/Naveax/Nexowire/pull/1110). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K16:** T-345, T-346, T-347, T-348, T-349, T-350 (6); [#1105](https://github.com/Naveax/Nexowire/pull/1105), [#1121](https://github.com/Naveax/Nexowire/pull/1121). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K17:** T-351, T-352, T-353, T-354, T-355, T-356 (6); [#1113](https://github.com/Naveax/Nexowire/pull/1113). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K18:** T-357, T-358, T-359, T-360, T-361, T-362 (6); [#1107](https://github.com/Naveax/Nexowire/pull/1107), [#1119](https://github.com/Naveax/Nexowire/pull/1119). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K19:** T-363, T-364, T-365, T-366, T-367, T-368 (6); [#1111](https://github.com/Naveax/Nexowire/pull/1111), [#1124](https://github.com/Naveax/Nexowire/pull/1124). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+- **K20:** T-369, T-370, T-371, T-372, T-373, T-374 (6); [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130). Teslim düzeyi kaynak/yerel, hosted ve gerçek cihaz sonucunu PR/KNN kaydında ayrı oku.
+
+### Tamamlanmadı / bağımlı (16 kimlik — arşivde TAMAMLANDI sayılmıyor)
+- T-256, T-257, T-260, T-266, T-270, T-271, T-272, T-275, T-277, T-278, T-304, T-309, T-310, T-311, T-314, T-339.
+- Sebepler KNN bazında P005 **Önceki açık** alanında: owner #1068 web bekleme, K01 pairingId/token RED, K04 admin 401/403 RED, K10 Chromium socket EPERM, K12 tarihsel CSV/cihaz, fiziksel Windows/provider NOT_RUN. Bunları P005 yeni teslim sayacına ekleme.
+
+### P004 HAVUZ: 16 benzersiz sahip, 4 boş
+- **T-375** → **K08**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128).
+- **T-377** → **K19**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1111](https://github.com/Naveax/Nexowire/pull/1111), [#1124](https://github.com/Naveax/Nexowire/pull/1124).
+- **T-378** → **K06**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129).
+- **T-379** → **K11**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1102](https://github.com/Naveax/Nexowire/pull/1102).
+- **T-380** → **K08**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128).
+- **T-381** → **K20**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130).
+- **T-382** → **K04**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1104](https://github.com/Naveax/Nexowire/pull/1104), [#1120](https://github.com/Naveax/Nexowire/pull/1120).
+- **T-383** → **K06**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129).
+- **T-384** → **K18**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1107](https://github.com/Naveax/Nexowire/pull/1107), [#1119](https://github.com/Naveax/Nexowire/pull/1119).
+- **T-385** → **K02**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1101](https://github.com/Naveax/Nexowire/pull/1101), [#1126](https://github.com/Naveax/Nexowire/pull/1126).
+- **T-387** → **K16**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1105](https://github.com/Naveax/Nexowire/pull/1105), [#1121](https://github.com/Naveax/Nexowire/pull/1121).
+- **T-388** → **K20**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130).
+- **T-389** → **K07**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1100](https://github.com/Naveax/Nexowire/pull/1100), [#1125](https://github.com/Naveax/Nexowire/pull/1125).
+- **T-390** → **K14**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1117](https://github.com/Naveax/Nexowire/pull/1117), [#1123](https://github.com/Naveax/Nexowire/pull/1123).
+- **T-393** → **K17**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1113](https://github.com/Naveax/Nexowire/pull/1113).
+- **T-394** → **K15**; yerel/QA kanıtı ilgili KNN durum dosyasında. [#1110](https://github.com/Naveax/Nexowire/pull/1110).
+
+**Boş kalan:** T-376, T-386, T-391, T-392 (P005 HAVUZ'a taşındı).
+
+**Çifte sahiplenme çözümü — küçük numara tek asıl sahibi:**
+- T-379: K11 devam, K12 ek testi ayrı kanıt olarak korunur.
+- T-382: K04 devam, K05 #1122 ayrı test kanıtı.
+- T-383: K06 devam, K07 #1125 ayrı doküman QA.
+- T-385: K02 devam, K16 #1121 ve K20 #1130 ayrı QA kanıtı.
+
+### Kabulde açık bulgular (bitmiş sayılmaz)
+- K01 [#1114](https://github.com/Naveax/Nexowire/pull/1114): boş/whitespace pairingId/token kontrolü gerçek owner web kaynakta RED; K04 [#1104](https://github.com/Naveax/Nexowire/pull/1104): admin 401/403 owner adayına karşı 4/6 test FAIL.
+- K13 [#1112](https://github.com/Naveax/Nexowire/pull/1112): ana CI 52 delegated testinin 43'ü doğrudan/kalıp kapsama, kalanları gerçek çalışma kanıtı yok; exact SHA 7/7 genel CI tek başına yeterli değil.
+- K20 [#1118](https://github.com/Naveax/Nexowire/pull/1118): Node22 hosted CI FAIL, browser job cancelled. Gerçek Windows, iki bilgisayar ve provider/soak acceptance NOT_RUN.
+- 32 yeni fork PR'nın yalnız biri (#1102) upstream main'e merge edildi, kalan 31 Draft açık; bunlar üretime kabul değil.
+
+---
+
 # ARŞİV — A003 | 2026-11-07
 
 ## P002 sonrası doğrulanmış kayıt özeti

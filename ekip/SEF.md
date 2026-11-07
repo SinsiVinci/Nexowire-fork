@@ -1,3 +1,24 @@
+# ŞEF HAFIZASI — S005 | 2026-11-07 (Europe/Istanbul)
+
+## Bu ŞEF DEVAM: iki kullanıcı turunun sonucu
+- S004'ten bu yana fork `ekip` geçmişinde **67 yeni commit**, K01–K20 **20/20** güncel kayıt dosyası okundu. Adım sayıları K01–K09 ve K12/K13/K15/K17–K19=4; K10/K11/K16=5; K14/K20=6. Hepsi P004/V003 kullandı.
+- P004 T-255…T-374 toplam **104/120 (%86,7) yerel/source QA teslim**, 16 kısmi/bağımlı. Kaynak PR başka; canlı cihaz ve owner kabulü ayrı. Önceki birleşmiş işler bu sayaca eklenmedi. Yeni P005 120 görev başlangıcı 0/120; 20 ajan için 6'şar ayrık paket, ayrıca 20 yeni HAVUZ, 4 eski boş HAVUZ.
+- HAVUZ T375–394 **16 ayrı geçerli sahiplik, 4 sahipsiz**. T379 K11/K12 → K11; T382 K04/K05 → K04; T383 K06/K07 → K06; T385 K02/K16/K20 → K02. Kaybedenlerin bağımsız QA/PR kanıtı saklı, T-ID çift puan yok. A004 arşivinde liste.
+- **Gerçek upstream sonuç:** K11 [#1102](https://github.com/Naveax/Nexowire/pull/1102) exact HEAD `86f1224ccdc9252c98131de187ad40985a0752ac`, PR CI 7/7 success, en az 3 dosyalık diff ve targeted test incelendi, draft→ready, **squash merge succeeded**: upstream main `b5a3f8840517d65ecbd6a018699c4c8bdde09987`. Fork main aynı SHA'ya `force:false`, expected old SHA `4e7db16f4233048a956664bef6b607781eb63fb7` ile fast-forward edildi. **Yeni main push CI son snapshot: 6/7 success, browser-live running.** Bu kaynak-only S5 bilinmezlik düzeltmesi; #487/#539 issue hâlâ açık, canlı ölçüm değil.
+- 32 yeni kaynak PR #1099…#1130; #1102 merge sonrası 31 Draft. 14 diğerinde exact-HEAD CI 7/7 yeşil; **test discovery bulgusu** yüzünden 31'i toplu merge etmedim. K13 #1112: 52 delegated test, 43 directly/wildcard accounted, bazı yeni `.mjs`/nested `.ts` keşfi kanıtlanmamış; `.github/workflows/ci.yml` Ömer #1096 sahibinde. K13 sadece kendi izinli `delegated-noncore.yml` ve scripts yolunu düzeltecek. K20 #1118 hosted Node22 FAIL + browser cancelled; K20 aktif T509 hata çözümü.
+- K01 #1114 boş pairingId/token RED ve K04 #1104 admin 401/403 owner adayına karşı 4/6 FAIL: source owner #1068. Bağımsız test/kanıt var, ama owner kaynak değiştirilmedi, çözülmüş değil. K10 Chromium socket EPERM, fiziksel Windows/iki-PC/provider soak NOT_RUN; bu yüzden kapanış yok.
+- Ömer'in #1096 CORE/Broker/SQLite Hub/Connection v2, #1068 web entegrasyonu dosyaları protected. Aynı dosyada iki ajan yazmıyor; K16 `src/agent/process-manager.ts` read-only, K13 `.github/workflows/ci.yml` read-only. Ömer ile yalnız somut SHA/path merge çakışmasında Onur aracılığıyla temas, beklemeden diğer işlere geç.
+
+## Yeni öncelik ve yürütme kararı
+1. CI doğruluk açığını K13 T467...T472'de; K20 hosted FAIL'i T509'da ilk ele al. Yanlış yeşil kabulü durdurmak hedef; özellik işlerini tümden durdurma.
+2. K01/K04 gerçek RED'leri owner #1068'le kaynak çatışması olmadan dar negatif test + öneri yap, güvenli source değişikliği owner main'e girince uygula. K16 Windows #540 yalnız bağımsız test; fiziksel kabul farklı.
+3. Her KNN P005'te bir aktif + 5 kuyruk, sonra sahipsiz T515–534 havuz, 4 eski kalan T376/T386/T391/T392. T-ID ve dosya sahibi kontrolü, her adımda main HEAD ve PR check güncelliği.
+4. ŞEF sonraki devamda KNN değişmiş raporları ve PR exact SHA/CI üzerinden okur; uygun noncore PR için gerçek eklenmiş testlerin çalıştığı ve owner kaynak çakışmasının olmadığı kanıtlanırsa merge eder; main CI izler, fork main FF. Çakışmalı/RED işleri owner'a not ve bağımsız görev yönlendirme.
+5. #1006 üzerinden ana kabul izi PANO/SEF/PR bağlantılarıyla sürdürülür, job NOT_RUN/fiziksel beklenti başarı diye yazılmaz; #1006 issue kapatılmaz.
+6. Onur'dan yalnız 20 sekmeye aynı worker V002, sonra kısa ŞEF DEVAM promptu; teknik iş için başka insan şartı yok. Ürünün tümü için ETA ve gerçek % kesin değil (22 açık issue/owner/cihaz), yalnız P004 yerel iş ilerlemesi %86,7.
+
+---
+
 # ŞEF HAFIZASI — S004 | 2026-11-07 (Europe/Istanbul)
 
 ## Ömer'den gelen koordinasyon ve doğrulama

@@ -1,4 +1,4 @@
-# NEXOWIRE EKİBİ PROTOKOLÜ — V003
+# NEXOWIRE EKİBİ PROTOKOLÜ — V004
 Tarih: 2026-11-07 (Europe/Istanbul)
 ŞEF tarafından yönetilen iş: `SinsiVinci/Nexowire-fork` içindeki `ekip` dalında yalnız `ekip/`.
 Bu dosya ve PANO ilk kurulumda oluşturuldu. Her ajan kendisine atanan işi gerçek kod/test çıktısı ile tamamlar; sadece metin raporu ilerleme sayılmaz.
@@ -36,6 +36,13 @@ Kritik sahibi Ömer ve upstream ajanlarıdır. Şüphede kritik sayılır; sadec
 - Bir CI run/check **aynı exact SHA için zaten başlamışsa yeniden başlatma**; 0-job, skipped, pending ve NOT_RUN sonucunu yeşil sayma. Yerel 60/60 owner bildirimi kendi kodun için CI/cihaz kabulü yerine geçmez.
 - Yeni T-ID bitince durum dosyasında ilgili issue, kod commit ve PR, test komutu/sonuç, workflow run, canlı cihaz gerekirse NOT_RUN, ana dal kabul bilgisi bulunsun. ŞEF bunları #1006 ana kabul izine bağlar; PR sahibi kendi başına kritik owner PR'ını merge etmez.
 - Karşı tarafa mesaj gerektiğinde **sadece gerçek yol çakışması, iki PR ve SHA, önerilen çözüm** kaydet. ŞEF Onur üzerinden iletir. Gereksiz onay ve yeni engeller üretme.
+
+## P005 iki tur sonrası tespit edilen kurallar — V004
+- **Öncelik P005:** KNN kendi güncel P005 aktif görevini, ardından 5'li kuyruğunu ve boş HAVUZ'u yürütür. P004 T255–374 kaynak teslimleri A004 arşivindedir; kalan 16 bağımlı P005'te `Önceki açık` olarak taşınmıştır. Önce bitmiş işi tekrar yapma; yeni görev T395–514, havuz T515–534.
+- **Havuz çift sahiplik:** claim öncesi 19 durumu oku; `ÜSTLENDİM` kaydını dalda önce commit et; PR ve BITTI kaydından **hemen önce 19 kayıt dosyasını tekrar kontrol et**. Aynı T-ID'de küçük KNN kazanır, büyük KNN hemen başka görev alır. İkinci ajan tarafından üretilmiş benzersiz QA kalsın ama o T-ID için ikinci kredi yok (P004 T379/T382/T383/T385 örnek).
+- **Kanıtın gerçekten koşulması:** Genel GitHub `7/7 success`, yeni eklediğin nested `.test.ts`/`.test.mjs`'in CI'de çalıştığını **tek başına kanıtlamaz**; test keşfi ve çıktı adını doğrula. K13 keşif açığını kendi `delegated-noncore.yml` ve scripts dizininde giderir, owner `.github/workflows/ci.yml`ye müdahale etmez. Yeni test keşfedilmediyse test `NOT_RUN` yaz, mevcut 7/7'yi sahteleme. Aynı HEAD için CI'yi tekrar dispatch etme.
+- **Gerçek RED hedefleri:** K01 `#1114` boş pairingId/token, K04 `#1104` 401/403 owner web dalına karşı başarısız testler, K20 `#1118` Node22 CI FAIL. Bunlar düzeltilmeden bitmiş/merge kabul edilmez; kaynak sahibi #1068/#1096 ile çakışma varsa bağımsız test/owner notuyla çalışmaya devam et.
+- **Main'e giren PR:** #1102 2026-11-07 squash merge `b5a3f8840517d65ecbd6a018699c4c8bdde09987`, fork main de bu SHA'ya FF; bu örnek kapasitenin sahada ölçüldüğünü kanıtlamaz. Her adımda yeni main SHA'yı tekrar sorgula, eski bazdan gelen PR'ı körlemesine merge etme.
 
 ## Üstlenme ve öncelik
 1. `PANO` içindeki **AKTİF** görevi yap; BITTI/bağımlı/engel ise sıradaki hazır **KUYRUK** görevi.
