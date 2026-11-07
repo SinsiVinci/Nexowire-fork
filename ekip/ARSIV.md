@@ -1,3 +1,39 @@
+# ARŞİV — A003 | 2026-11-07
+
+## P002 sonrası doğrulanmış kayıt özeti
+- ŞEF, son S002 snapshot'ından sonra 34 ekip commit'ini ve 20 KNN raporunu okudu. Aşağıda **köle tarafından raporlanan yerel teslimler** ve açık kısımlar var; tüm testleri ŞEF bağımsız çalıştırmadı. Source PR kapalı/CI yarıda/yerel PASS = fiziksel veya issue kabulü değildir.
+- 36 SinsiVinci PR'ının **30'u closed ve doğrudan merged_at=null**, **6'sı açık Draft** (#1010/#1011/#1015/#1016/#1030/#1035). Ama kaynak test/docs'un belli parçaları Ömer'in birleşmiş koordinatör PR'larında gerçek main'e alındı: #1054, #1055, #1057, #1058, #1059, #1061, #1063, #1066, #1070, #1071. Özellikle #1066 K06/07/08; #1070 K11/12/18; #1071 K09. Aktarımın tamlığını PR/fark SHA'sı belirler.
+- **T-235 çakışma düzeltmesi:** K02 ve K07 kayıtlarında görünür. PROTOKOL küçük numara kuralına göre K02 sahibi; K07 artefaktı ayrı tarihî QA'dır, bu ID ikinci teslim sayılmaz. K09 T-179–184 uzakta WIP, 'BITTI' denmedi.
+- P003'ün yeni issue görevleri T-255'ten başlar; aşağıdaki eski T-ID'ler tekrar kullanılmaz.
+
+| Köle | P002 teslim/kısmi ID kaydı | Kaynak PR | Kanıtın sınırı |
+|---|---|---|---|
+| K01 | T-138, T-141, T-144; T-142/T-143 kısmi | #1011 | Ekran negatifleri; gerçek OAuth/browser NOT_RUN |
+| K02 | T-145–T-150, T-235 | #1010, #1033 | 17/17 ve 12/12 offline test raporlandı; T-235 tek sahip |
+| K03 | T-151–T-153 (yerel kapsam); T-133 kısmi | #1016 | 13/13 offline; gerçek klavye/viewport NOT_RUN |
+| K04 | T-154, T-155, T-157, T-238; T-156 uygulanamaz | #1015, #1037 | Admin kayıtları ve fixture; NVDA/gerçek mobil NOT_RUN |
+| K05 | T-136, T-158–T-162, T-253 | #1019 | HTML erişilebilirlik negatif testleri, gerçek okuyucu NOT_RUN |
+| K06 | T-137, T-163–T-167 | #1018 | Windows kurulum dokümanı/testleri; imza ve kurulum canlı değil |
+| K07 | T-168–T-173; T-235 ÇAKIŞMA, K02 sahibi | #1013, #1034 | Self-host doküman QA; #1034 ayrı artefakt ama T-235 ikinci kez sayılmıyor |
+| K08 | T-135, T-174–T-178, T-249 | #1014, #1035 | MCP yüzey/yanıt QA; #1035 hâlâ açık Draft |
+| K09 | T-179–T-184 yerel WIP, ARŞİV YOK | #1017, #1028 | Uzaktan yayımlanmadığı için bitmiş sayılmadı |
+| K10 | T-126, T-185–T-188, T-239; T-059 fiziksel açık | #1020 | Offline browser kanıt taslağı; gerçek screenshot NOT_RUN |
+| K11 | T-189–T-194, T-242 | #1029 | Maliyet/CSV 8 yeni offline test; #1070 owner birleşimi |
+| K12 | T-195–T-199, T-252; T-071 CSV açık | #1024 | Loopback QA, gerçek provider yükü değil; #1070 birleşimi |
+| K13 | T-130, T-200, T-202–T-204; T-201 kısmi | fork #1 | 3-job fork CI yalnız kendi exact SHA; upstream farklı |
+| K14 | T-132, T-205–T-209, T-254; T-084 dış CI/PR açık | #1022 | 32 sentetik PR denetim testi; gerçek merge kararı değil |
+| K15 | T-210–T-214, T-246; T-086 kabul açık | #1026 | İsim/cihaz kartı offline test; #1068 kaynak bağımlı |
+| K16 | T-091–T-096 yerel kabul; source PR closed | #1041 | 32/32 yerel test beyanı; upstream taşınma/cihaz kanıtı ayrı |
+| K17 | T-215–T-220, T-244 | #1030, #1038 | Metadata QA; #1030 açık Draft, symlink TODO açık |
+| K18 | T-107, T-108, T-139, T-221, T-222; T-223 JSON kısmi | #1023 | Metrik QA; CSV K11 bağımlı; #1070 birleşimi |
+| K19 | T-224–T-229, T-245 | #1025, #1040 | Aktarım UX/UNKNOWN kuralı offline; gerçek iki-PC NOT_RUN |
+| K20 | T-127, T-230, T-232–T-234, T-241; T-231 açık | #1031, #1036, #1039 | Issue/CI kanıt denetimi; main üstündeki kaynak yeniden kontrol edilmeli |
+
+## İleriye devredilen eski engeller
+T-006, T-016, T-017, T-021, T-022, T-059, T-071, T-084, T-086, T-133, T-142, T-143, T-201, T-223, T-231 ve K09'un T-179–184 yerel WIP işleri eski kayıtlarında korunur; P003 bunları yeni güvenli issue işleriyle değiştirir. Hâlâ soruna hizmet ediyorlarsa owner ile bağımlılık olarak izlenir.
+
+## TARİHSEL A002 — eski gün bilgileri bugüne ilişkin değildir
+
 # ARŞİV — A002 | 2026-11-01
 
 ## Kanıt ve kabul sınırı

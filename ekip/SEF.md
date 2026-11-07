@@ -1,3 +1,32 @@
+# ŞEF HAFIZASI — S003 | 2026-11-07 (Europe/Istanbul)
+
+## Bu ŞEF DEVAM'da ne yapıldı?
+- Okunan son ekip HEAD: `7fe64eedf09981afb28dacbcbd3509097be19eb7`, S002 baz `de78d759f1eda21c1e8ac34f2dc80c61f5cec769`den **34 commit** ileride. Değişenler yalnız **K01…K20 durum dosyaları**; hiçbir KNN kaydı ŞEF tarafından değiştirilmedi.
+- **20/20 köle gerçek rapor yazdı.** K16 sessizlik giderildi: Adım 3, test PR #1041 açılmış (sonradan upstream tarafından kapalı-unmerged), 32/32 yerel test beyanı; kabul edilen main kaynak ayrıştırılacak. K20 Adım 4, K14 Adım 4. Diğerleri Adım 2/3. **Kayıtlar 1 Kasım çevresinde**, 7 Kasım'da yeniden çalıştıklarına dair kanıt yok.
+- T-235 çakışması: K02 ve K07 aynı ID'yi üstlenmiş. PROTOKOL'ün küçük numara kuralına göre **K02 sahibi**; K07'nin #1034 teslimi tarihsel ve ayrı PR olarak kalır, T-235 ikinci kez sayılmaz.
+- K09 T-179–184 **yerel WIP, uzakta yok**; tekrar teslim sayılmaz. K13 T-201 dal/workflow stratejisi engelli, K18 T-223 CSV başka sahibin alanı. K01/K03/K04/K10/K12/K15 fiziksel browser/cihaz kabulü açık; CI action_required/0-job PASS değildir.
+- `Naveax/Nexowire` üzerinde **SinsiVinci write collaborator** doğrulandı; fork `main` eski `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`den upstream `4e7db16f4233048a956664bef6b607781eb63fb7`ye **27 commit / 201 dosya, non-force fast-forward, expected SHA** ile eşitlendi. Bu tek repo senkronu kod PR'ı değildir.
+- **22 açık issue** okundu; #260 artık kapalı. Açıklar: #1006, #1001, #974, #812, #780, #617, #588, #587, #540, #539, #487, #486, #485, #484, #482, #481, #402, #323, #322, #271, #269, #265.
+- 36 SinsiVinci kaynak PR'ının **6'sı açık Draft** (#1010, #1011, #1015, #1016, #1030, #1035), **30'u closed unmerged**. SinsiVinci kaynaklarından bir kısmı owner birleşimleri [#1054](https://github.com/Naveax/Nexowire/pull/1054), #1055, #1057, #1058, #1059, #1061, #1063, [#1066](https://github.com/Naveax/Nexowire/pull/1066), [#1070](https://github.com/Naveax/Nexowire/pull/1070), [#1071](https://github.com/Naveax/Nexowire/pull/1071) ile **main'e girdi**; bu PR'ların merged_at bilgisi doğrudan doğrulandı.
+- [#1068](https://github.com/Naveax/Nexowire/pull/1068) **open Draft**, K01–K04'ün kaynak UI işlerini ve CI gate'ini toparlıyor. Owner'ın müdahalesi süresince K01–K04 web/CSS kaynaklarında çakışma YASAK; öncelik bağımsız test/denetim. PR başlığında source-only/no production kapsamı korunmalı.
+
+## Öncelik kararları ve savunması
+1. **P1 gerçek zarar/risk:** [#540](https://github.com/Naveax/Nexowire/issues/540) Windows ProcessManager taskkill sonucunun descendant ölümü olmadan başarı söylemesi; 11/11 test PASS olsa bile asılı süreç var. K16 izole negatif/rapor, K20 kabul denetimi. Gerçek process kill/kontrol yetkisi Ömer'in CORE/native güvenlik alanı; bizim kaynak patch yok.
+2. **P1 aktarım güvenilirliği:** [#588](https://github.com/Naveax/Nexowire/issues/588) >~220KB sorunu, güvenli resumable/verify. K19/K18 offline kullanıcı/ölçüm QA; dosya hash, reassembly, authorization/WAL çekirdeğine girilmez.
+3. **Hızlı gerçek noncore düzeltme:** [#539](https://github.com/Naveax/Nexowire/issues/539) R01/R11/R17/R18/R22'de yanlış başarı/hata ayrımı, environment doctor ve ekran. K01–K05/K08/K10/K13/K15/K16/K20 işlenecek, **ayrı dosya sahipliği**.
+4. **Kullanım ve kanıt:** [#485](https://github.com/Naveax/Nexowire/issues/485) kuruluma yönelik docs/UI; [#487](https://github.com/Naveax/Nexowire/issues/487) gerçek fatura değil offline maliyet/kapasite; [#1006](https://github.com/Naveax/Nexowire/issues/1006) CI/PR darboğazı. #812 yalnız read-only UI teşhisi.
+5. **Kritik rezervasyon:** #1001, #974, #587, #617, #402, #323, #322, #271, #486, #484, #269, #265, #780'in sandbox/auth tarafı ve #1006 release/doğrudan CORE. #271 [#481](https://github.com/Naveax/Nexowire/issues/481)'deki owner **ON HOLD**; kullanıcının genel 'hataları düzeltin' isteği özel hold'u kaldırmıyor.
+6. **Bitiş tanımı:** Repo write izni olsa da otomatik merge yok. Önce owner aktif PR ve source SHA kontrolü, sonra yalıtılmış test, exact-head hosted CI, profesyonel PR ve main sonrası kanıt; fiziksel kabul ayrı. Bir issue **kapalı değilse açık kalır**, "yerel test PASS" tek başına kapanış değil.
+
+## Plan sürümü ve takip
+- PANO **P003**: K01…K20 için her biri **1 aktif + 5 kuyruk**, toplam **120 yeni tekil görev T-255…T-374**. **HAVUZ 20 sahipsiz T-375…T-394**. Eski tarihî T-ID'ler tekrar kullanılmadı; P002 tamamları A003 özetinde, kısmi işler kayıt ve PANO'da. PROTOKOL **V002**: issue-öncelik, write yetkisi, owner çakışması, merge ve issue kapanış şartları.
+- Hedef kilometre taşları M2 üç tekrar üretilebilir kanıt, M3 en az bir gerçek CI yeşil noncore PR, M4 main birleşme. 22 issue'nun tamamı için ETA **bilinmiyor**; ilk küçük bağımsız teslim **1–3 iş günü tahmin, koşullu**.
+- **Bir sonraki ŞEF DEVAM:** P003 sonrasındaki commitleri karşılaştır, KNN numaraları + issue etiketini kontrol et, #1068 merge/CI durumunu ve altı açık source PR'ın semantik farkını tekrar hesapla; proof ile tamamlanan T-ID'leri A004'e taşı, 20 kuyruğu yenile. Ömer'in kritik açık PR'larına çarpmayı denetle.
+- **ONUR'un yapacağı:** Aynı sabit KÖLE MESAJI'nı 20 sekmeye yapıştır; yetki için Ömer'e tekrar Discord yazma.
+
+## Tarihsel S002 referansı
+Aşağıdaki kayıt önceki snapshot'tır; S003'te doğrulanan güncel write/merge/issue durumu üstündür.
+
 # ŞEF HAFIZASI — S002 | 2026-11-01 (Europe/Istanbul)
 
 ## Son ŞEF DEVAM snapshot'ı
