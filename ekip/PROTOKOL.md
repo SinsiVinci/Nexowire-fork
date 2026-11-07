@@ -1,4 +1,4 @@
-# NEXOWIRE EKİBİ PROTOKOLÜ — V002
+# NEXOWIRE EKİBİ PROTOKOLÜ — V003
 Tarih: 2026-11-07 (Europe/Istanbul)
 ŞEF tarafından yönetilen iş: `SinsiVinci/Nexowire-fork` içindeki `ekip` dalında yalnız `ekip/`.
 Bu dosya ve PANO ilk kurulumda oluşturuldu. Her ajan kendisine atanan işi gerçek kod/test çıktısı ile tamamlar; sadece metin raporu ilerleme sayılmaz.
@@ -28,6 +28,14 @@ Kritik sahibi Ömer ve upstream ajanlarıdır. Şüphede kritik sayılır; sadec
 - **Issue kapatma eşikleri:** kaynağı düzelttik ve izole test PASS ilk aşamadır; exact-HEAD CI yeşil, main'de merge ve sorunun kendi kabulü (gerekirse gerçek Windows/cihaz) ayrı aşamalardır. Kapatma kararı sadece yeterli kanıtla ŞEF tarafından değerlendirilir; P0 owner kapısını atlama. `Fixed in source` ≠ `resolved on installed device`.
 - Fork `main` 7 Kasım'da upstream `4e7db16f4233048a956664bef6b607781eb63fb7`ye fast-forward edildi. Bu SHA kalıcı kabul değil, **her adımda HEAD'i yeniden al**. Kod dalını daima güncel upstream ana daldan aç; eski dalına güncel ana dalı körlemesine zorla yazma.
 - **İnsan işi:** yalnız Onur'un tek mesajı 20 köleye yapıştırması. Ek collaborator talebi gerekmez. Yeni fiziksel cihaz/owner onayı gibi gerçek dış bağımlılık varsa kayıt dosyasına ve ŞEF'e yaz; geri kalan işleri sürdür.
+
+## 2026-11-07 Ömer koordinasyon teyidi — V003
+- PANO P004'te **K01–K20 T-255…T-374 değişmedi**; görevler mevcut sırayla ilerler. #540/#588/#539/#485/#487 odak; önceden birleşen işler yeni 120 sayacına eklenmez.
+- Owner'ın aktif [#1096](https://github.com/Naveax/Nexowire/pull/1096) CORE/Broker/SQLite Hub/Connection v2 entegrasyonuna kaynak kod ekleme. `src/agent/process-manager.ts` ve `.github/workflows/ci.yml` de #1096 yol listesinde; K16 testleri kendi dizininde, K13 yalnız kendi `delegated-noncore.yml` dosyasında çalışır. `#1068` web UI entegrasyonu açıkken K01–K04 kaynak çakışmasına girme, yeni bağımsız test üretmeye devam et.
+- Her görevde *bulgu → tekrar üretim → minimum düzeltme → aynı kaynak sürümünde tekrar test* sırasını koru; gerçek kod yerine gereksiz sentetik belge çoğaltma. Kritik kaynak hatası bulunursa test ve kaynak kanıtıyla owner'a yönlendir; başka görevine devam et.
+- Bir CI run/check **aynı exact SHA için zaten başlamışsa yeniden başlatma**; 0-job, skipped, pending ve NOT_RUN sonucunu yeşil sayma. Yerel 60/60 owner bildirimi kendi kodun için CI/cihaz kabulü yerine geçmez.
+- Yeni T-ID bitince durum dosyasında ilgili issue, kod commit ve PR, test komutu/sonuç, workflow run, canlı cihaz gerekirse NOT_RUN, ana dal kabul bilgisi bulunsun. ŞEF bunları #1006 ana kabul izine bağlar; PR sahibi kendi başına kritik owner PR'ını merge etmez.
+- Karşı tarafa mesaj gerektiğinde **sadece gerçek yol çakışması, iki PR ve SHA, önerilen çözüm** kaydet. ŞEF Onur üzerinden iletir. Gereksiz onay ve yeni engeller üretme.
 
 ## Üstlenme ve öncelik
 1. `PANO` içindeki **AKTİF** görevi yap; BITTI/bağımlı/engel ise sıradaki hazır **KUYRUK** görevi.

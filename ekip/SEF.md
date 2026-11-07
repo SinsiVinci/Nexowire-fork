@@ -1,3 +1,15 @@
+# ŞEF HAFIZASI — S004 | 2026-11-07 (Europe/Istanbul)
+
+## Ömer'den gelen koordinasyon ve doğrulama
+- Onur üzerinden Ömer'in ajanından ortak plan teyidi alındı. **K01–K20 P003/P004 iş dağılımı korunacak**, öncelik #540, #588, #539, #485, #487. 120 yeni T-255…T-374 **ayrı sayaç: 0 yeni tamamlandı**. Eski merged işleri yeni tamam sayma.
+- [#1096](https://github.com/Naveax/Nexowire/pull/1096): **open Draft/NO-GO**, exact HEAD `02bf1004646620198719a7f441e7d8ce870f4d38`; `main@4e7db16f4233048a956664bef6b607781eb63fb7` baz. **310 dosya** değişti. Değişen yollar KNN'nin P003'te izinli kod/test/docs alanlarından hiçbirine doğrudan karşılık gelmedi; ama `src/agent/process-manager.ts` (#540 core) ve `.github/workflows/ci.yml` (#1006 CI) içeriyor ve owner yönetimindedir. K01–K04 için ayrıca #1068 web çakışması sürer.
+- Owner beyanı: `60/60` yerel PASS, Windows Node22/24 PASS ve Work-PC CORE/Hub/Agent çalışıyor. Bunlar owner'ın ilettiği bilgilerdir; ŞEF canlı cihazı/yerel testleri fiziksel yeniden yapmadı. GitHub exact #1096 checks: **17 success, 6 skipped, 1 in_progress browser-live** (24 toplam); mevcut çalışma olduğundan **yeniden dispatch yapılmadı**. Source/CI PASS olsa da üretim kabulüne eşit değildir.
+- Owner isteği: aynı SHA için tekrar CI başlatma; gerçek cihaz gerekiyorsa bitmiş sayma; CORE/Broker/auth/SQLite değiştirme; çakışma varsa merge yerine GitHub kanıtı ile haberleş; yeni gereksiz kısıtlar ekleme. PANO P004 ve PROTOKOL V003 bu **hedefli koordinasyon** notlarını eklendi, **tek bir yeni T-ID değişmedi**.
+- #1006 açık; henüz P004 yeni tamamlanan görev bulunmadığından issue'ya 'bitti' yorumu yazılmadı. Tamamlandıkça her görev için issue numarası, PR/commit, exact-head CI ve canlı kabul durumu ayrı kanıt olarak takip edilecek.
+- Önceki main, fork main ve ekip HEAD P003'ün doğrulanan `main@4e7db16f...`, `ekip@7ebb1628...` bilgileridir. Bu S004 değişikliği yalnız ekip yönetim dosyalarını değiştirir; upstream `main` veya #1096'ya dokunulmadı.
+- **Sonraki ŞEF DEVAM:** P004 sonrasını ve KNN raporlarını oku, 120 yeni görevden kanıtlı bitenlerin sayısını güncelle, #1096/#1068 çakışmasını yeniden değerlendir, #1006 takip bağlantılarını hazırla.
+
+## S003 tarihî kayıt (içeriği aşağıdadır)
 # ŞEF HAFIZASI — S003 | 2026-11-07 (Europe/Istanbul)
 
 ## Bu ŞEF DEVAM'da ne yapıldı?
