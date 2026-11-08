@@ -11,6 +11,10 @@
 - Yeni kaynak RED: K01 pairingId/token boşluğu ve HTTP429 rate-limit dönüşü, K02 long-Unicode mobile CSS, K04 admin 401/403 stale success, gerçek browser screenshot yok; owner #1068; K16 #540 ProcessManager gerçek çocuk PID postcondition ve K19 #588 iki-PC transfer confirmation fiziksel NOT_RUN. Bunlar bitmiş sayılmadı.
 - ŞEF bu devamda yalnız güvenli, gerçekten testli tek somut kod PR'ını (#1135) upstream main'e merge etti; diğer 42 Draft test keşfi/owner collision/CI failure nedeniyle otomatik toplu merge edilmedi. Aynı commit için CI yeniden başlatılmadı. K13 CI ve K20 QA kısımlarına darboğaz ağırlığı verildi; 20 lane ayrık.
 
+## #1006 merkezi takip ve owner koordinasyonu
+- [#1006 teslim/CI kabul kanıtı yorumu](https://github.com/Naveax/Nexowire/issues/1006#issuecomment-6721485897) eklendi; iki upstream merge, #487 auto-close/reopen, K13 six missing delegated tests, başarısız PR job'ları ve fiziksel kabul açıkları profesyonel biçimde özetlendi.
+- [#1096 CORE/CI owner PR yorumunda](https://github.com/Naveax/Nexowire/pull/1096#issuecomment-6721498936) eksik altı test keşfi ve sabit 41 TAP sayacı kaynaklı CI FAIL kanıtı iletildi; protected workflow'a tek satır yazılmadı. Owner cevabı beklenmeden diğer görevler sürdürülür.
+
 ## Bir sonraki ŞEF DEVAM için kontrol listesi
 1. Önce `ekip` son commit, değişen KNN, K03 ilk P005 yanıtını izle; P006 T535–654 ve 39 sahipsiz yedek (P005 19 + P006 20) görev ilerleme/kuyrukları kontrol et.
 2. #1135 merged main SHA `52d452f` post-push CI browser-live bitti mi; #487 OPEN mı; repo main/fork main FF uyumlu mu; #1096/#1068 path collision yeni HEAD'e kaydı mı?
