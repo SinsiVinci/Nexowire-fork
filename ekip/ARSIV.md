@@ -1,3 +1,46 @@
+# ARŞİV — A005 | 2026-11-08
+
+## P005 (ilk köle çalıştırması) — ayrı ilerleme sayacı
+- Son [ŞEF S005](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/SEF.md) commit'i `5cb864e99773f79637c00fe3b18e8afe78724a7d` sonrası **23 yeni ekip commit'i**, **19 güncellenen KNN raporu** okundu. **K03 değişmedi:** P004/Adım 4, dolayısıyla yeni P005 işlerine başlanmamış; K03 kuyruğu korundu.
+- P005 **T-395…T-514: 92/120 (%76,7) yerel/source/test/QA teslim**, 28 kısmi/bağımlı/NOT_RUN. **Bu sayı ana dalda merge veya gerçek cihaz/işlevsel kabul sayısı değildir.** P004 eski 104/120 iş ayrı arşivlendi; yeni P006 0/120 başlatıldı.
+- P005 HAVUZ'dan **T-523 K02**: gerçek screenshot olmadığında `NOT_RUN` işaretleyen QA, yerel 9/9 ve [#1138](https://github.com/Naveax/Nexowire/pull/1138); hosted yeni test keşfi ve gerçek tarayıcı screenshot hâlâ NOT_RUN. Diğer 19 havuz kimliği sahipsiz, P006'ya taşındı.
+- 12 yeni PR #1131…#1142 açık Draft; kaynaklar kendi izinli dosyalarında. **Yeni kaynak-yazım teslimleriyle test keşfi/CI/cihaz kabulünü asla tek satırda PASS sayma.**
+- **Ana projeye gerçek yeni merge:** K11 [#1135](https://github.com/Naveax/Nexowire/pull/1135) exact head `1267ea14554cca3545e962b1bbdec57487994a99` 7/7 hosted CI PASS; açıklama ve üç dosya incelendi, seçili 57/57 S5 testinin local PASS kanıtı. Upstream squash merge `52d452f717d891eeaf4c2b9aff3c6e1ea68369b0`; fork `main` güvenli fast-forward. Sub-cent modeled costs düzeltildi; #487 provider/physical/24h kabulü **yapılmadı**.
+- **İstenmeyen issue kapanışı düzeltildi:** [#1135](https://github.com/Naveax/Nexowire/pull/1135) PR metnindeki negated kapanış anahtar sözcüğü GitHub tarafından yanlışlıkla işlenip [#487](https://github.com/Naveax/Nexowire/issues/487) otomatik kapatıldı; ŞEF issue'yu **reopened** yaptı ve PR açıklamasını nötrleştirdi. **#487 OPEN** tekrar doğrulandı. Canlı kabul olmadığı için kapatmak kesinlikle doğru değildi.
+
+### P005 görev kimlikleri — yalnız yerel/source QA bitti
+- **K01:** T-395, T-396, T-397 (**3**); kaynak [#1114](https://github.com/Naveax/Nexowire/pull/1114). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K02:** T-401, T-402 (**2**); kaynak [#1131](https://github.com/Naveax/Nexowire/pull/1131), [#1138](https://github.com/Naveax/Nexowire/pull/1138). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K03:** P005 teslim yok (**0**); kaynak [#1103](https://github.com/Naveax/Nexowire/pull/1103). P004'ten beri rapor gelmedi, P005 yeni işleri korunuyor.
+- **K04:** T-413, T-414, T-415 (**3**); kaynak [#1104](https://github.com/Naveax/Nexowire/pull/1104), [#1120](https://github.com/Naveax/Nexowire/pull/1120), [#1133](https://github.com/Naveax/Nexowire/pull/1133). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K05:** T-419, T-420, T-421, T-422, T-423, T-424 (**6**); kaynak [#1115](https://github.com/Naveax/Nexowire/pull/1115), [#1122](https://github.com/Naveax/Nexowire/pull/1122), [#1132](https://github.com/Naveax/Nexowire/pull/1132). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K06:** T-425, T-426, T-427, T-428, T-429 (**5**); kaynak [#1108](https://github.com/Naveax/Nexowire/pull/1108), [#1129](https://github.com/Naveax/Nexowire/pull/1129). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K07:** T-431, T-432, T-433, T-434, T-435 (**5**); kaynak [#1100](https://github.com/Naveax/Nexowire/pull/1100), [#1125](https://github.com/Naveax/Nexowire/pull/1125). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K08:** T-437, T-438, T-439, T-440, T-441, T-442 (**6**); kaynak [#1106](https://github.com/Naveax/Nexowire/pull/1106), [#1128](https://github.com/Naveax/Nexowire/pull/1128). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K09:** T-443, T-444, T-446 (**3**); kaynak [#1099](https://github.com/Naveax/Nexowire/pull/1099), [#1127](https://github.com/Naveax/Nexowire/pull/1127), [#1137](https://github.com/Naveax/Nexowire/pull/1137). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K10:** T-449, T-450, T-452, T-454 (**4**); kaynak [#1116](https://github.com/Naveax/Nexowire/pull/1116), [#1142](https://github.com/Naveax/Nexowire/pull/1142). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K11:** T-456, T-457, T-458, T-459, T-460 (**5**); kaynak [#1102](https://github.com/Naveax/Nexowire/pull/1102), [#1135](https://github.com/Naveax/Nexowire/pull/1135). #1135 main'e alındı; diğer K11 kapsamı hosted/provider kabulü değil.
+- **K12:** T-462, T-463, T-464, T-466 (**4**); kaynak [#1109](https://github.com/Naveax/Nexowire/pull/1109). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K13:** T-467, T-468, T-469, T-470, T-471, T-472 (**6**); kaynak [#1112](https://github.com/Naveax/Nexowire/pull/1112), [#1134](https://github.com/Naveax/Nexowire/pull/1134). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K14:** T-473, T-474, T-475, T-476, T-477, T-478 (**6**); kaynak [#1117](https://github.com/Naveax/Nexowire/pull/1117), [#1123](https://github.com/Naveax/Nexowire/pull/1123), [#1140](https://github.com/Naveax/Nexowire/pull/1140). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K15:** T-479, T-480, T-481, T-482, T-483, T-484 (**6**); kaynak [#1110](https://github.com/Naveax/Nexowire/pull/1110). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K16:** T-485, T-486, T-487, T-488, T-489 (**5**); kaynak [#1105](https://github.com/Naveax/Nexowire/pull/1105), [#1121](https://github.com/Naveax/Nexowire/pull/1121). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K17:** T-491, T-492, T-493, T-494, T-495, T-496 (**6**); kaynak [#1113](https://github.com/Naveax/Nexowire/pull/1113). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K18:** T-497, T-498, T-499, T-500, T-501 (**5**); kaynak [#1107](https://github.com/Naveax/Nexowire/pull/1107), [#1119](https://github.com/Naveax/Nexowire/pull/1119), [#1139](https://github.com/Naveax/Nexowire/pull/1139). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K19:** T-503, T-504, T-505, T-506, T-507, T-508 (**6**); kaynak [#1111](https://github.com/Naveax/Nexowire/pull/1111), [#1124](https://github.com/Naveax/Nexowire/pull/1124), [#1136](https://github.com/Naveax/Nexowire/pull/1136). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+- **K20:** T-509, T-510, T-511, T-512, T-513, T-514 (**6**); kaynak [#1118](https://github.com/Naveax/Nexowire/pull/1118), [#1130](https://github.com/Naveax/Nexowire/pull/1130), [#1141](https://github.com/Naveax/Nexowire/pull/1141). CI ve fiziksel kabulü KNN raporuna göre ayrı kontrol et.
+
+### P005 henüz tamamlanmayan 28 görev — A005'te BITTI sayılmadı
+- T-398, T-399, T-400, T-403, T-404, T-405, T-406, T-407, T-408, T-409, T-410, T-411, T-412, T-416, T-417, T-418, T-430, T-436, T-445, T-447, T-448, T-451, T-453, T-455, T-461, T-465, T-490, T-502.
+- **K01** 429 RED/#1068 owner/gerçek browser; **K02** long-Unicode CSS/source RED, Chromium NOT_RUN; **K03** P005 hiçbir görev denenmedi; **K04** 401/403 RED, owner #1068/Windows; **K06/K07** real release/source ve #1068; **K09** kaynak-historik gate kısmi; **K10** browser screenshot; **K11/K12** main-push CI/CSV ölçümü/test discovery; **K16** Windows canlı process; **K18** sonraki metrik test. Tamamlanma kanıtı gelmeden otomatik kapama yok.
+
+### CI ve owner bekleyen gerçek riskler
+- K13 [#1134](https://github.com/Naveax/Nexowire/pull/1134) ayrı fork `delegated-noncore.yml` kaynak CI **4/4 hosted PASS**, K09/K16 seçili testleri Node22/24 üzerinde **12/12 PASS** ama ana required CI'da **6 delegated test seçilmiyor**; bu scope `NOT_PROVEN`.
+- [#1118](https://github.com/Naveax/Nexowire/pull/1118) Node22 FAIL, [#1130](https://github.com/Naveax/Nexowire/pull/1130) Node24 FAIL, [#1141](https://github.com/Naveax/Nexowire/pull/1141) Node22 FAIL, [#1120](https://github.com/Naveax/Nexowire/pull/1120) WSL2 FAIL. Bazı durumlarda yerel TAP 48–50 PASS ile korunmuş `ci.yml` sabit test sayısı 41 çakışıyor; owner #1096 workflow code protected.
+- [#1068](https://github.com/Naveax/Nexowire/pull/1068) web owner ve [#1096](https://github.com/Naveax/Nexowire/pull/1096) CORE/Broker/SQLite owner açık. K01 pairingId/token/429 ve K04 admin 401/403 gerçek RED owner source değiştirilmeden kapanmaz. Fiziksel Work-PC/gerçek Agent-Hub/provider 24h soak NOT_RUN.
+
+---
+
 # ARŞİV — A004 | 2026-11-07
 
 ## P004 iki köle çalıştırması: teslim ve açıklar

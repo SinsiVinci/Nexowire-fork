@@ -1,4 +1,4 @@
-# NEXOWIRE EKİBİ PROTOKOLÜ — V004
+# NEXOWIRE EKİBİ PROTOKOLÜ — V005
 Tarih: 2026-11-07 (Europe/Istanbul)
 ŞEF tarafından yönetilen iş: `SinsiVinci/Nexowire-fork` içindeki `ekip` dalında yalnız `ekip/`.
 Bu dosya ve PANO ilk kurulumda oluşturuldu. Her ajan kendisine atanan işi gerçek kod/test çıktısı ile tamamlar; sadece metin raporu ilerleme sayılmaz.
@@ -36,6 +36,14 @@ Kritik sahibi Ömer ve upstream ajanlarıdır. Şüphede kritik sayılır; sadec
 - Bir CI run/check **aynı exact SHA için zaten başlamışsa yeniden başlatma**; 0-job, skipped, pending ve NOT_RUN sonucunu yeşil sayma. Yerel 60/60 owner bildirimi kendi kodun için CI/cihaz kabulü yerine geçmez.
 - Yeni T-ID bitince durum dosyasında ilgili issue, kod commit ve PR, test komutu/sonuç, workflow run, canlı cihaz gerekirse NOT_RUN, ana dal kabul bilgisi bulunsun. ŞEF bunları #1006 ana kabul izine bağlar; PR sahibi kendi başına kritik owner PR'ını merge etmez.
 - Karşı tarafa mesaj gerektiğinde **sadece gerçek yol çakışması, iki PR ve SHA, önerilen çözüm** kaydet. ŞEF Onur üzerinden iletir. Gereksiz onay ve yeni engeller üretme.
+
+## 8 Kasım 2026 — P006 / V005 güncel çalışma kararları
+- Güncel görev panosu **P006**: K01–K20 120 yeni T-535…T-654 (0/120 başlangıç) ve 20 yeni HAVUZ T-655…T-674. P005 T-395…T-514 **92/120 yerel/source QA tamam**, 28 kısmi; P005 HAVUZ T-523 K02 BITTI-YEREL, kalan 19 sahipsiz havuza devreder. P004 104/120 kaydı ayrı A004/A005'tedir. Bu metrikler **ürün ilerleme % değildir**.
+- **K03 sessiz:** K03'ün P004/Adım4 kayıt dosyasına ŞEF dokunmaz. K03 eski P005 aktif **T-407**, kuyruğu T-408…T-412 olarak korunur; T-547…T-552 **ek sıra**, bu ilk altı tamamlanmadan yer değiştirme. Başka hızlı KNN onun dosyasına müdahale edemez.
+- **GitHub otomatik issue kapanışı tuzağı:** Bir PR title/body/commit metninde `close #487`, `fix #487`, `resolve #487` gibi kapanış anahtar kelimesi, “cannot close #487” gibi **olumsuz cümlede** bile issue'yu otomatik kapatabilir. **Kapanması uygun olmayan issue numarasına hemen bitişik kapanış fiili kullanma**; “acceptance for issue #487 remains open” gibi nötr ifade kullan. ŞEF merge öncesi kapanış sözdizimini denetler; yanlış kapandıysa aynı tur içinde **yeniden açar ve kayıt altına alır**. #1135 sonrası #487 böyle düzeltildi, güncel issue OPEN.
+- **CI discovery/callsite:** K13 #1134 aux hosted **4/4 jobs** ile bazı nested testleri açık seçerek çalıştırdı; upstream required `.github/workflows/ci.yml` owner #1096 ve **54 delegated testten 6'sını seçmiyor**. K20 Node CI 41 fixed-gate yeni TAP sayılarına göre yanlış/FAIL; #1118/#1130/#1141 kaynak job FAIL, #1120 WSL2 FAIL. Genel CI yeşil, yeni nested testin koştuğunu ispatlamaz. Doğru HOSTED_PASS için çalıştırılan **tam test dosya adı, exact commit SHA ve run id** gereklidir; aksi hâlde yeni kapsam `NOT_RUN`.
+- **Ömer sınırı:** Owner #1096 Windows CORE/Broker/SQLite Hub/CI, #1068 web kaynağı. K01–K04/K15 kendi test/docs alanında kaynak hata tekrarı yapabilir, owner web kaynağını değiştiremez. K16 `src/agent/process-manager.ts`, K13 `.github/workflows/ci.yml` read-only. Canlı Windows/Agent/Hub/provider/billing/deploy/yayın kabulüne girme.
+- **Birleştirme:** #1102 ve #1135 main'e test kanıtıyla merge edildi, fork main normal FF ile eşitlendi. Yeni kod dalları her zaman **güncel upstream main** bazlı başlar; geçmiş SHA kalıcı baz değil. ŞEF küçük non-core PR'ı gerçekten koşan test, owner çatışması, host CI ve issue-closing syntax sonrası birleştirir; fork aynı main'e FF. Fiziksel kabul için koşmayan senaryoya PASS yazma, issue'yu kapatma.
 
 ## P005 iki tur sonrası tespit edilen kurallar — V004
 - **Öncelik P005:** KNN kendi güncel P005 aktif görevini, ardından 5'li kuyruğunu ve boş HAVUZ'u yürütür. P004 T255–374 kaynak teslimleri A004 arşivindedir; kalan 16 bağımlı P005'te `Önceki açık` olarak taşınmıştır. Önce bitmiş işi tekrar yapma; yeni görev T395–514, havuz T515–534.
