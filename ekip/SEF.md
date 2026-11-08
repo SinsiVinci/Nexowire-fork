@@ -1,4 +1,25 @@
-# ŞEF HAFIZASI — S006 | 2026-11-08 (Europe/Istanbul)
+# ŞEF HAFIZASI — S007 | 2026-11-08 (Europe/Istanbul)
+
+## Karar ve gerekçe
+- Ömer'in AI'sından Onur üzerinden gelen yeni yetki sınırı açık: **Ömer'in tekil açık onayı olmadan upstream main merge/issue close YOK**, yeni PR açmak yerine mevcut 59 açık PR teslim/temizlik. Öncelik **CI → PR temizliği → UI → büyük aktarım → Skill → S5**. Önceden write yetkimizle yapılan main merges tarihsel, bu karar geriye yönelik işlem gerektirmez.
+- GitHub güncel denetim: SinsiVinci **91 toplam PR / 59 açık Draft / 32 kapalı veya birleşmiş**; 59/59 PR exact HEAD, diff dosya listesi, HEAD üstündeki CI run/job id'leri incelendi. **48 genel CI 7/7 yeşil, 5 CI FAIL (#1118/#1120/#1130/#1141/#1152), 6 sıfır-job (#1010/#1011/#1015/#1016/#1030/#1035)**. Genel CI yeşil, PR'ın yeni nested testini gerçekten çalıştırdığı veya fiziksel kabul edildiği anlamına gelmez. [59 PR'ın tam raporu](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PR_DENETIM_20261108.md).
+- **#1149 K13:** HEAD 5d5d186545b1c6e1e57f35eb35d2175890369087, generic [run 42485529477](https://github.com/Naveax/Nexowire/actions/runs/42485529477) 7/7, fork aux [run 42485485796](https://github.com/SinsiVinci/Nexowire-fork/actions/runs/42485485796) Node22/24 2/2 jobs, yedi explicit missing test toplam **33/33**, negatif gate **11/11 PASS**. Main required CI içinde 55 delege dosyadan 43 explicit+5 glob = **7 eksik**; Ömer #1096 ana ci.yml sahibidir.
+- **#1152 K20:** HEAD 7a18e1b5b8a7ffe86e3f42a17d8d5170cedcf129, [run 42486164254](https://github.com/Naveax/Nexowire/actions/runs/42486164254) test(24) FAIL, test(22) CANCELLED. Gerçek TAP 55/55 PASS ama main ci.yml K20 fixed41 exact equality, job exit1. #1118 50/50, #1130 48/48, #1141 52/52 TAP aynı problem; **hiçbiri CI PASS değildir**. #1120 run 42411741316 WSL2 job FAIL, log erişimi 404; kök neden bilinmiyor, sabit41 diye varsayma.
+- **Çakışma:** K13 #1134 ve #1149 ikisi de .github/workflows/delegated-noncore.yml değiştiriyor; K13 tek sahibi ve tek PR'a benzersiz testleri aktaracak. Eski 0-job #1010/#1011/#1015/#1016 tüm web source yolları Ömer'in #1068 değişikliklerinde de yer alıyor; owner web kaynağını zorla merge etme. #1117/#1123/#1140/#1153 ve K20 ardışık belgeler içeriksel tekrar olabilir ama birebir changed-file yolu çakışmıyor, kanıtsız kapatma yok.
+- **Bu kontrolde yapılan GitHub metadata düzeltmesi:** #1100/#1101/#1115/#1121/#1122 PR body içinde olumsuz cümlelerde geçen GitHub issue auto-close tetikleyici ifadeler nötrleştirildi. Kod HEAD'i veya CI değişmedi, sorunlar kapatılmadı. Yeni PR/merge/CI yeniden dispatch yok.
+- **Owner:** #1096 head b675897dce171a4f5e7a7ccb3187a16ac13630d0, CORE/Broker/Agent/Hub/SQLite/CI; #1068 head 94d38799e9e4b50fe84f7924e6fc84f90aeba090, web UI. Bu SHAlar okuma anına aittir. Upstream main ve fork main 52d452f717d891eeaf4c2b9aff3c6e1ea68369b0. Ana main'in generic CI 7/7 olması 59 PR veya fiziksel ürünün kabulü değil.
+- **Ekip:** önceki yönetim commit 4cb7487361b0e4d1002bc40df68b3db2312395b5; okunan ekip HEAD 3c2d1b2fd38846afe1591ffbe91bb0ecc1c358f4; **25 yeni commit, K01–K20 20/20 durum güncel**. K03 eski sessizlik artık yok, eski RED/P005 bağımlılık sürüyor. P006 T535–654 kaynak ve QA çıktıları A006'ya özetiyle taşındı, fiziksel/hizmet tamam denmedi. P007 **20×(1 aktif + 5 kuyruk) D001–D120 mevcut PR closure**, havuz 20 D121–D140; yeni PR/özellik üretimi sayacı değil.
+- Öncelikli roller: K13/K20 gerçek CI ve source fix owner handoff; K14 bütün 59 PR audit; K01–K05/K15 #1068/UI; K18–K19 #588 transfer/256MiB/ACK; K17 symlink güvenlik; K11/K12 simülasyon/gerçek S5; kalan KNN kendi mevcut PR test/duplicated evidence kapanışı.
+- Bu tur **upstream'e kod girmedi**. Merge onaylı PR sayısı bu kontrol döneminde 0; **59 PR envanteri %100**, üretim tamam yüzdesi güvenilir değil. ETA #1096 CI yaması, #1068 UI kabulü ve gerçek Windows/iki-PC/provider ölçümleri sonuçlarına bağlı.
+
+## Sonraki ŞEF DEVAM
+1. Son ekip HEAD sonrası yalnız değişen 20 durum dosyasını oku; yeni D-ID local PASS/hosted file discovery/physical NOT_RUN ayrımıyla A007'ye ilerlet.
+2. K13 #1149 yedi testin required ana ci.yml keşfi ve #1134 workflow overlap; K20 #1152 fixed41; K14 #1153 42→59 snapshot; K04 #1120 WSL2 ayrı kök neden. Önce çöz.
+3. Owner #1096 ve #1068 yeni HEAD'lerini ve ana main'i kontrol et; owner koduna müdahale yok. CI aynı SHA ve workflow için yeniden run yok.
+4. Tek #1006 teslim raporunda exact SHA/run, merge adayları, eksik testler, live NOT_RUN ve owner yapılacaklar; Ömer açık onay vermeden merge/issue close yapma.
+
+---
+## Önceki SEF S006 (tarihsel, V006'nın üzerinde değil)
 
 ## Kontrol edilen uzak durum
 - Önceki yönetim commit'i `5cb864e99773f79637c00fe3b18e8afe78724a7d`; `ekip` dalı yeni okunan head `fb0ea0f5729c4cff846f8417614d803bbcff305b`, **23 commit ve 19 değişen KNN durumu**. K03 hâlâ P004 Adım4 (sessiz); K03 P005 görevleri T407–412 korunarak P006 ek yedek sıra ayrıldı. K01 5, K02 5, K03 4, K04 5, K05 5, K06 5, K07 5, K08 5, K09 5, K10 6, K11 6, K12 5, K13 5, K14 7, K15 5, K16 6, K17 5, K18 5, K19 5, K20 7.

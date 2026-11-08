@@ -1,4 +1,37 @@
-# ARŞİV — A005 | 2026-11-08
+# ARŞİV — A006 | 2026-11-08
+
+## P006 T-535…T-654: kayıtların tamamı okundu, ürün kabulü değil
+- Önceki yönetim S006 sonrası ekip dalında **25 yeni commit**; K01–K20 **20/20 durum dosyası** güncellendi. K03 artık sessiz değil. Kaynak/yerel QA teslimi, gerçek hosted test keşfi, owner düzeltmesi ve fiziksel kabul ayrı tutuldu. **120/120 tamamlandı veya main'e girdi** iddiası yok.
+- **K01** — T535/537/538 local; T536 429 ve T539 token gerçek RED; T540 #1068 bağımlı. Mevcut #1114 PR(lar)ı; kapanış P007'de.
+- **K02** — T541/542 owner-browser NOT_RUN; T543-545 local, T546 kısmi. Mevcut #1138 PR(lar)ı; kapanış P007'de.
+- **K03** — Önceki T407/408 dashboard/Bridge RED; T269 fixture local; P006 T547–552 yedek sıradaydı. Mevcut #1103/#1143 PR(lar)ı; kapanış P007'de.
+- **K04** — T553/554/556/557 local; T555 WSL2 FAIL; T558 #1068 bağımlı. Mevcut #1144/#1120 PR(lar)ı; kapanış P007'de.
+- **K05** — T559-564 local QA, gerçek ekran okuyucu/mobil NOT_RUN. Mevcut #1146 PR(lar)ı; kapanış P007'de.
+- **K06** — T565-570 local/docs, HAVUZ T667 alındı, fiziksel Windows NOT_RUN. Mevcut #1108/#1129 PR(lar)ı; kapanış P007'de.
+- **K07** — T571-575 local; T576 owner/gerçek cihaz açık. Mevcut #1125 PR(lar)ı; kapanış P007'de.
+- **K08** — T577-582 local QA; yeni nested CI / provider NOT_RUN. Mevcut #1106/#1128 PR(lar)ı; kapanış P007'de.
+- **K09** — T583/584 local, T585 kısmi, T586 önceki kanıt; T587/588 bekler. Mevcut #1145 PR(lar)ı; kapanış P007'de.
+- **K10** — T589-593 local; T594 gerçek browser/owner engeli. Mevcut #1142 PR(lar)ı; kapanış P007'de.
+- **K11** — T595-600 local S5 QA; gerçek provider/kapasite NOT_RUN. Mevcut #1148 PR(lar)ı; kapanış P007'de.
+- **K12** — T602/603/604/606 local, T601 CI discovery engeli, T605 owner ölçüm bağımlı. Mevcut #1109 PR(lar)ı; kapanış P007'de.
+- **K13** — T607-612 yardımcı CI/local; ana ci.yml owner, yedi missing hosted. Mevcut #1149 PR(lar)ı; kapanış P007'de.
+- **K14** — T613-618 QA PR snapshot 42; ŞEF denetiminde 59 açık, riskli issue kapanış metadata bulundu. Mevcut #1153 PR(lar)ı; kapanış P007'de.
+- **K15** — T619-623 local; T624 owner/cihaz açık; HAVUZ T666 local. Mevcut #1110 PR(lar)ı; kapanış P007'de.
+- **K16** — T625-630 local Windows process QA; fiziksel #540 NOT_RUN. Mevcut #1105 PR(lar)ı; kapanış P007'de.
+- **K17** — T631-636 local Skill QA; symlink kaynak güvenlik açığı OPEN. Mevcut #1150 PR(lar)ı; kapanış P007'de.
+- **K18** — T637-640/T642 local, T641 owner; HAVUZ T672 local. Mevcut #1151 PR(lar)ı; kapanış P007'de.
+- **K19** — T643-648 local transfer fixture, 256MiB+/iki-PC NOT_RUN. Mevcut #1147 PR(lar)ı; kapanış P007'de.
+- **K20** — T649-654 local QA, sabit41 nedeniyle ana CI FAIL ve owner #1096 bağımlı. Mevcut #1152 PR(lar)ı; kapanış P007'de.
+
+## P007 yeni yönetim kararı
+- Ömer'in 8 Kasım talimatıyla **yeni PR açma ve açık onay olmadan main merge durdu**. P007 D-001…D-120 yalnız **59 mevcut açık PR'ın kapanış kontrolü**, P006 T sayısına **ek ürün başarısı olarak yazılmaz**. HAVUZ D-121…D-140 read-only denetim.
+- Açık 59 PR için 48 generic CI 7/7, 5 FAIL (#1118/#1120/#1130/#1141/#1152), 6 zero-job (#1010/#1011/#1015/#1016/#1030/#1035); exact SHA/run ve değişen dosyalar [59 PR raporunda](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PR_DENETIM_20261108.md). #1134/#1149 delegated workflow dosyası çakışıyor. Dört eski web PR #1068 ile owner source çakışıyor.
+- #1100/#1101/#1115/#1121/#1122 PR açıklamalarındaki olumsuz cümlede yanlış issue kapatabilecek anahtar sözcükler ŞEF tarafından nötrleştirildi; **bu kontrolde hiçbir issue kapatılmadı, PR merge edilmedi**.
+- #1152 TAP 55/55 PASS, ancak sabit41 gate yüzünden ana CI run 42486164254 FAIL; #1149 yardımcı fork run 42485485796 2/2 jobs, 33/33 explicit test PASS, **ana CI yedi missing test discovery hâlâ açık**. Owner #1096 ana ci.yml; fiziksel iki-PC/Windows/gerçek provider NOT_RUN.
+
+---
+
+## Önceki ARSIV A005 (korunmuş geçmiş)
 
 ## P005 (ilk köle çalıştırması) — ayrı ilerleme sayacı
 - Son [ŞEF S005](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/SEF.md) commit'i `5cb864e99773f79637c00fe3b18e8afe78724a7d` sonrası **23 yeni ekip commit'i**, **19 güncellenen KNN raporu** okundu. **K03 değişmedi:** P004/Adım 4, dolayısıyla yeni P005 işlerine başlanmamış; K03 kuyruğu korundu.
