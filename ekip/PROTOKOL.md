@@ -1,5 +1,5 @@
 # NEXOWIRE EKİBİ PROTOKOLÜ — V005
-Tarih: 2026-11-07 (Europe/Istanbul)
+Tarih: 2026-11-08 (Europe/Istanbul)
 ŞEF tarafından yönetilen iş: `SinsiVinci/Nexowire-fork` içindeki `ekip` dalında yalnız `ekip/`.
 Bu dosya ve PANO ilk kurulumda oluşturuldu. Her ajan kendisine atanan işi gerçek kod/test çıktısı ile tamamlar; sadece metin raporu ilerleme sayılmaz.
 
