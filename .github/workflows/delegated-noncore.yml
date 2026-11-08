@@ -1,0 +1,77 @@
+name: Fork non-core checks (offline)
+
+# Fork-owned CI. This never substitutes for upstream required checks or device acceptance.
+on:
+  push:
+    branches:
+      - "k[0-9][0-9]/**"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: delegated-noncore-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  linux-static:
+    if: github.repository == 'SinsiVinci/Nexowire-fork'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - name: Preflight exact PR head has fork test harness
+        env:
+          SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/delegated/k13/verify-head-harness.mjs
+      - run: npm ci
+      - name: Validate fork CI security contract
+        run: node scripts/delegated/k13/validate-workflow.mjs
+      - name: Offline delegated static tests
+        run: node scripts/delegated/k13/run-delegated-tests.mjs
+      - name: Typecheck (no service starts)
+        run: npm run typecheck
+      - name: Build (no release artifact)
+        run: npm run build
+
+  windows-static:
+    if: github.repository == 'SinsiVinci/Nexowire-fork'
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Preflight exact PR head has fork test harness
+        env:
+          SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/delegated/k13/verify-head-harness.mjs
+      - run: npm ci
+      - name: Validate fork CI security contract
+        run: node scripts/delegated/k13/validate-workflow.mjs
+      - name: Offline delegated static tests
+        run: node scripts/delegated/k13/run-delegated-tests.mjs
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build
+        run: npm run build
