@@ -1,4 +1,48 @@
-# ARŞİV — A006 | 2026-11-08
+# ARŞİV — A007 | 2026-11-09
+
+## P007 kapanış kampanyası — kaynak/yerel kanıt, ürün kabulü değil
+- Yönetim [S007 commit 437a537](https://github.com/SinsiVinci/Nexowire-fork/commit/437a537fc3dd3185f96d9b579cedaf4e2431cb42) sonrası **86 ekip commit**, **20/20 KNN durumu** okundu. **18 açık PR HEAD güncellendi**. Upstream ana dal değişmedi, yeni main merge YOK, yeni PR açılmadı.
+- **59/59 PR exact HEAD/CI/diff güncellendi**: 48 generic CI 7/7, 5 FAIL, 6 zero-job. [9 Kasım tam 59 satırlı kaynak](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PR_DENETIM_20261109.md). Bu 59/59 ürün teslimi veya testin fiziksel kabulü değildir.
+- **K01 #1114:** D001–006 kaynak/QA; owner #1068 üzerinde 4 bilinçli RED; run 42514666903 7/7 generic, K01 nested NOT_RUN.
+- **K02 #1138:** Sahte PNG kanıtı fail-closed düzeltildi; 21/21 local, gerçek browser/mobil NOT_RUN; #1126 path subset.
+- **K03 #1143:** Boş Bridge requestId ve UI state için 1 PASS/3 SOURCE FAIL; owner #1068 kaynak düzeltmesi açık.
+- **K04 #1144/#1120:** D020–024 yerel QA; WSL2 #1120 run 42411741316 FAIL ve log 404, kök neden NOT_VERIFIED; 401/403 owner.
+- **K05 #1146:** Hosted nested discovery false-green (echo/grep/label) RED→GREEN QA; #1115/#1122/#1132 changed paths kapsanır; canlı NVDA NOT_RUN.
+- **K06 #1108/#1129:** Installer/Windows docs QA, #588 owner tarihsel manuel iki-PC 221KiB/1MiB HASH kanıtı, otomatik tek-istek NOT_RUN; havuz D122/D133/D137 canonical.
+- **K07 #1100/#1125:** Self-host docs test/CI kaynak ayrımı, browser-live gerçek görüntü kanıtı değil; D133 K06 canonical, K07 ikinci kredi yok.
+- **K08 #1106/#1128/#1035:** K08 MCP QA ve D123/D126/D127/D134; #1120 log BlobNotFound, #1035 0-job, owner #1068/CI keşfi açık.
+- **K09 #1145:** 41/41 yerel QA ve auto-close metin negatif testi; #1099/#1127/#1137 changed paths #1145 içinde, hosted yeni nested NOT_RUN.
+- **K10 #1116/#1142:** Browser kanıtı/PNG negatif QA; generic browser-live 7/7 fiziksel screenshot değil; gerçek Chromium NOT_RUN; havuz D132 canonical.
+- **K11 #1148:** S5 maliyet modeli sentetik; owner #1096 staging'de 3 K11 explicit test 70/70, ana main required coverage/fatura fiziksel NOT_RUN; havuz D121/D129 canonical.
+- **K12 #1109:** 30/30 yerel kapasite QA, K12 nested main/owner CI hâlâ NOT_RUN, gerçek provider/24h NOT_RUN.
+- **K13 #1149:** False-green aynı run/job/checkout aidiyet testi RED→GREEN, fork aux 42527882187 4/4 ve yedi test 33/33 Node22/24; main generic 42527886343 7/7 ama yedi path required NOT_PROVEN; owner #1096 dört staged missing.
+- **K14 #1153:** 59/59 PR güncel snapshot ve CI/overlap; 8 full changed-path subset çifti ve dört eski UI owner #1068; havuz D139 canonical, D126/D129/D137 kredi küçük KNN'de.
+- **K15 #1110:** Main source 12 PASS/10 expected TODO, owner 19 PASS/3 TODO; Chromium EPERM gerçek browser NOT_RUN; issue owner #1068.
+- **K16 #1105/#1121:** 24/24 local Windows taskkill sentetik QA; generic CI 7/7 ama yeni nested/Work-PC #540 real NOT_RUN; havuz D131 canonical.
+- **K17 #1150:** 20/20 local test symlink validate→read dış katalog okuma BUG tekrar üretimi, düzeltme değil; #1030 0-job owner, havuz D136/D140 canonical, D123 K08.
+- **K18 #1151:** 49/49 local transfer/ACK/SHA fixture ve generic CI 7/7, gerçek otomatik 256MiB+/iki-PC NOT_RUN; owner ACK test eksik.
+- **K19 #1147:** 34/34 local file/receiver QA, generic CI 7/7 nested K19 NOT_RUN; tarihsel manuel gerçek iki-PC kanıtı ≠ yeni otomatik; D140 K17 canonical.
+- **K20 #1152:** TAP 78/78 PASS, [run 42528172259](https://github.com/Naveax/Nexowire/actions/runs/42528172259) Node24 CI FAIL (main sabit41), Node22 CANCELLED; owner staging dynamic min41 main'e girmedi; D124/D128/D135 canonical.
+
+## HAVUZ D-121…D-140 kanonik sahipleri ve çakışma kararı
+- 20 eski havuz kimliği raporlarda **tamamı sahiplenilmiş**; bu havuz P008'de yeniden kullanılmayacak. **Tek kredi küçük KNN**: D121 K11; D122 K06; D123 K08; D124 K20; D125 K15; D126 K08; D127 K08; D128 K20; D129 K11; D130 K07; D131 K16; D132 K10; D133 K06; D134 K08; D135 K20; D136 K17; D137 K06; D138 K05; D139 K14; D140 K17.
+- Tekrarlı claim'ler: K07 D133 (K06 kazanır), K17 D123 (K08 kazanır), K19 D140 (K17 kazanır), K14 D126/D129/D137 (K08/K11/K06 kazanır), K20 D129/D132/D136/D137/D139 (K11/K10/K17/K06/K14 kazanır). Kod ve benzersiz QA korunur, fakat aynı D için ikinci tamamlama sayacı yok; başka KNN'nin durum dosyası değiştirilmez.
+
+## Sekiz tam path-subset PR adayı — silme değil kanıtlı karar
+- #1099/#1127/#1137 değişen bütün path'ler #1145'te; #1115/#1122/#1132 bütün path'ler #1146'da; #1126 üç path #1138'de; #1134 sekiz path #1149'da. **Path eşitliği tek başına blob/semantik eşdeğerlik değildir.** Eski PR'lar benzersiz testi korunmadan kapatılmadı.
+- Eski 0-job #1010/#1011/#1015/#1016 her changed path owner #1068 web PR içinde; tek başına birleştirilmediler. Owner #1096 CORE/Broker/SQLite/CI, #1068 web, #1161/#1164 yeni P0 owner sınırı.
+
+## Test gerçeği
+- #1149 upstream generic [42527886343](https://github.com/Naveax/Nexowire/actions/runs/42527886343) 7/7; fork aux [42527882187](https://github.com/SinsiVinci/Nexowire-fork/actions/runs/42527882187) 4/4. Owner #1096 staged üç yedi eksik test seçiyor, dört açık; **main'de yedi açık**.
+- #1152 exact latest [42528172259](https://github.com/Naveax/Nexowire/actions/runs/42528172259) CI FAILED: **78/78 TAP PASS** olmasına rağmen main sabit41 kontrolü exit1. Yanlış 'CI yeşil' yazılmadı; #1120 WSL2 FAIL log 404 kökü bilinmiyor.
+- #588 için **tarihsel gerçek iki-PC manuel bounded transfer+SHA** vardır (221KiB/1MiB) fakat tek mantıksal istekte otomatik resumable ACK/256MiB+ **NOT_RUN**. #1150 symlink güvenlik açığı testlerle yeniden üretildi ama source fix yok. #487 gerçek 24h faturanın ve kapasitenin kanıtı yok.
+
+## P008 giriş
+- R001–R120 yeni PR değildir, 20×6 eski 59 PR'ın tamamlanma/inceleme işleri. Yeni havuz R121–R140 20 sahipsiz, farklı read-only kanıt işleri. PROTOKOL V006 merge/yeni PR freeze devam ediyor.
+
+---
+
+## Önceki ARSIV A006 (aynen saklı)
 
 ## P006 T-535…T-654: kayıtların tamamı okundu, ürün kabulü değil
 - Önceki yönetim S006 sonrası ekip dalında **25 yeni commit**; K01–K20 **20/20 durum dosyası** güncellendi. K03 artık sessiz değil. Kaynak/yerel QA teslimi, gerçek hosted test keşfi, owner düzeltmesi ve fiziksel kabul ayrı tutuldu. **120/120 tamamlandı veya main'e girdi** iddiası yok.

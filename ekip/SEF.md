@@ -1,4 +1,31 @@
-# ŞEF HAFIZASI — S007 | 2026-11-08 (Europe/Istanbul)
+# ŞEF HAFIZASI — S008 | 2026-11-09 (Europe/Istanbul)
+
+## Yönetim kararı
+- Ömer’in Onur üzerinden gönderdiği en son sınır geçerli: yeni mükerrer PR açma; **açık ve tekil Ömer onayı olmadan Naveax/Nexowire ana dalına MERGE YOK**. CORE, Broker, Agent, Hub, SQLite/WAL, yetki, ana CI, production/release, servis ve canlı cihaz sahibi Ömer. Mevcut draft'ların sonuçlarını kanıtla, eksikleri gider, bağımlılıkları bildir. Öncelik **CI → PR teslim/konsolidasyon → UI → aktarım → Skill → S5**. İş bitmeden kapatma yok.
+- 8 Kasım S007 kayıt commit'i 437a537fc3dd3185f96d9b579cedaf4e2431cb42 sonrası **86 ekip commit**; **20 K01–K20 raporu** değişmiş ve okunmuş. Panoda artık **P008**: her köle bir aktif iş ve **beş bağımsız kuyruk işi** (R-001…R-120), ayrıca **20 sahipsiz okuma/kanıt işi** (R-121…R-140). PROTOKOL **V006 değişmedi**, ARSIV **A007**, yeni denetim **PR_DENETIM_20261109.md**.
+- **120 yeni iş (R001…R120) plan görevidir; önceki 120 D görevinin başarı hanesine eklenemez.** P007’nin D121…D140 havuz işlerinin tamamında birincil sorumlu eşleştirildi. Aynı D işini birden çok ajan “claimed” yazdıysa tek sahipli say; örn. D126=K08, D129=K11, D133=K06, D140=K17. KNN tek-yazar hafızasına ŞEF yazmadı.
+
+## GitHub karşılaştırma — fiili doğrulama
+- Açık PR sayısı **59 Draft** (91 toplam, 32 closed/merged), son kontrolden beri **18 HEAD** değişmiş; **ana dal 52d452f717d891eeaf4c2b9aff3c6e1ea68369b0 değişmedi; 0 upstream merge**. Envanter exact HEAD commit/CI run ID/changed-path ile yeni raporda 59 satırdır.
+- 59 exact HEAD CI incelemesi: **48 generic 7/7 başarılı, 5 başarısız (#1118, #1120, #1130, #1141, #1152), 6 zero-job (#1010/#1011/#1015/#1016/#1030/#1035), 0 pending**. Genel 7/7, yeni alt-testlerin çalıştığını kanıtlamaz; fiziksel cihaz kabulü değildir. Aynı commit+workflow koşusu tekrar çalıştırılmadı.
+- **#1152** HEAD b17c4deabb0195fa972eafe00623ab08e094833a, run **42528172259**, Node24 job **128876295774** FAIL. Ham logda 78/78 TAP PASS olsa da main ci.yml literal 41 test kapısı yüzünden exit1; CI “PASS” sayılamaz. #1118/#1130/#1141 de CI FAIL. #1120 WSL2 run **42411741316** FAIL, job **128521158395** log 404 BlobNotFound; gerçek kök neden kanıtlanmadı.
+- **#1149** HEAD 27c9065cd0262450f3ecb7510e56df84eb1913bc, upstream run **42527886343** generic 7/7; fork yardımcı run **42527882187** 4/4, Node22+24 gate 26/26 ve açık seçilmiş testler 33/33. **Bu yardımcı koşu required upstream CI yerine geçmez.** Genel CI'da henüz gerçekten seçilmeyen 7 test vardır. Ömer'in aktif #1096 dalındaki ci.yml değişimi dinamik min-41 kontrolü ve 3 K11 test yolunu içeriyor, ancak **ana dala birleşmedi**; orada bile şu dört dosya hâlâ açıkta: test/delegated/k09/roadmap-evidence.test.mjs; test/delegated/k16/environment-doctor-contract.test.ts; test/delegated/pool-k17/markdown-anchors.test.ts; test/delegated/pool-k19/audit-physical-pass-labels.test.ts. Bu yolların eklenmesi ana ci.yml sahibi Ömer'e raporlanacak, ŞEF değişmeyecek.
+- Ömer'in açık **#1096** HEAD 43e8125e7a4ced654a769b661dc10938c02bc7a4; web **#1068** HEAD 94d38799e9e4b50fe84f7924e6fc84f90aeba090, ikisi de **açık ve korunuyor**. Yeni kritik #1161 sistem Hub SQLite ve #1164 Windows elevated stage Ömer sahibi; ekip kod müdahalesi yok.
+- Yol listesi bir başka PR'da tümüyle kapsanan **8 aday çift**: #1099→#1145, #1127→#1145, #1137→#1145, #1115→#1146, #1122→#1146, #1132→#1146, #1126→#1138, #1134→#1149. Bu sadece **dosya yolları kapsaması**, içerik/semantik eşitliği değildir; özgün testler taşınmadan PR kapatılmayacak. Owner web #1068 ile #1010/#1011/#1015/#1016 değişen yolları çakışıyor; UI kaynak düzeltmesi onların alanı değil.
+
+## Gerçek test ve ürün kabulünü ayrı say
+- K02/K05 UI, K17 Skill, K18/K19 dosya aktarımı, K11/K12 S5 konularında ekibin yerel kanıtları arşivde. Gerçek tarayıcı, NVDA, Windows/Linux cihazları, 256MiB üstü otomatik dosya aktarımı, fiziksel ACK kaybı kurtarma ve faturalı gerçek provider uzun koşu **NOT_RUN/UNKNOWN**.
+- #588 hakkında önceki manuel 64KiB parçalara bölünmüş tarihî fiziksel 221KiB/1MiB hash doğrulamaları var; bunlar hiç fiziksel test yapılmadığı anlamına gelmez. Fakat yeni **tek mantıksal otomatik aktarım**, 220KB HTTP413 sınır katmanı ve >256MiB kurtarma kanıtı yok; fiziksel otomatik kabul **NOT_RUN**. Simülasyon ile gerçek cihaz/fatura ölçümünü ayır.
+- #1150 symlink dış katalog okuma kusuru K17 kanıtında **RED/açık**; güvenlik PASS değil. Yeni kısıt uydurma yok, gerçek negatif test ve owner'a düzeltme sorumluluğu aktarılacak.
+
+## Sonraki ŞEF DEVAM için kesin prosedür
+1. Önce fork ekip HEAD, bu S008, P008, PROTOKOL V006, ARSIV A007, PR_DENETIM_20261109.md ve son değişmiş KNN dosyalarını oku; 59 mevcut PR'ın exact HEAD + CI delta ve Ömer #1096/#1068/issue #1006 güncellemelerini kontrol et.
+2. Kanıtın aksini gerektirmiyorsa **48/5/6** tabanını koru, koşulan/koşulmayan nested testleri ve cihazı ayrı etiketle; artefakt loglarını doğrula. D havuzu tek sahiplidir; R havuzu yeni ve bağımsızdır.
+3. PR konsolidasyonu önerisi Ömer açık onayıyla; merge/close, ana ci.yml, live/DB veya prod müdahalesi yapma. Her KNN kendi sahibi tarafından yazılır. Birikeni ARSIV'e işleyip PANO/SEF versiyonunu bir artır, #1006'ya net delta ver.
+4. Onur'un yapacağı tek rutin insan işi: **NEXOWIRE KÖLE MESAJI V002**'yi K01–K20 sekmelerine göndermek ve iki turdan sonra **ŞEF DEVAM** yazmak. Ömer'den özel olarak merge/onay ve gerçek cihaz testleri gerekenleri insan koordinasyonuna bırak.
+
+---
+## Önceki S007 kaydı
 
 ## Karar ve gerekçe
 - Ömer'in AI'sından Onur üzerinden gelen yeni yetki sınırı açık: **Ömer'in tekil açık onayı olmadan upstream main merge/issue close YOK**, yeni PR açmak yerine mevcut 59 açık PR teslim/temizlik. Öncelik **CI → PR temizliği → UI → büyük aktarım → Skill → S5**. Önceden write yetkimizle yapılan main merges tarihsel, bu karar geriye yönelik işlem gerektirmez.
