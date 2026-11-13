@@ -1,3 +1,18 @@
+# ARŞİV — A008 | 13 Kasım 2026
+
+**P008'den beri 20 commit / 20 değişmiş KNN kaydı** (P008 commit d4f865af... baz, gözlenen ekip HEAD 1bfe59d552f5bd3f5a5b359a4660f2a7122e1ae1). Çalışmaların kanıtı güncel KNN'nin en üst P008 bölümleri ve açık mevcut PR'larıdır. 14 PR HEAD changed, 0 upstream main merge. Bu 20 commit gerçek yeni kullanıcı özelliği olarak sayılmaz. Başka ajan P008 R görevlerini tamamladığını yazsa da physical/hosted kabul ayrıca açık.
+
+**K01–K05:** #1114 pairing 429 malformed Retry-After negatif kaynak kanıtı, #1138 PNG CRC/IEND offline QA, #1143 Bridge requestId owner source RED, #1120 WSL2 nedeni UNKNOWN, #1146 CSS/DOM A11y CI discovery; dört orijinal UI source zaten owner #1068 Draft içinde. **K06–K10:** #1066'da docs merged history, #1125 yeni onboarding negative, #1106 MCP docs, #1145 macOS CI CANCELLED, #1142 hosted browser vs gerçek PNG farkı. **K11–K15:** #1135 subcent ve #1102 capacity UNKNOWN main'de; #1148/#1109 provider yok; #1149 explicit missing coverage, #1153 59 PR audit, #1110 device UI TODO. **K16–K20:** #1105 synthetic Windows (real child PID NOT_RUN), #1150 source symlink TOCTOU RED, #1151 ACK/SHA offline (two-PC automatic NOT_RUN), #1147 hosted TypeScript TS2532 regression (branch 556c294, new CI pending), #1152 79/79 TAP but CI FAIL.
+
+**Sahiplik ve overlap kararı:** K01/K04 kaynak #1068 zaten kopyalandı (K01/K04 4/4 same blobs), K02/K03 owner evolved üç source blob. #1134→#1149, #1126→#1138, K05 üç→#1146, K09 üç→#1145 byte/assertion eşitlik gate gerektirir; yol çakışması tek başına tamamlanma değildir. Hiçbir PR/issue kapatılmadı. Ömer'in #1160 integration QA merge'i kendi kaynak dalına ait, upstream main değil.
+
+**Yapılan bu ŞEF DEVAM somut tek kod değişikliği:** #1147 K19 sahipli mevcut branch'inde `test/delegated/k19/p006-receiver-ack-reference.test.ts` satır 197 undefined byte erişimini fail-safe `??0` ile TS2532 önleme; commit [556c294](https://github.com/SinsiVinci/Nexowire-fork/commit/556c294570f4e30fd7fd8b1c457f472c0de2268c). Önceki hata run [43285660133](https://github.com/Naveax/Nexowire/actions/runs/43285660133), yeni [43422654887](https://github.com/Naveax/Nexowire/actions/runs/43422654887) başlangıçta IN_PROGRESS. GitHub CI PASS olduğunu iddia etme, fiziksel kabul yok.
+
+Eski kaynak: [P008 arşivi](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/ARSIV.md) aşağıda korunur. Tam current audit [TEKRAR_DENETIM_20261113.md](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/TEKRAR_DENETIM_20261113.md).
+
+---
+## Eski A007 (tarihsel)
+
 # ARŞİV — A007 | 2026-11-09
 
 ## P007 kapanış kampanyası — kaynak/yerel kanıt, ürün kabulü değil

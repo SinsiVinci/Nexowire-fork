@@ -1,3 +1,227 @@
+# NEXOWIRE ŞEF PANO — P009 / 13 Kasım 2026
+
+**YÖNETİM KARARI / ÇİFTE İŞ DENETİMİ:** Ömer'in #1068'i K01–K04 dört eski UI source PR'ının 15 dosyasını içeriyor; kaynakları ikinci kez yazmayın. #1068 Draft, main'e girmedi. K06–K09 tarihsel doküman ve S5 çalışmalarının bir bölümü #1066/#1070/#1071 ve #1102/#1135 aracılığıyla ana projeye daha önce alınmış; bunlara yeni iş puanı yazmayın. K01–K20 P008 20 güncel durum kaydı okundu; 20/20 ekip kaydı P008 commit'i sonrası değişti. **20 yeni commit**, fakat ürün teslimi sıfır.
+
+**ANA DAL:** Naveax main 52d452f717d891eeaf4c2b9aff3c6e1ea68369b0 (8 Kasım'dan beri sabit); fork ekip okuma HEAD 1bfe59d552f5bd3f5a5b359a4660f2a7122e1ae1. Ömer'in 13 Kasım **#1160** entegrasyonu (HEAD 5efab6c7...) izolasyon branch'inde, **3/3 CI workflow success**, ancak Draft/NO-GO ve main'de değil; #1201 korunan SYSTEM visibility belge düzeltmesi child PR, CI kontrol anında in_progress. #1096 (CORE, 321 changed files), #1068 (UI, 18 files) hâlâ Draft, protected; #1161/#1164 kritik owner issue. Yeni 24. issue iddiası 13 Kasım sorgusunda doğrulanmadı; GitHub son listede **23 open issue**.
+
+**BİZİM 59 AÇIK PR:** 12 Kasım'da **14 exact HEAD değişti**. Önceki 48 GREEN/5 FAIL/6 zero-job panosu ESKİ. Yeni CI'da #1145 CANCELLED macOS job → workflow FAIL, #1147 **TS2532** tip hatası ile 6 jobs FAIL + 1 cancelled, #1152 79/79 TAP ama CI exit1. #1147 mevcut dalında dar TypeScript byte-index düzeltmesi **556c294570f4e30fd7fd8b1c457f472c0de2268c** ile yapıldı; yeni run **43422654887 IN_PROGRESS, henüz PASS değil**. Güncel snapshot: **46 genel green / 6 fail / 6 zero-job / 1 running** (59). Diğer 6 FAIL: #1118, #1120, #1130, #1141, #1145, #1152. Düzeltme sonrası yeni #1147 bitene dek bu sayı geçicidir.
+
+**GERÇEK İLERLEME:** 20 ajan rapor/QA üretti, fakat 8 Kasım'dan sonra **0 upstream main merge**. Genel CI green, özgün nested testin çalışması veya fiziksel cihaz acceptance değildir. Ömer'in #1160 source CI başarısı bizim PR'larımızın main'e girdiği anlamına gelmez. Bir işin owner tarafından yapıldığını görünce yeni kod yazmak YASAK; yalnız kaynak-hata RED, test ve entegrasyon açığı kaldıysa çalışın.
+
+**SERT KURAL:** PROTOKOL V006 ve Ömer'in açık onay gerektiren freeze'i sürer. Yeni PR yok; açık tekil Ömer izni olmadan upstream main merge/issue close yok. Owner CORE/Broker/SQLite/auth/CI/web source ve gerçek cihaz yok. Sadece mevcut kendi PR dalında izinli test/docs. Sahte success/duplicate rapor puanlanmaz.
+
+## P009 20 ajan / 1 AKTİF + 5 gerçek KUYRUK (Q-141…Q-260)
+
+### K01 | Bağlantı/pairing | mevcut #1114
+**AKTİF Q-141:** #1068 dört gerçek RED'i satır/fixture ile owner'a ilet; aynı source SHA'da karşıla.
+**KUYRUK (5):**
+- Q-142: PR #1114 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-143: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-144: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-145: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-146: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K02 | CSS/PNG QA | mevcut #1138
+**AKTİF Q-147:** PNG CRC/IEND negatifini gerçek test adıyla CI'da doğrula; #1010→#1068 tekrar koduna girme.
+**KUYRUK (5):**
+- Q-148: PR #1138 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-149: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-150: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-151: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-152: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K03 | Bridge dashboard | mevcut #1143
+**AKTİF Q-153:** Boş requestId/başarı metni üç gerçek RED'i owner #1068 düzeltmesinde izle.
+**KUYRUK (5):**
+- Q-154: PR #1143 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-155: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-156: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-157: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-158: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K04 | Admin denied/WSL | mevcut #1120
+**AKTİF Q-159:** WSL2 eski log 404 için yeni SHA'sız kesin neden iddia etme; 401/403 owner #1068 RED.
+**KUYRUK (5):**
+- Q-160: PR #1120 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-161: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-162: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-163: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-164: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K05 | A11y/CI discovery | mevcut #1146
+**AKTİF Q-165:** #1115/#1122/#1132→#1146 blob ve özgün assertion kaybını karşılaştır.
+**KUYRUK (5):**
+- Q-166: PR #1146 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-167: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-168: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-169: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-170: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K06 | Windows kurulum belgeleri | mevcut #1108/#1129
+**AKTİF Q-171:** #1066'da birleşmiş dokümanı kopyalama; yalnız yeni bozuk link/gerçek setup eksiğini kanıtla.
+**KUYRUK (5):**
+- Q-172: PR #1108/#1129 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-173: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-174: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-175: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-176: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K07 | Self-host/onboarding | mevcut #1125
+**AKTİF Q-177:** #1066 dokümana girmiş eski içerikle tekrarları ayır, yeni nested testin hosted koşusunu kanıtla.
+**KUYRUK (5):**
+- Q-178: PR #1125 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-179: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-180: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-181: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-182: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K08 | MCP docs/error provenance | mevcut #1106
+**AKTİF Q-183:** Ömer CORE/Agent kaynak dokümanını kopyalama; #539 hata kaynağı/UNKNOWN test bağımsızlığı.
+**KUYRUK (5):**
+- Q-184: PR #1106 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-185: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-186: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-187: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-188: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K09 | Issue kanıt/PR konsolidasyon | mevcut #1145
+**AKTİF Q-189:** 12 Kasım CI macOS-agent-lifecycle-live CANCELLED, sebebi ve exact-run kabulü denetle.
+**KUYRUK (5):**
+- Q-190: PR #1145 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-191: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-192: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-193: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-194: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K10 | Gerçek browser görsel QA | mevcut #1142
+**AKTİF Q-195:** Host browser-live PASS ile ürün ekran PNG artefaktı ayrımı; fiziksel real-browser NO_GO.
+**KUYRUK (5):**
+- Q-196: PR #1142 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-197: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-198: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-199: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-200: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K11 | S5 maliyet kalibrasyonu | mevcut #1148
+**AKTİF Q-201:** #1135 main'de olduğundan eski düzeltmeyi tekrar etme; gerçek fatura karşılaştırmasını UNKNOWN tut.
+**KUYRUK (5):**
+- Q-202: PR #1148 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-203: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-204: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-205: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-206: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K12 | S5 performans | mevcut #1109
+**AKTİF Q-207:** Kapasite/soak sentetiğini gerçek provider performansına eşitleme; dört nested test explicit CI.
+**KUYRUK (5):**
+- Q-208: PR #1109 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-209: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-210: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-211: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-212: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K13 | Ana CI eksik test keşfi | mevcut #1149
+**AKTİF Q-213:** Yedi missing testin ana required CI/owner #1096'da gerçek çağrısını öncelikle kanıtla.
+**KUYRUK (5):**
+- Q-214: PR #1149 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-215: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-216: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-217: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-218: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K14 | PR teslim/çakışma | mevcut #1153
+**AKTİF Q-219:** 59 open PR, 14 changed SHA ve owner #1160 integration değişimleriyle çakışma/duplicate raporunu yenile.
+**KUYRUK (5):**
+- Q-220: PR #1153 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-221: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-222: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-223: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-224: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K15 | Cihaz/izin UX | mevcut #1110
+**AKTİF Q-225:** #1068 12/15 blob equality + 3 evolved; üç TODO ve 403→200 doğru durumunu doğrula.
+**KUYRUK (5):**
+- Q-226: PR #1110 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-227: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-228: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-229: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-230: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K16 | Windows taskkill | mevcut #1105
+**AKTİF Q-231:** Gerçek Work-PC process child PID kanıtı NO_GO; owner #1160'nın Windows path'lerine dokunma.
+**KUYRUK (5):**
+- Q-232: PR #1105 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-233: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-234: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-235: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-236: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K17 | Skills symlink güvenliği | mevcut #1150
+**AKTİF Q-237:** Validate→read symlink TOCTOU pozitif yeniden üretim security-fix değil; owner düzeltme/red.
+**KUYRUK (5):**
+- Q-238: PR #1150 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-239: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-240: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-241: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-242: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K18 | Transfer ACK/SHA | mevcut #1151
+**AKTİF Q-243:** #588 tek logical sender→receiver ACK+SHA; 256MiB+ fiziksel NOT_RUN, eski manuel PASS'ı koru.
+**KUYRUK (5):**
+- Q-244: PR #1151 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-245: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-246: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-247: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-248: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K19 | Transfer UX + TS derleme | mevcut #1147
+**AKTİF Q-249:** #1147 @556c294 TypeScript TS2532 düzeltmesinin exact SHA CI sonucu; kırmızıysa yalnız yeni neden.
+**KUYRUK (5):**
+- Q-250: PR #1147 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-251: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-252: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-253: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-254: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+### K20 | CI doğruluk/evidence | mevcut #1152
+**AKTİF Q-255:** 79/79 TAP PASS ama step exit1; sabit41 gate/CI sayımının negatifini ve owner #1096 fix'i ayır.
+**KUYRUK (5):**
+- Q-256: PR #1152 için güncel exact HEAD/changed-files ve owner #1096/#1068/#1160 ile gerçek örtüşmeyi doğrula.
+- Q-257: Yalnız kendi test/docs alanında gerçekten eksik bir negatif regresyonu düzelt; sırf görev dolsun diye test çoğaltma.
+- Q-258: Kaynağın tekil local test komutu ve GitHub job logundan explicit nested çağrı var mı belirt; green ≠ keşif.
+- Q-259: Önceki PR'lardaki benzersiz kod/test, Git blob, assertions ve aktif PR'da aktarım durumunu karşılaştır.
+- Q-260: Fiziksel browser/Windows/iki-PC/provider şartı için PASS, FAIL, NOT_RUN ayır; owner'a tek satırlık teslim kararı çıkar.
+
+## P009 SAHİPSİZ POOL Q-261…Q-280 (20 read-only sonuç işi)
+Claim önce 19 başka KNN kaydını kontrol et, çift claim küçük KNN'ye; hiçbir havuz işi yeni PR, owner source veya canlı test yetkisi vermez.
+- **Q-261:** #1160 üç yeşil workflow HEAD commit doğruluğu, child #1201 için yeniden devralma YOK.
+- **Q-262:** #1201 child CI ile branch filter skipped ayrımını doğrula.
+- **Q-263:** #1161 protected SYSTEM task visibility access-denied ≠ installed=false özlü owner raporu.
+- **Q-264:** #1164 elevated Windows stage gerçek fiziksel kabul şartları owner'a.
+- **Q-265:** #1068 15 source blobdan K01/K04 birebir, K02/K03 EVOLVED olanları tek matriste.
+- **Q-266:** #1147 TypeScript TS2532 197. satır orijinal kırmızı run ve yeni commit karşılaştırması.
+- **Q-267:** #1147 yeni 43422654887 run sonucunda bağımsız real nested test callsite.
+- **Q-268:** #1152 79/79 TAP vs exit1 owner min41 workflow farkı.
+- **Q-269:** #1145 macOS-agent-lifecycle job CANCELLED kökü ve branch HEAD.
+- **Q-270:** #1149 fork aux 4/4 vs required main coverage ayrımı.
+- **Q-271:** #1134→#1149 sekiz file ve benzersiz assertions değişimi.
+- **Q-272:** #1126→#1138 PNG validator testleri ve fixture blob eşitliği.
+- **Q-273:** #1099/#1127/#1137→#1145 gerçek içerik farkı.
+- **Q-274:** #1115/#1122/#1132→#1146 false-positive regression korunması.
+- **Q-275:** #1030 skill registry kaynak değişimleri owner security scope.
+- **Q-276:** #588 HTTP413 ingress katmanı UNKNOWN, paket/buffer sınırı owner'a.
+- **Q-277:** #540 Windows child PID postcondition gerçek cihaz yoksa NO_GO.
+- **Q-278:** #487 tahmini VPS/sunucu fiyatı gerçek invoice değil.
+- **Q-279:** #1006 59 PR current CI envanterini exact SHA ile yenile.
+- **Q-280:** #269 signer/release asset sha gerçek setup signing değildir.
+
+## Öncelik ve insan kapısı
+1. K19 #1147 yeni CI sonucu ve K09 #1145 macOS cancelled kökü; K20 #1152 sabit41, K13 #1149 missing nested test.
+2. 8 subset PR ikilisi önce SHA/blob/assertion semantiğiyle temizlenir. Ömer #1068 15 kaynak blob sahipliği açık; dört eski source PR ile kör merge yapılmaz.
+3. Ömer'den gereken: #1096 main ci.yml nested coverage, #1068 source RED çözümü, #1160 gerçek elevated/DPAPI/SQLite SYSTEM fiziksel kabul, **yazılı PR merge sırası/onayı**. Onur sadece 20 sekmeyi V002 mesajıyla çalıştırır ve Ömer'e bu 4 maddelik kapıyı iletir.
+
+## P008 eski kayıt (tarihsel, artık görev emri DEĞİL)
+
 # NEXOWIRE EKİP PANOSU — P008
 Tarih: 2026-11-09 (Europe/Istanbul) | PROTOKOL V006 | 59 açık PR teslim/doğrulama
 
