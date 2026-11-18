@@ -107,7 +107,7 @@
 **Bağlam:** Açık #1142/#1116; #1142 beş yolun beşi #1160'da.
 **AKTİF N-335:** #1142'nin 5 source blob'unu #1160 ile ve gerçek screenshot artefaktı gereksinimiyle karşılaştır; sentetik yeniden yazmayı durdur.
 **KUYRUK (5):**
-- **N-336:** #1116'da owner branch'ine taşınmayan gerçekten benzersiz source/capture testi var mı sapt a
+- **N-336:** #1116'da owner branch'ine taşınmayan gerçekten benzersiz source/capture testi var mı belirle
 - **N-337:** Hosted browser-live job ile persisted PNG artefaktı arasındaki farkı run/artifact ID ile kanıtla
 - **N-338:** 320/375/768px keyboard/viewport kabulü gerçek Chromium olmadan PASS yazma
 - **N-339:** #1142 exact HEAD success olsa da nested suite çağrısını doğrula
