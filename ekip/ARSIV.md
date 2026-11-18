@@ -1,3 +1,16 @@
+# ARŞİV — A009 | 18 Kasım 2026
+
+## P009 iki-iş kontrolünün kapanışı
+- P009 immutable yönetim commit [8d42d036](https://github.com/SinsiVinci/Nexowire-fork/commit/8d42d036e4d7e333f50c101cd57433ba2d520869); sonraki gözlenen ekip HEAD `f2cd938142b06bb65c68c38f965b8b834677549f`: **25 ekip commit, 19 değişen KNN (K02–K20), K01 değişmedi**. P009'un 120 QA slotu = source teslim veya ürün % değil. K01 P008'dedir. Durum kayıtları korunuyor.
+- 59 açık SinsiVinci PR 16 Kasım sonrası **39 açık / 20 kapanmış-unmerged**. #1068 ve #1096 owner source da closed-unmerged; #1160 owner integration Draft, main'e merge edilmedi. Source port örnekleri owner PR comments #1068, #1149, #1147, #1151, #1138, #1108. Kanıtı olmayan eşdeğerlik yazılmadı.
+- K05/#1146, K10/#1142, K11/#1148, K13/#1134, K14/#1153, K17/#1150 ve K18/#1139 owner #1160 changed path listelerinde; yalnız #1148 ve #1139 2/2, #1142 seçilen 2/2 byte-identical doğrulandı, #1150 bir exact/bir evolved. K01/K04 source owner #1068→#1160; geriye kalan bağımsız testlerde owner kabulü bekler.
+- #1205 yeni, kanıtlı CI coverage: owner #1160 exact HEAD 10420aa6399cd8c9ae3a2360132e7007656898b4, 649 tracked TS dosyası; legacy shell glob 42, default-omitted 607; root smoke/discovery/required beş workflow SUCCESS fakat tüm 649 testi PASS olarak okumayın.
+- **Bu ŞEF kontrolünde** upstream ana dal 0 merge; kod/testte yeni PR/issue kapatma/owner kaynak değişikliği yapılmadı. 39 PR'dan 33 genel CI success, 4 fail, 2 zero-job. Son yayımlanan v1.0.8; v1.0.9-exp.0 integration branch preview, latest yayın değil.
+- P010/S010/V007, tarihsel P009 görev listesini aktif metinden ayırdı. Tam 39 PR kanıt listesi `ekip/PR_DENETIM_20261118.md`. Biten yol kanıtı ve fiziksel NOT_RUN ayrı.
+
+---
+## Önceki A008 ve daha eski arşiv (tarihsel)
+
 # ARŞİV — A008 | 13 Kasım 2026
 
 **P008'den beri 20 commit / 20 değişmiş KNN kaydı** (P008 commit d4f865af... baz, gözlenen ekip HEAD 1bfe59d552f5bd3f5a5b359a4660f2a7122e1ae1). Çalışmaların kanıtı güncel KNN'nin en üst P008 bölümleri ve açık mevcut PR'larıdır. 14 PR HEAD changed, 0 upstream main merge. Bu 20 commit gerçek yeni kullanıcı özelliği olarak sayılmaz. Başka ajan P008 R görevlerini tamamladığını yazsa da physical/hosted kabul ayrıca açık.
