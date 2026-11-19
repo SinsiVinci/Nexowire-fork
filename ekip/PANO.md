@@ -2,7 +2,7 @@
 
 **ACTIVE policy:** Ömer'in 19 Kasım TXT talimatı kabul. P010 [immutable](https://github.com/SinsiVinci/Nexowire-fork/blob/9869f29270278d8e8e07ea4042b7793917bce164/ekip/PANO.md) tarihsel. Eski KNN dosyaları P007/P008/P009'da kaldı; ilk mesajda P011/V008 oku, K01 öncelikli.
 
-**Owner #1160:** `151c6a89a493ca72906d39262456d72367cb6fa0` Draft, 319 changed path, **5/6 workflow success**, [General CI 44512743805](https://github.com/Naveax/Nexowire/actions/runs/44512743805) son kontrolde IN_PROGRESS. **#1228:** `4802faa06edca1f531a52cac56476d6b8573df91` ayrı Draft, 33 portable/184 PASS Node22 ve Node24; [CI 44513480838](https://github.com/Naveax/Nexowire/actions/runs/44513480838) IN_PROGRESS. İkisinin de main merge/release/physical kabulü YOK. Main `52d452f717d891eeaf4c2b9aff3c6e1ea68369b0` değişmedi.
+**Owner #1160:** `151c6a89a493ca72906d39262456d72367cb6fa0` Draft, 319 changed path, **6/6 workflow SUCCESS**, [General CI 44512743805](https://github.com/Naveax/Nexowire/actions/runs/44512743805) ve Release Readiness 44512743817 tamamlandı/başarılı. **#1228:** `4802faa06edca1f531a52cac56476d6b8573df91` ayrı Draft, 33 portable/184 PASS Node22 ve Node24; [CI 44513480838](https://github.com/Naveax/Nexowire/actions/runs/44513480838) SUCCESS; aynı SHA için daha yeni CI 44517783263 ve Release 44517783233 IN_PROGRESS. İkisinin de main merge/release/physical kabulü YOK. Main `52d452f717d891eeaf4c2b9aff3c6e1ea68369b0` değişmedi.
 
 **#1205:** 650 TS, eski glob 43 seçti/607 bu komutta atlandı. Diğer CI workflow yürütmelerini dosya bazında birleştirmeden 607 NOT_RUN veya 650 PASS deme.
 
