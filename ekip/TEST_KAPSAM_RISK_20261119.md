@@ -1,0 +1,7 @@
+# #1205 DOSYA BAZLI KAPSAM VE RİSK — 19 Kasım 2026
+
+Owner #1160 exact `151c6a89a493ca72906d39262456d72367cb6fa0`; [Test Discovery 44512744226](https://github.com/Naveax/Nexowire/actions/runs/44512744226) **650 tracked .test.ts**: 574 root, 43 immediate directory, 33 deeper. Eski `npm test` shell glob 43 seçer, 607 bu komutta omitted. Bu 607 başka joblarda hiç çalışmadı demek değildir. #1228 exact `4802faa06edca1f531a52cac56476d6b8573df91` [Portable 44513480730](https://github.com/Naveax/Nexowire/actions/runs/44513480730) 33 dosya/184 PASS Node22 ve Node24; **617 yalnız portable lane NOT_RUN**. #1228 henüz parent'a alınmadı; full 650 PASS iddiası yasak.
+
+**Risk sırası:** (1) P0 CORE/Broker/CAS, SQLite/WAL/journal/rollback, Windows SYSTEM/DPAPI/prelogin; (2) P1 Cloudflare/Agent-Hub bağlantı, gerçek iki cihaz, >256MiB ACK/SHA256; (3) P1 signed installer/release, gerçek clean-user ve reboot; (4) P1 Skill path security symlink/TOCTOU (güncel owner realpath/lstat/opened handle korunuyor, gerçek RED yeniden test edilmeli); (5) P2 UI 401/403, mobile/a11y, S5 provider cost/24h. Öncelik ürün riski, kanıtlanmış NOT_RUN toplamı değil.
+
+**K13 teslim algoritması:** Her exact SHA için workflow+job logdan `path, test_sha, run_id, job_id, platform, TAP pass/fail/skip/todo` çıkar; owner Git tree manifest ile eşleştir, tekrarları deduplicate et, çalıştırıldığı kanıtlanmayanı `EXECUTION_UNKNOWN` yaz. 43 old glob + portable 33'ü körlemesine toplama. Owner main CI ve fiziksel host erişimi korunur. K20 bağımsız yanlış-PASS denetçisi.
