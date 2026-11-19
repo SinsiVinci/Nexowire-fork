@@ -1,3 +1,13 @@
+# NEXOWIRE PROTOKOLÜ V010 | 19 Kasım 2026
+
+1. **Güncel yönetim:** P013 W581–W700 20 x (1 aktif + 5 queue), havuz W701–724. P012 W421–580 tarihsel/superseded, otomatik bitti değildir. KNN kendi bölümünü ve kendi durum dosyasını her mesajda oku; değişmişse protokolü tekrar oku. Numaran yoksa yalnız NUMARAM KAÇ?. KNN sadece kendi KNN dosyasını yazar; ŞEF yalnız merkezi dosyaları.
+2. **Verim kuralı:** Yeni ürün SOURCE_RED, dar fix, gerçek test/CI, owner handoff; aynı SHA'da aynı kanıtı tekrar commit etmek ilerleme değildir. NO_DELTA varsa tek kısa durum notuyla aktif→sıradaki kuyruk→sahipsiz güvenli havuz geç. Havuz öncesi diğer 19 KNN'de W claim ara; kendi dosyana koddan önce ÜSTLENDİM W-xxx commit et, iki claim varsa küçük K numarası. Başkasının dosya/sahipliğine girme.
+3. **Kanıt:** source SHA, PR SHA, gerçek test komutu ve exit/TAP, GitHub exact run+attempt+job+test path, SKIP/TODO/CANCELLED ve fiziksel NOT_RUN ayrıdır. #1205 güncel 651 TypeScript; default glob sadece 44, portable per-file 34 PASS ve başka explicit paths var, 651 PASS iddia edilmez. Özellikle yalnız line/source path okumak test EXECUTED demek değildir.
+4. **Sınır:** Ömer 19 Kasım tekil yazılı izin vermeden yeni PR, Naveax/main merge, PR/issue close, force push, release/deploy/tag YASAK; write yetkisi bu kuralı değiştirmez. Kendi halen OPEN QA/docs PR'ında kanıtlı gerçek RED ve küçük test/fix serbest, closed PR asla değiştirilmez. CORE/Broker/auth/SQLite/WAL/native/SYSTEM/DPAPI/Cloudflare/payment/secret/protected .github/workflows/ci.yml ve Work-PC/release owner-only. Başka alan belirsizse korumalı say.
+5. **Gerçek kabul:** #1161 owner SYSTEM Hub/SQLite cutover, #588 >256MiB gerçek iki cihaz, #485 kurulum/rollback, #487 provider 24h PHYSICAL_NOT_RUN/NO-GO. Hosted Windows runner owner Work-PC değildir; dummy browser fixture gerçek screenshot/NVDA değildir. Ömer'in #1160 ve #1235 protected branch'i ile çakışma yapma.
+6. **Adım:** Aktif→kuyruk→havuz, bağımlılık engelli ise sıradaki, sadece gerçek delta olduğunda kod dalına commit + KNN güncelle; KNN formatı adım, pano sürümü, yapılan işlem, commit/test/CI linki, şimdi, engel, öneri. Sohbet cevabı 3 satırı geçmez.
+
+## V009 tarihsel metni
 # NEXOWIRE PROTOKOLÜ V009 | 19 Kasım 2026
 
 Ömer 19 Kasım owner talimatı ve güncel P012 bağlayıcıdır. Owner #1160 exact current HEAD `81028bf643e3dc3cb5b0ab3f9c609c239732a413`; #1228/#1233 yalnız entegrasyon dalına merged, main değildir. Önceki [V007](https://github.com/SinsiVinci/Nexowire-fork/blob/9869f29270278d8e8e07ea4042b7793917bce164/ekip/PROTOKOL.md) güvenlik sınırları korunur, eski SHA ve sayılar tarihsel.
@@ -9,3 +19,4 @@
 5. #1205 owner #1160 650 tracked, eski glob 43 selected/607 omitted; current #1160 altı workflow başarıyla yürütüldü, portable Node22/24 ve diğer explicit CI testlerini ayrıca dosya-bazlı birleştir. Bütün workflow path+run+SHA logları birleşmeden global kapsam veya fail oranı iddia etme. Test kaynak SHA'sını yürütme öncesinde sabitle, CI run tekrar dispatch etme.
 6. #1161 SYSTEM Hub protected state root, DPAPI/Broker, SQLite cutover, reboot/pre-login, #588 iki cihaz transfer, #487 provider 24h, #485 installer release fiziksel NO-GO. Bu işlemler sadece owner yetkili fiziksel yürütücü tarafından yapılır.
 7. Sadece kendi açık PR'ın güvenli test/docs dosyasında **kanıtlı gerçek RED** varsa minimum düzeltme+local test+CI; genelleştirilmiş sonsuz test/QA raporu üretme. Asıl rapor KNN dosyasında, sohbet 3 satır. ŞEF merkezi PANO/SEF/ARSIV ve #1006 yönetir.
+

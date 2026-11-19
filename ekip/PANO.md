@@ -1,249 +1,228 @@
-# ŞEF PANO P012 | 19 Kasım 2026
+# ŞEF PANO P013 | 19 Kasım 2026
 
-**GÜNCEL ANA HAT:** Naveax/`main` [`52d452f7`](https://github.com/Naveax/Nexowire/commit/52d452f717d891eeaf4c2b9aff3c6e1ea68369b0) (güncel branch API ile doğrulandı, Ömer'in entegrasyon dalı main değildir). Owner [#1160](https://github.com/Naveax/Nexowire/pull/1160) OPEN/DRAFT, exact HEAD [`81028bf643e3dc3cb5b0ab3f9c609c239732a413`](https://github.com/Naveax/Nexowire/commit/81028bf643e3dc3cb5b0ab3f9c609c239732a413), 330 changed paths. Child [#1228](https://github.com/Naveax/Nexowire/pull/1228) ve [#1233](https://github.com/Naveax/Nexowire/pull/1233) **MERGED yalnız entegrasyon dalına**. Ana dala teslim = 0.
+**Durum:** [Naveax main](https://github.com/Naveax/Nexowire/commit/52d452f717d891eeaf4c2b9aff3c6e1ea68369b0) 52d452f717d891eeaf4c2b9aff3c6e1ea68369b0 değişmedi. Owner [#1160](https://github.com/Naveax/Nexowire/pull/1160) 81028bf643e3dc3cb5b0ab3f9c609c239732a413 OPEN/DRAFT, main'e MERGED DEĞİL. Yeni owner [#1235](https://github.com/Naveax/Nexowire/pull/1235) Scale Worker overflow OPEN/DRAFT, bu alana müdahale yok.
 
-**CI / GERÇEK KAPSAM:** #1160 exact `81028bf6` commitinde altı workflow SUCCESS: [CI 44576357852](https://github.com/Naveax/Nexowire/actions/runs/44576357852), [Portable Root 44576357848](https://github.com/Naveax/Nexowire/actions/runs/44576357848), [Inventory 44576357843](https://github.com/Naveax/Nexowire/actions/runs/44576357843), [Release 44576357671](https://github.com/Naveax/Nexowire/actions/runs/44576357671), [AI03 44576357780](https://github.com/Naveax/Nexowire/actions/runs/44576357780), [AI04 44576357908](https://github.com/Naveax/Nexowire/actions/runs/44576357908). CI joblarında Node22/24 `npm run check`, seçili UI K02/K03, admin HTTP 401/403/503 ve portable-root test adımları başarıyla *yürütülmüş*. Inventory jobu test yolu keşfidir, **650 testin çalışması değildir**; #1205 650 tracked/43 default/607 bu komutta atlanan hesabı için explicit workflow path/job/source-SHA birleştirme şart. `Physical Windows owner Work-PC cutover / two-device authenticated transfer / provider 24h / installer rollback` = NOT_RUN/NO-GO.
+**İlerleme ve delil:** P012'den beri 69 ekip kayıt commit'i / K01–K20 20 dosya güncel; 69 ürün düzeltmesi değildir. K20 source audit 2 bugfix, K04 admin concurrency RED, K09 invalid issue RED fix, K19 false-CI fix, K13 651 tracked TS SHA envanteri. Yalnız K13 34 portable per-file PASS receipt ve yedi önceden eksik delegated testin Node22/24 required 409 TAP yürütmesini kanıtladı. #1205 default glob 44/651 seçti; 607 o komutta seçilmedi. 651 PASS demek YANLIŞ. İşçi değerlendirme: ekip/DEGERLENDIRME_20261119.md.
 
-**GERÇEK İLERLEME:** kaynak entegrasyonu + CI ileri gitti, stable release veya ürün fiziksel kabulü henüz yok. Kanıtlanabilir uçtan uca ürün tamamlanma yüzdesi/tahmini kalan süre hesaplanamaz. Kritik yol: #1205 test kapsama birleştirmesi (K13), eski 39 PR/owner port kararları (K14), #1161 protected SYSTEM/DPAPI/SQLite ve #588 iki PC fiziksel kabul (yalnız owner). [PR kanıt matrisi](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PR_SINIFLANDIRMA_20261119.md) P011/`81028bf6` tarihsel; **güncel `81028bf6` için yeniden hesaplanacak**.
+**Kritik yol:** Owner UI source RED çözümü → testlerin SHA/run/job/TAP dosya bazında doğrulanması → yalnız owner gerçek Windows/SYSTEM/SQLite/DPAPI ve #588 2-PC kabulü → main/release. Güvenilir ürün tamamlanma yüzdesi veya kalan gün hesabı yok. [CI 44576357852](https://github.com/Naveax/Nexowire/actions/runs/44576357852) owner exact SHA için SUCCESS, bu Work-PC fiziksel kabulü değildir. #1161 ve #588 gerçek cihaz NOT_RUN, #487 24h provider fatura UNKNOWN, #485 gerçek installer rollback NOT_RUN.
 
-**SAHİPLİK / DEĞİŞİKLİKLER:** K01–K20 kayıtlarında P012/V009 teslimi henüz yok (okunmuş en son P007–P009). Yeni biten KNN işi kanıtlanmadığından sahte ARŞİV tamamlaması yapılmadı. Owner'ın #1230, #1232, #1234 child port kaynakları `81028bf6` zincirinde olabilir; kapalı/unmerged child PR'ı kaynak eksik veya main'e girdi olarak yorumlama. #1068, #1096, #1103, #1138, #1151 kapalı/unmerged; bunların HEAD/başlıkları üzerinden yeni kod yazılmadan owner source diff'i okunacak. #1101 ve #1114 halen OPEN/DRAFT. Her KNN için aşağıdaki 1 aktif + 5 kuyruk geçerli; eskisi superseded. İşler yeni owner HEAD'e göre sadece gerçekten benzersiz RED ve izinli test/docs kapsamıyla ilerler; CORE/Broker/auth/SQLite/protected CI dosyalarına dokunulmaz.
+**Yönetim:** P012 W421–W580 artık tarihsel/superseded; hepsini BİTTİ sayma. P013 20 görevli × (1 AKTİF + 5 KUYRUK) W581–700 ve sahipsiz W701–724. Aynı SHA üzerinde aynı kanıtı her mesajda tekrar raporlama: yalnız yeni RED, fix, code commit, CI sonucu değişirse KNN güncelle. Kendi alanı harici dosyaya ve protected owner core'a dokunma. Başka kölenin işini üstlenmeden önce 19 KNN'yi tarayıp sahipsiz claim'i kayıt dosyana yaz.
 
-**GÜVENLİ ENTEGRASYON KARARI:** `Naveax/main` yazma yetkisi mevcut (SinsiVinci=write) ama owner 19 Kasım açık kuralı tekil yazılı onay yokken yeni PR/main merge/PR close/release/force işini yasaklıyor. Bu tur yeni PR/ana dal birleştirmesi yapılmadı; KNN'lerin mevcut açık QA PR'larında gerçekten test edilmiş güvenli çalışmalara devam etmesi serbest. Ömer beklenerek kapasite durdurulmaz.
+**Yetki:** SinsiVinci write izni var, ancak Ömer'in tekil yazılı izin kuralı nedeniyle yeni PR, PR/issue close, main merge, force push, release/deploy/tag YOK. CORE/Broker/authorization/SQLite/native/SYSTEM/DPAPI/Cloudflare/payment/secret/protected CI owner-only. Kendi OPEN QA/docs PR'ında gerçek RED varsa minimum fix + test serbest, owner-ported/kapalı PR değişmez.
 
-### K01 | 429 Retry-After / bağlantı
-**Aktif W-421:** K01 P012: açık #1114 429 Retry-After, 401/403 gizleme negatiflerini owner #1160 yeni 81028bf6 web source ve gerçek CI callsite ile eşleştir; salt test/docs
-**Kuyruk (5):**
-- W-422: #1114 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-423: Kendi 429 retry-after / bağlantı alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-424: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-425: Bağlantı UI ve pairing fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-426: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+## 20 işçinin optimize görevleri
 
-### K02 | mobile CSS / gerçek PNG
-**Aktif W-427:** K02 P012: #1234 owner child kapalı/unmerged ama 81028bf6 zincirinde responsive port; açık #1101 QA ile aynı testi iki kez yazma; yeni RED varsa fixture
-**Kuyruk (5):**
-- W-428: #1101 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-429: Kendi mobile css / gerçek png alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-430: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-431: Mobil/klavye/zoom fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-432: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K01 | Bağlantı ve pairing
+**AKTİF W-581:** #1114: owner 403-null ve 200-null gerçek kaynak RED negatiflerini tek çalışır QA testinde doğrula
+**KUYRUK (5):**
+- W-582: 401/403/429/503 hata durumlarını ayrı testle
+- W-583: JSON null, boş object ve geçerli yanıtı birbirinden ayır
+- W-584: Gizli error metninin UI'ye taşınmasını fail closed test et
+- W-585: Açık PR test dosyasında dar minimum düzeltme ve exit kodu kaydet
+- W-586: Owner için web/connect.js satır/bug kanıtını teslim et
 
-### K03 | Bridge requestId / dashboard
-**Aktif W-433:** K03 P012: #1103 kapalı/unmerged, #1230/#1232 owner child port edildi; source Bridge requestId/UNKNOWN regresyonlarının CI'de hangi dosya olarak koştuğunu doğrula
-**Kuyruk (5):**
-- W-434: #1103 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-435: Kendi bridge requestid / dashboard alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-436: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-437: Bridge ekran durumu fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-438: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K02 | Mobil CSS ve PNG
+**AKTİF W-587:** #1101: tekil gerçek mobil overflow RED bul, port edilmiş testi kopyalama
+**KUYRUK (5):**
+- W-588: 320/375px Unicode pill sarılmasını test et
+- W-589: Boş IDAT/CRC negatifini sahte PNG kabulünden ayır
+- W-590: Gerçek browser screenshot artefaktı yoksa NOT_RUN de
+- W-591: Zoom ve forced-colors odak davranışını izole test et
+- W-592: CI'da yeni testin explicit çağrısını göster
 
-### K04 | admin 401/403 / stale state
-**Aktif W-439:** K04 P012: #1160 Node22/24 CI admin 401/403/503 explicit success; eşit kaynak SHA'da 403→200 stale-state negatifini ve fiziksel olmayan kabulü ayır
-**Kuyruk (5):**
-- W-440: #1104 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-441: Kendi admin 401/403 / stale state alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-442: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-443: Gerçek admin/Windows fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-444: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K03 | Dashboard/Bridge
+**AKTİF W-593:** #1230/#1232 portundan sonra kalan farklı Bridge pending/UNKNOWN RED ara
+**KUYRUK (5):**
+- W-594: Whitespace-only requestId yanlış ilerleme negatifini test et
+- W-595: Farklı cihaz ACK ile yanlış applied iddiasını reddet
+- W-596: Console grant ekranında offline/live farkını test et
+- W-597: Açık K03 test dalı varsa only new RED fixture ekle
+- W-598: Yeni RED yoksa NO_DELTA, havuzdan farklı iş al
 
-### K05 | A11y assertion/owner port
-**Aktif W-445:** K05 P012: #1146 önceki 9 exact/4 evolved assertion, yeni owner HEAD 81028bf6 ile gerçek negatif kapsama eşdeğerliği; NVDA ayrı
-**Kuyruk (5):**
-- W-446: #1146 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-447: Kendi a11y assertion/owner port alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-448: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-449: NVDA/keyboard/zoom fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-450: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K04 | Admin güvenilirliği
+**AKTİF W-599:** #1104: 200/403 eşzamanlı geç yanıt yarışı owner source 0/2 RED'i patch-ready kanıtla
+**KUYRUK (5):**
+- W-600: Eski 403 ve yeni 200 ters sıra regresyonu test et
+- W-601: 401/403/503 sahte body/statusText redaksiyon negatifini koru
+- W-602: Admin concurrency iki yeni testin CI 44609496987 gerçek çağrısını doğrula
+- W-603: Owner web/admin.js için last-request-wins minimal değişiklik taslağı ver
+- W-604: KPI/aria-busy ve gerçek browser kabulünü ayrı fişle
 
-### K06 | installer sürüm/sha
-**Aktif W-451:** K06 P012: #1231 PowerShell5.1 paketleme child kapalı/unmerged, owner 81028bf6 source karşılaştır; v1.0.8 yayın ile v1.0.9 adayını ve Windows fiziksel NOT_RUN'ı ayır
-**Kuyruk (5):**
-- W-452: kapalı #1108/#1129 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-453: Kendi installer sürüm/sha alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-454: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-455: Gerçek Windows kurulum/rollback fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-456: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K05 | Erişilebilirlik
+**AKTİF W-605:** İç içe install-content/copy-status aria-live bulgusunu kullanıcıya etkili eşsiz testle doğrula
+**KUYRUK (5):**
+- W-606: K01 ile dosya çakışmadan canlı bölge negatif fixture oluştur
+- W-607: K05 45/45 hosted testinin düzeltme değil algılama olduğunu ayır
+- W-608: Dört evolved assertion içinde eksik yeni negatif ara
+- W-609: Keyboard focus ve zoom durumunu izole DOM ile ölç
+- W-610: Gerçek NVDA olmadığı sürece erişilebilirlik kabulü verme
 
-### K07 | self-host/CURRENT_USER vs SYSTEM
-**Aktif W-457:** K07 P012: self-host CURRENT_USER/SYSTEM/DPAPI belgeleri owner 81028bf6 ile kıyasla; canlı cutover/dosya erişimi yasak
-**Kuyruk (5):**
-- W-458: #1100 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-459: Kendi self-host/current_user vs system alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-460: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-461: Reboot/DPAPI kurulum fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-462: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K06 | Kurulum ve sürüm
+**AKTİF W-611:** #1231 aday ile v1.0.8 yayın installer SHA/PowerShell 5.1 ayrımında belge RED ara
+**KUYRUK (5):**
+- W-612: Resmi kurulum URL ve pin sürümünü karşılaştır
+- W-613: Yanlış SHA indirme yönlendirmesini negatif testle yakala
+- W-614: Hatalı ZIP çıkarma sırası için safe belge fixture oluştur
+- W-615: Node 22/24 docs testini exact HEAD'e bağla
+- W-616: Gerçek temiz Windows kurulumunu PHYSICAL_NOT_RUN tut
 
-### K08 | MCP denied/UNKNOWN
-**Aktif W-463:** K08 P012: MCP denial/UNKNOWN sahibi salt belge/test, #1035 TODO/0-job ve yeni owner #1160 CI source kapsamını ayır
-**Kuyruk (5):**
-- W-464: #1106 ve #1035 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-465: Kendi mcp denied/unknown alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-466: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-467: Canlı MCP/Cloudflare fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-468: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K07 | Self-host belgeleri
+**AKTİF W-617:** #1100 W572 CurrentUser vs SYSTEM uyarısını gerçek docs/test kabulüne bağla
+**KUYRUK (5):**
+- W-618: SYSTEM LocalMachine DPAPI yanlış eşitlik önerisini negatif testle reddet
+- W-619: 32/32 hosted docs TAP'i yeni PR exact SHA'da kontrol et
+- W-620: Kritik SQLite migration'ı kullanıcı docsundan ayrı tut
+- W-621: Eksik tekil self-host geri dönüş senaryosunu fixture ile test et
+- W-622: Yeni bug yoksa kopya rapor üretme, havuzdan işe geç
 
-### K09 | roadmap/issue CI kanıtı
-**Aktif W-469:** K09 P012: #1145 önceki 12 exact/2 absent kanıtı yeni 81028bf6 source'da test et; issue lifecycle event/dates negatiflerini doğrula
-**Kuyruk (5):**
-- W-470: #1145 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-471: Kendi roadmap/issue ci kanıtı alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-472: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-473: Yayımlı sürüm iddiası fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-474: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K08 | MCP redaksiyon
+**AKTİF W-623:** #1106 denial/cookie origin kaynak RED'ini protected koda dokunmadan izole test et
+**KUYRUK (5):**
+- W-624: 403 izinsiz ile ağ kesintisi yanlış sınıfını ayır
+- W-625: #1035 zero-job/test.todo'yu PASS yazma
+- W-626: Yanıt gövdesi gizli canary sızıntısını offline test et
+- W-627: İzinli K08 açık PR varsa dar fixture düzelt
+- W-628: Owner'a kaynak SHA/negatif ve CI boşluğunu teslim et
 
-### K10 | browser/screenshot
-**Aktif W-475:** K10 P012: browser screenshot negative + gerçek PNG kanıtını #1160 yeni UI/CI adımlarıyla karşılaştır; fiziksel browser kabul ayrı
-**Kuyruk (5):**
-- W-476: #1142 ve #1116 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-477: Kendi browser/screenshot alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-478: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-479: Gerçek browser/NVDA fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-480: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K09 | Issue doğruluk
+**AKTİF W-629:** #1145 invalid issue-ID kaynak fix'i owner exact kaynakla karşılaştır ve eksik negatifini teslim et
+**KUYRUK (5):**
+- W-630: Geçersiz -7 ve uygunsuz timestamp testlerini koru
+- W-631: Yeni ID fix'i üzerinde yerel 7/7 testi tekrar bağla
+- W-632: CI 44605826854 success ile nested testin seçilmesini ayır
+- W-633: Sahte issue closed durumunun yeni bir mutantını test et
+- W-634: Owner'a iki dosyalık minimal port önerisi oluştur
 
-### K11 | S5 fiyat/UNKNOWN
-**Aktif W-481:** K11 P012: S5 fiyat/UNKNOWN owner-exact QA portundan sonra tekrar üretilebilen gerçek RED ara; yoksa NO_DELTA kanıtla, yeni kod yazma
-**Kuyruk (5):**
-- W-482: #1148 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-483: Kendi s5 fiyat/unknown alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-484: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-485: Provider fatura/24h fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-486: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K10 | Browser QA güvenliği
+**AKTİF W-635:** #1116 owner browser-visual-smoke file:// dış root izin RED'ini negatif fixture ile doğrula
+**KUYRUK (5):**
+- W-636: Raw error.message CANARY sızıntısını ayrı test et
+- W-637: Realpath symlink dış kaçışı src değiştirmeden test et
+- W-638: Owner-ported K10 suite ile yeni benzersiz testi ayır
+- W-639: Gerçek Chromium PNG sonucu yoksa SCREENSHOT_NOT_RUN
+- W-640: Owner için iki bug'ın dar fix + test planını üret
 
-### K12 | S5 loopback cleanup
-**Aktif W-487:** K12 P012: S5 loopback teardown AbortSignal benzersiz benchmark/test adaylarını 81028bf6'da kıyasla; provider 24h ayrı
-**Kuyruk (5):**
-- W-488: #1109 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-489: Kendi s5 loopback cleanup alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-490: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-491: Gerçek provider soak fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-492: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K11 | S5 maliyet
+**AKTİF W-641:** #487 provider fatura UNKNOWN ile sentetik kapasite başarı iddiası farklılığında yeni RED ara
+**KUYRUK (5):**
+- W-642: Cost-report exact port kodunu tekrar üretme
+- W-643: Subcent/CSV sahte sıfır kuralını fixture ile denetle
+- W-644: 24h soak gerçek receipt yoksa PASS verme
+- W-645: Node22/24 exact unit test farkı varsa düzelt
+- W-646: Benzersiz bulgu yoksa havuzdan farklı S5 işine geç
 
-### K13 | CI file-level union
-**Aktif W-493:** K13 P012: #1205 650 tracked/43 default/607 bu komutta yok; #1160 exact altı workflow için file-level union/Node22+24 explicit files/NOT_RUN receipt hesapla
-**Kuyruk (5):**
-- W-494: #1134/#1205 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-495: Kendi ci file-level union alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-496: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-497: CI içindeki yürütme kanıtı fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-498: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K12 | S5 loopback
+**AKTİF W-647:** #1109 AbortSignal/teardown 4 unported testi gerçek Node ortamında çalıştır
+**KUYRUK (5):**
+- W-648: ws/tsx modül eksikliğini mevcut hosted ortamla aş
+- W-649: Late socket ACK/reconnect yanlış tamamlandı negatifini sınama
+- W-650: İki benchmark evolved dosyanın gerçek semantik farkını ayır
+- W-651: Diverged 4 ahead/2 behind riski owner'a kanıtla
+- W-652: Gerçek provider 24h ve fiziksel cihazı NOT_RUN tut
 
-### K14 | 39 PR gerçek sınıflandırma
-**Aktif W-499:** K14 P012: eski 39 PR 5/9/6/19 P011 matrisi eskidi; #1160 81028bf6 ve yeni kapanmış PR'lar üzerinden open/closed/ported/unique kaynak+CI kararını güncelle
-**Kuyruk (5):**
-- W-500: #1153 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-501: Kendi 39 pr gerçek sınıflandırma alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-502: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-503: Owner close/merge onayı fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-504: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K13 | CI kapsamı
+**AKTİF W-653:** #1205: 651 tracked dosyanın 34 file receipt ve 439 kanıtsız dosya durumunu makine-okunur kanıta dönüştür
+**KUYRUK (5):**
+- W-654: Yedi eski eksik testin Node22/24 409 TAP'ini tekrar iş yazmadan kapat
+- W-655: CLI'da anılan 152 dosyayı TAP receipt yokken PASS sayma
+- W-656: Gerçek per-file execution proof için eksik alanları modelle
+- W-657: K20 foreign-run audit alanıyla çakışmadan kendi CI testini düzelt
+- W-658: Güncel owner SHA için 651 satırlık rapor yerine kısa actionable özet sun
 
-### K15 | yanlış cihaz/yetki
-**Aktif W-505:** K15 P012: açık #1110 cihaz yanlış-seçim/403 sekiz absent QA kaynak dosyasını owner 81028bf6 UI ile karşılaştır; gerçek iki cihaz kabulü yok
-**Kuyruk (5):**
-- W-506: #1110 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-507: Kendi yanlış cihaz/yetki alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-508: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-509: İki gerçek cihaz fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-510: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K14 | PR entegrasyon
+**AKTİF W-659:** 38 açık SinsiVinci PR için owner exact/evolved/absent kararlarından gerçek benzersiz 5 adayı seç
+**KUYRUK (5):**
+- W-660: Kapalı #1103 owner-exact 2 yolunu tekrar iş listesine sokma
+- W-661: 6 CI_REPAIR PR için gerçek job sırasını kontrol et
+- W-662: 18 path-only adaydan semantik duplicate olanları ele
+- W-663: En güvenli üç test/docs PR için kanıtlı owner review paketi hazırla
+- W-664: Owner açık izni yokken main merge/PR close yapma
 
-### K16 | Windows taskkill / SYSTEM
-**Aktif W-511:** K16 P012: Windows taskkill/SYSTEM #1121 negatiflerinin #1160 CI gerçek runner kapsamını denetle; protected state/donanım yetkisini devralma
-**Kuyruk (5):**
-- W-512: #1121 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-513: Kendi windows taskkill / system alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-514: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-515: SYSTEM/DPAPI/SQLite fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-516: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K15 | Cihaz UX
+**AKTİF W-665:** #1110 gerçek owner HTTP403'ün offline diye sunulmasını kaynak/fixture ile RED kanıtla
+**KUYRUK (5):**
+- W-666: Stale 'Bağlı' label fixture'ını güncel 'Cihaz çevrimiçi' ile düzelt
+- W-667: 0 cihaz ile yanlış cihaz ayrımını negative test et
+- W-668: 23 V8 izole fixture'ın Node suite ile farkını kapat
+- W-669: Kendi açık #1110 test alanında dar commit varsa CI bağla
+- W-670: Gerçek 2-PC/grant testini PHYSICAL_NOT_RUN tut
 
-### K17 | Skill symlink/race
-**Aktif W-517:** K17 P012: skill symlink/realpath/açık handle testlerini yeni owner #1160 kaynakla karşılaştır; güvenlik runtime düzeltmesi owner'da
-**Kuyruk (5):**
-- W-518: #1150/#1030 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-519: Kendi skill symlink/race alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-520: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-521: OS gerçek symlink fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-522: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K16 | Windows testleri
+**AKTİF W-671:** #1121 owner'da absent 6 platform-status testinin benzersiz yanlış-yeşil vakasını kanıtla
+**KUYRUK (5):**
+- W-672: #1105 exact-ported 4 dosyayı tekrar yazma
+- W-673: Windows hosted taskkill child regression job'unu aynı SHA ile doğrula
+- W-674: Synthetic/real Work-PC PID sonucu ayrımını koru
+- W-675: K16 test-only yolunda mevcut PR'a dar negatif ekle
+- W-676: Owner'a test seçimi ve gerçek fiziksel kabul farkını teslim et
 
-### K18 | transfer + maliyet kanıtı
-**Aktif W-523:** K18 P012: #1139/#1119 transfer + maliyet negatiflerini 81028bf6 CI'da seçilmiş dosya olarak doğrula; sahte ACK yerine gerçek test kanıtı
-**Kuyruk (5):**
-- W-524: #1139/#1119/#1107 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-525: Kendi transfer + maliyet kanıtı alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-526: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-527: Gerçek 2-PC ACK fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-528: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K17 | Skill symlink QA
+**AKTİF W-677:** #1150 lstat/realpath owner korumasına rağmen kalan gerçek race bug RED varsa ispatla
+**KUYRUK (5):**
+- W-678: Path-swap handle identity negatifini sahte PASS'den ayır
+- W-679: Yeni case owner testinde zaten var mı exact blobla kontrol et
+- W-680: Linux/macOS izole filesystem testini mümkünse çalıştır
+- W-681: Windows reparse/SYSTEM güvenlik koduna dokunma
+- W-682: RED yoksa NO_DELTA ve skill metadata havuz işi al
 
-### K19 | dosya aktarımı >256 MiB
-**Aktif W-529:** K19 P012: 256MiB+ #588 receiver ACK/SHA test/CI source evidence ile gerçek iki cihaz NOT_RUN ayrımı; owner physical çalışmaya müdahale yok
-**Kuyruk (5):**
-- W-530: #1136, kapalı #1147 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-531: Kendi dosya aktarımı >256 mib alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-532: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-533: Gerçek iki-PC 256MiB+ fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-534: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K18 | Transfer metrik
+**AKTİF W-683:** #1119 bytes KB/KiB ve UNKNOWN owner absent negatifinin gerçek rapor etkisini test et
+**KUYRUK (5):**
+- W-684: #1107 evolved source ve absent QA arasındaki yeni farkı bul
+- W-685: #1139/#1151 owner exact testini tekrarlama
+- W-686: Sahte ACK ile gerçek receiver SHA'yı ayır
+- W-687: Kap 64MiB/256MiB farklılıklarını gerçek source kanıtla
+- W-688: Yeni unit yanlış-yeşil varsa izinli K18 test PR'ında düzelt
 
-### K20 | CI FAIL/0-job
-**Aktif W-535:** K20 P012: sabit41 gate FAIL (#1152/#1141/#1130/#1118) ile yeni #1160 81028bf6 CI yeşilini aynı test dosyası/same SHA diye birleştirme; exact yürütme makbuzu çıkar
-**Kuyruk (5):**
-- W-536: #1152/#1141/#1130/#1118/#1030/#1035 exact HEAD/changed-path/owner `81028bf643e3` source blob ve SHA eşdeğerliği çıkar.
-- W-537: Kendi ci fail/0-job alanında son #1160 source ile gerçek RED mi, owner-port mu? Kanıtlı negatif fixture bul; gereksiz test üretme.
-- W-538: Exact PR CI run+job'da kendi testin gerçekten seçilmiş mi, TAP exit ve SKIP/TODO ayrımını yaz.
-- W-539: CI exact run ve TAP fiziksel kanıtı yoksa PHYSICAL_NOT_RUN, çevrimdışı/local testten gerçek kabul çıkarma.
-- W-540: OWNER_PORTED / UNIQUE_FIX_ADAYI / CI_REPAIR / NO_DELTA kararını, etkileyen SHA ve owner'a gereken dar işlemle kendi KNN kaydına yaz.
+### K19 | Transfer/CI kanıtı
+**AKTİF W-689:** #1136 echo sahte test keşfi fix c6c3128 exact CI 44609222768 sonucunu kanıtla
+**KUYRUK (5):**
+- W-690: #588 ilk HTTP413 hatasının katmanını trace olmadan uydurma
+- W-691: 256MiB+ gerçek 2-PC tek gönderim NO-GO'yu koru
+- W-692: Yanlış yorum/echo komutunu gerçek CI sayan yeni parser mutantı ara
+- W-693: K18 byte unit dosyalarına dokunma
+- W-694: Mevcut #1136 PR'ında benzersiz RED testi ve owner inceleme fişi tut
 
-## Sahipsiz pool W-541..W-560
-- W-541: #1160 yeni altı workflow'un current exact SHA audit'i
-- W-542: #1228 33-file portable source SHA reviewed ledger
-- W-543: #1205 root 574 testten kaç dosya ayrı exact workflow'da gerçekten koştu
-- W-544: #1205 immediate 43, deep 33 için explicit proof listesi
-- W-545: #1161 protected state root ACL ve SQLite cutover NO-GO
-- W-546: #1160 LocalMachine DPAPI owned physical acceptance
-- W-547: #1160 gerçek Broker authority/CORE privilege physical kabul
-- W-548: #588 220KiB HTTP413 katman sınırı kanıtı
-- W-549: #588 256MiB+ authenticated two-device ACK/SHA
-- W-550: #485 signed installer ve rollback gerçek Windows
-- W-551: #1146 changed dört accessibility assertion diff
-- W-552: #1150 evolved Skill symlink test diff
-- W-553: #1100 selfhost owner evolved source güvenlik uyarısı
-- W-554: #1145 iki owner-absent CI evidence negative
-- W-555: #1109 2 benchmark evolved ve 4 unique test
-- W-556: #1110 device UX 8 owner-absent/real RED
-- W-557: #1152 80 TAP fixed41 failure ve gerçek exit1
-- W-558: #1141 52 TAP fixed41 failure
-- W-559: #1130 48 TAP fixed41 failure
-- W-560: #1118 50 TAP fixed41 failure
+### K20 | CI TAP doğruluğu
+**AKTİF W-695:** #1152 strict run/attempt/headSHA ve cancelled/unsafe TAP fix'ini 82/82 exact job ile owner'a teslim et
+**KUYRUK (5):**
+- W-696: CI 44609751252 fixed41 FAIL/Node22 CANCELLED durumunu kesin kaydet
+- W-697: Foreign-run metadata yanlış-yeşil negatifini dar test et
+- W-698: Missing/duplicate/unsafe TAP footer negatifini koru
+- W-699: K13 full suite coverage alanına müdahale etme
+- W-700: Owner'a #1152 minimum source-ported QA patch ve CI gate ihtiyacı ver
 
+## Sahipsiz güvenli havuz W701–W724
+- W-701: Bağlantı 403 null body: source negative minimal owner handoff
+- W-702: Admin 403↔200 stale response browser fake DOM repro
+- W-703: Mobile screenshot PNG receipt + non-empty IDAT
+- W-704: K05 aria-live nested DOM negative assertion
+- W-705: Stable v1.0.8 latest installer hash link source review
+- W-706: Same-user SYSTEM migration docs false-safe negative
+- W-707: MCP 403 origin vs transport denial redaction
+- W-708: K09 invalid timestamp negative on owner exact source
+- W-709: K10 file:// external path route leak negative
+- W-710: K11 synthetic bill source false-zero test
+- W-711: K12 AbortSignal teardown socket race
+- W-712: K13 root 574 test manifest independent proof
+- W-713: K13 explicit file selected not-run reconciliation
+- W-714: K14 old fixed59 PR count stale gating test
+- W-715: K15 wrong-device 403 UI wording negative
+- W-716: K16 Windows child PID terminal proof hosted
+- W-717: K17 stale symlink handle fixture on disposable FS
+- W-718: K18 KiB byte-counter overflow negative
+- W-719: K19 HTTP413 first boundary read-only mapping
+- W-720: K20 run-attempt mismatch fixture
+- W-721: K20 duplicate/cancelled TAP summary canary
+- W-722: Keyboard focus isolated viewport fixture
+- W-723: MCP secret redaction source-only fixture
+- W-724: PR evidence stale HEAD-merge guard fixture
 
-## P012 yeni güvenli sahipsiz havuz W-561..W-580
-- W-561: Eski P011 PR matrisi 39 satırının current OPEN/CLOSED/MERGED durumunu API ile rekonsile et (K14)
-- W-562: #1234 child port ile #1101 unique responsive QA assertion eşdeğerlik listesi (K02)
-- W-563: #1230 child port ile kapanan #1103 Bridge ve console grant QA'nın assertion farkları (K03)
-- W-564: #1232 child port ile eski K03 pending/UNKNOWN testlerinin same-SHA callsite ayrımı (K03)
-- W-565: #1160 six-workflow current SHA run IDs/step kanıt haritası (K13)
-- W-566: #1205 tracked test file ile explicit CI path union deterministik rapor (K13)
-- W-567: #1114 429 source negatifinin owner 81028bf6 sonraki hâli (K01)
-- W-568: Admin #539 401/403/503/redacted-body static test; prod auth'a dokunma (K04)
-- W-569: Screenshot fixture CRC/IEND + gerçek görüntü almadan PASSED deme denetimi (K02/K10)
-- W-570: PowerShell 5.1 Node ZIP installer docs evidence; binary/release değiştirme (K06)
-- W-571: 4 evolved a11y assertion kaybı/korunması compare ve NVDA ayrı (K05)
-- W-572: Selfhost Windows SYSTEM DPAPI risk uyarısını belge olarak yaz, protected env değiştirme (K07)
-- W-573: MCP denial reason raporu redaksiyon/test-only; güvenlik runtime değiştirme (K08)
-- W-574: Roadmap issue lifecycle UTC tarih negatif fixture karşılaştır (K09)
-- W-575: Browser screenshot gerçek artefakt/NVDA olmayan koşuyu NOT_RUN raporla (K10)
-- W-576: S5 fiyat ve kapasite 24h simulated vs provider receipt ayrımı (K11)
-- W-577: S5 loopback AbortSignal negative fixture/test-only minimal düzeltme (K12)
-- W-578: Skill registry symlink negative fixture ile owner protected runtime fark raporu (K17)
-- W-579: Transfer receiver SHA and receipt bytes negative harness, iki-PC değil (K18/K19)
-- W-580: Eski fixed41 CI exit1 ile yeni green job içerik farkı, `.github/workflows/ci.yml` owner-only (K20)
+## Projeye gidecekler
+K20 [#1152](https://github.com/Naveax/Nexowire/pull/1152) 63cb871d: 82 TAP PASS ama eski fixed41 CI FAIL; K04 [#1104](https://github.com/Naveax/Nexowire/pull/1104) 90f28d78: local 5/5 + 6/6, hosted CI pending; K09 [#1145](https://github.com/Naveax/Nexowire/pull/1145) 17953c24: genel CI SUCCESS ancak unique testin owner entegrasyonundaki yürütmesi ayrı; K19 [#1136](https://github.com/Naveax/Nexowire/pull/1136) c6c3128c: local 12 PASS, CI pending; K07 [#1100](https://github.com/Naveax/Nexowire/pull/1100) 18cf22ab: docs + test 32 TAP. Bu PR'lar açık, main'e **bu kontrolde 0 kod merge**. PR dışındaki Ömer #1160 integration başarıları main değildir.
 
-Bu havuz *yalnız mevcut izinli QA/docs dalında* üstlenilebilir; owner-only fiziksel/protected eski W545–550 üstlenilmez. Önce diğer 19 KNN kaydını ve mevcut PR diff/HEAD SHA'yı denetle; iş id'si tek sahipli.
+## Onur'un listesi
+Sadece değişmeyen KÖLE MESAJI'nı K01–K20 sekmelerine yeniden yapıştır. Rapor taşıma yok. Gerçek Work-PC/secret/SYSTEM erişimi veya release işi atanmıyor.
 
-**Havuz sahipliği:** Önce 19 KNN kaydını kontrol et. Havuz yazma veya yeni PR izni değil. Main CI, CORE, Windows, Hub, Broker, auth, SQLite, production owner'dadır. Yalnız var olan açık kendi PR dalında gerçek benzersiz hata izole edilirse test/docs düzelt; KAPALI PR'a yazma. Owner tekil izin olmadan source merge/PR close yok. Fiziksel SYSTEM cutover sadece yetkili yürütücü tarafından.
-
-
-## PROJEYE GİDECEKLER (P012)
-- Şimdi merge edilebilir olarak doğrulanmış **yeni** kendi PR'ımız: yok. Açık ve güvenli QA PR'ları K14 filtresinden/gerçek exact-head CI/owner tekil izninden sonra adaydır. Owner staged #1160 81028bf6 zaten ana proje repo içinde DRAFT, main'e henüz merge edilmedi.
-- KNN yeni kaynak dalı ile owner #1160 port edilmişse yeniden push/PR yok; assertion benzersizliği önce kanıtlanır.
-
-## ONUR'UN LİSTESİ
-- Tek insan adımı: aynı KÖLE MESAJI'nı K01–K20 sekmelerine yeniden yapıştır; yeni P012/V009 talimatını kendi KNN dosyaları üzerinden okuyacaklar. Başka rapor taşıma yok.
-- Main merge/production owner fiziksel kabulü Onur tarafından **yapılacak iş olarak atanmadı**; Work-PC/secret/SYSTEM erişimi talep etmiyoruz.
+## Tarihsel referans
+[P012](https://github.com/SinsiVinci/Nexowire-fork/blob/0e7a78091ce43720a94a011e9d0009e7cf6cada3/ekip/PANO.md) ve A012 kayıtları eski işleri korur. Açık blokajlar P013'e göre yeniden seçildi.

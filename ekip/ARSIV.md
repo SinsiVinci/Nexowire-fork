@@ -1,3 +1,21 @@
+# ARŞİV A012 | 19 Kasım 2026
+
+**Kapsam:** P012 sonrası 69 ekip commit/20 güncel KNN kaydı; tüm W421–580 otomatik BİTTİ değil, P013'e superseded. Ayrıntılı performans ekip/DEGERLENDIRME_20261119.md. Aşağıdakiler kanıtlı teslim/iş kanıtıdır; ana proje main merge değildir.
+
+- **K03 W563/W564 BİTTİ-KANIT:** owner [#1230](https://github.com/Naveax/Nexowire/pull/1230), [#1232](https://github.com/Naveax/Nexowire/pull/1232) exact blob port; owner #1160 Node22/24 21/21 source TAP [CI 44576357852](https://github.com/Naveax/Nexowire/actions/runs/44576357852). Gerçek cihaz NOT_RUN.
+- **K04 W568 BİTTİ-TEST:** [commit e60a2a1](https://github.com/SinsiVinci/Nexowire-fork/commit/e60a2a1d2c18cefe3dbe89193a136a537da2ef4f) 6/6 redaction local; [commit e588421](https://github.com/SinsiVinci/Nexowire-fork/commit/e5884216b22e6433164dd73bb5e3935de3ffadb6) admin concurrency source RED + fixture 5/5, #1104 owner source fix yok.
+- **K07 W572 BİTTİ-BELGE/TEST:** [commit 18cf22ab](https://github.com/SinsiVinci/Nexowire-fork/commit/18cf22ab1396aca16a8170b87f6625daffba22d1) CurrentUser != SYSTEM uyarısı; Node22/24 K06-8 32 TAP successful step, full CI initially in_progress. #1161 physical NO-GO.
+- **K08 W573 / K11 W576 / K06 W570 BİTTİ-KANIT:** MCP HTTP denial redaction, provider invoice UNKNOWN ve published installer hash/prerelease ayrımı; yeni auth/payment/release source fix iddiası YOK.
+- **K13 W493/W496 BİTTİ-DENETİM:** 651 tracked TypeScript SHA matrix, portable 34 exact per-file receipt, yedi missing test [CI 44576357852](https://github.com/Naveax/Nexowire/actions/runs/44576357852) Node22/24 409 TAP actual command; 439 per-file kabul belirsiz, #1205 açık.
+- **K14 W499–504 BİTTİ-SINIFLAMA:** 38 open SinsiVinci PR; 5 exact/9 evolved/6 CI-repair/18 unique path candidate, #1103 closed-unmerged. OWNER approval yok.
+- **K09 W469/470/471 BİTTİ-LOCAL:** [#1145](https://github.com/Naveax/Nexowire/pull/1145) invalid issue ID RED→fix 17953c24, local 7/7, [CI 44605826854](https://github.com/Naveax/Nexowire/actions/runs/44605826854) workflow SUCCESS fakat owner new nested port açık.
+- **K19 W531 BİTTİ-LOCAL:** [#1136](https://github.com/Naveax/Nexowire/pull/1136) echo false-CI fix c6c3128c, 6/6+6/6 local; exact [CI 44609222768](https://github.com/Naveax/Nexowire/actions/runs/44609222768) IN_PROGRESS.
+- **K20 W537 KISMİ / FIX-TEST:** [#1152](https://github.com/Naveax/Nexowire/pull/1152) strict run/attempt/headsha + cancelled TAP false-green fixes; [CI 44609751252](https://github.com/Naveax/Nexowire/actions/runs/44609751252) Node24 82/82 TAP, job FAILURE fixed41 and Node22 CANCELLED; CI/owner port hâlâ açık.
+
+**Açık kalan, tamamlandı denmeyenler:** K01 null-body 403/200 owner source RED; K04 admin owner source concurrency RED; K10 external file/raw error; K12 AbortSignal gerçek Node test; K15 HTTP403 device UI; K16 absent Windows platform-status; K17 physical symlink; K18 byte-unit; owner protected #1161, #588, #1205. Main'e 0 yeni merge, gerçek release kabulü NO-GO.
+
+---
+## A011 tarihsel içerik
 # ARŞİV A011 | 19 Kasım 2026
 
 ## P012 doğrulanmış yeni harici entegrasyon kilometre taşları
@@ -468,4 +486,5 @@ T-006, T-016, T-017, T-021, T-022, T-059, T-071, T-084, T-086, T-133, T-142, T-1
 
 ## Altyapı kuruluşu (T-xxx görevi değildir)
 - 2026-11-01: fork `main` upstream `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`ye +38 commit fast-forward ile geldi; `ekip` dalı ve P001/V001/S001 kuruldu. Kod teslimi sayılmadı.
+
 
