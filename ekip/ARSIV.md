@@ -1,3 +1,14 @@
+# ARŞİV A011 | 19 Kasım 2026
+
+## P012 doğrulanmış yeni harici entegrasyon kilometre taşları
+- **E-011** — [Ömer #1228](https://github.com/Naveax/Nexowire/pull/1228): `4802faa06edca1f531a52cac56476d6b8573df91` child PR **merged=true, closed**; hedefi `integration/ai01-ai06-candidate-20261109`. Ana dal merge **değil**. [#1160 exact CI 44576357848](https://github.com/Naveax/Nexowire/actions/runs/44576357848) Node22/24 portable root jobs **success**; fiziksel kabul değil.
+- **E-012** — [Ömer #1233](https://github.com/Naveax/Nexowire/pull/1233): `0395887e2aeebf0c8fe3851f8f2a572613189544` child PR **merged=true, closed** into same integration branch; [#1160 exact CI 44576357852](https://github.com/Naveax/Nexowire/actions/runs/44576357852) **success**; current integration HEAD `81028bf643e3dc3cb5b0ab3f9c609c239732a413`. Main branch `52d452f...` unchanged.
+- **KNN W421–W540:** P012 öncesinde K01–K20 güncel pano üzerinde hiçbir yeni commit/bitirme kanıtı sunmamış; bu yüzden hiçbir W işi tamamlandı/arşivlendi diye **iddia edilmedi**.
+- **Kabul kapısı:** #1205 varsayılan glob 43/650 sorunu için diğer explicit CI testlerin file-level union hâlâ açık. #1161 SYSTEM/SQLite/DPAPI, #588 gerçek iki-PC ve stable release PHYSICAL_NOT_RUN. Kapalı-unmerged child PR'lar ana dal teslimi sayılmadı. Bu ŞEF adımı yalnız ekip belgelerini güncelledi, hedef main'e kod sokmadı.
+
+---
+
+## Tarihsel A010
 # ARŞİV A010 | 19 Kasım 2026
 
 18 Kasım P010/V007/S010 [immutable commit](https://github.com/SinsiVinci/Nexowire-fork/commit/9869f29270278d8e8e07ea4042b7793917bce164). 19 Kasım owner #1160 `151c6a89a493ca72906d39262456d72367cb6fa0` ve child #1228 `4802faa06edca1f531a52cac56476d6b8573df91` doğrulandı. 39 açık PR kaynak SHA matrisi [raporda](https://github.com/SinsiVinci/Nexowire-fork/blob/ekip/ekip/PR_SINIFLANDIRMA_20261119.md); 5 exact, 9 evolved, 6 CI, 19 unique candidate. 20 KNN kaydı okundu, P011 henüz çalıştırılmadı. #1205 650/43/607, child portable 33/184 PASS(Node22+24), diğer workflow kapsamı henüz dosya bazında birleştirilmedi. 0 main merge, 0 PR/issue close. Stable v1.0.9/physical acceptance NO-GO.
@@ -457,3 +468,4 @@ T-006, T-016, T-017, T-021, T-022, T-059, T-071, T-084, T-086, T-133, T-142, T-1
 
 ## Altyapı kuruluşu (T-xxx görevi değildir)
 - 2026-11-01: fork `main` upstream `93b6df33ef58610dcfdf3584bfe774e5afa7df4d`ye +38 commit fast-forward ile geldi; `ekip` dalı ve P001/V001/S001 kuruldu. Kod teslimi sayılmadı.
+

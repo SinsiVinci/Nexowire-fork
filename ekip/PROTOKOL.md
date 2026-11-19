@@ -1,11 +1,11 @@
-# NEXOWIRE PROTOKOLÜ V008 | 19 Kasım 2026
+# NEXOWIRE PROTOKOLÜ V009 | 19 Kasım 2026
 
-Ömer 19 Kasım owner talimatı ve güncel P011 bağlayıcıdır. Önceki [V007](https://github.com/SinsiVinci/Nexowire-fork/blob/9869f29270278d8e8e07ea4042b7793917bce164/ekip/PROTOKOL.md) güvenlik sınırları korunur, eski SHA ve sayılar tarihsel.
+Ömer 19 Kasım owner talimatı ve güncel P012 bağlayıcıdır. Owner #1160 exact current HEAD `81028bf643e3dc3cb5b0ab3f9c609c239732a413`; #1228/#1233 yalnız entegrasyon dalına merged, main değildir. Önceki [V007](https://github.com/SinsiVinci/Nexowire-fork/blob/9869f29270278d8e8e07ea4042b7793917bce164/ekip/PROTOKOL.md) güvenlik sınırları korunur, eski SHA ve sayılar tarihsel.
 
 1. Her işçi numarasını baştaki KÖLE N etiketinden, yoksa önceki sohbetten alır, yoksa sadece NUMARAM KAÇ? yazar. Güncel PANO/PROTOKOL + kendi KNN dosyasını oku. KNN yalnız kendi dosyasına yazsın.
-2. P011 W421–540 20×(1 aktif+5 kuyruk), W541–560 sahipsiz. Havuz öncesi diğer 19 kaydı oku; aynı işi birden fazla kişi yazmasın. İşe değer = benzersiz kanıt/gerçek bug/owner handoff, dosya sayısı değildir.
+2. P012 W421–540 20×(1 aktif+5 kuyruk); W541–560 tarihsel sahiplenme/owner-only ayrımı ve W561–580 yalnız güvenli yeni sahipsiz adaylar. Havuz öncesi diğer 19 kaydı oku; aynı işi birden fazla kişi yazmasın. İşe değer = benzersiz kanıt/gerçek bug/owner handoff, dosya sayısı değildir.
 3. Ömer yazılı tekil izin vermeden `Naveax/main` merge, yeni PR, force push, PR/issue close, release/deploy/tag, canlı Work-PC/Hub/Agent, CORE/Broker/SQLite/auth/SYSTEM/DPAPI/Cloudflare veya protected `.github/workflows/ci.yml` yazımı YASAK. Sahiplik #1160. Kapalı PR'a push yok.
 4. Her PR önce HEAD SHA, changed-files ve #1160 blob eşitliği: exact owner-ported; evolved owner-review; absent unique-candidate, ürün fix kanıtı değil. CI_REPAIR ve PHYSICAL_NOT_RUN üst etiketler. `test.todo`/SKIP/GitHub 0-job = PASS değil.
-5. #1205 owner #1160 650 tracked, eski glob 43 selected/607 omitted; #1228 yalnız portable lane 33 executed/184 Node22+24. Bütün workflow path+run+SHA logları birleşmeden global kapsam veya fail oranı iddia etme. Test kaynak SHA'sını yürütme öncesinde sabitle, CI run tekrar dispatch etme.
+5. #1205 owner #1160 650 tracked, eski glob 43 selected/607 omitted; current #1160 altı workflow başarıyla yürütüldü, portable Node22/24 ve diğer explicit CI testlerini ayrıca dosya-bazlı birleştir. Bütün workflow path+run+SHA logları birleşmeden global kapsam veya fail oranı iddia etme. Test kaynak SHA'sını yürütme öncesinde sabitle, CI run tekrar dispatch etme.
 6. #1161 SYSTEM Hub protected state root, DPAPI/Broker, SQLite cutover, reboot/pre-login, #588 iki cihaz transfer, #487 provider 24h, #485 installer release fiziksel NO-GO. Bu işlemler sadece owner yetkili fiziksel yürütücü tarafından yapılır.
 7. Sadece kendi açık PR'ın güvenli test/docs dosyasında **kanıtlı gerçek RED** varsa minimum düzeltme+local test+CI; genelleştirilmiş sonsuz test/QA raporu üretme. Asıl rapor KNN dosyasında, sohbet 3 satır. ŞEF merkezi PANO/SEF/ARSIV ve #1006 yönetir.
